@@ -2329,7 +2329,11 @@ CHECKS = [
 
 
 def main() -> None:
-    raw_dir = Path("data/raw")
+    # Was a hardcoded relative Path("data/raw"), so this guard depended on the
+    # caller's cwd instead of the RAW_DIR the rest of the module reads. That
+    # broke any caller redirecting the pipeline at another archive -- notably
+    # scripts/normalize_for_import.py, which rebinds RAW_DIR per tenant.
+    raw_dir = RAW_DIR
     if not raw_dir.is_dir() or not any(raw_dir.iterdir()):
         sys.exit("data/raw/ is empty or missing. Run extract.py first.")
 

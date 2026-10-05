@@ -9,10 +9,7 @@ import {
 } from "./activityAchievements";
 import { findTeam } from "./schedule";
 import { IR_SLOT_ID } from "./lineupSlots";
-import {
-  getLowestSingleWeekScores,
-  getLowestScoringWins,
-} from "./superlatives";
+import { getLowestSingleWeekScores, getLowestScoringWins } from "./superlatives";
 import type { BoxScoreEntry, Matchup, Owner, Player, Season, Team, Trade, Transaction, TrophyRecord } from "../types";
 
 export type ActivityScope = "matchup" | "season";
@@ -266,47 +263,31 @@ export interface BuildActivityFeedArgs {
   trophyNames?: Record<number, string>;
 }
 
-/** The 20 ESPN "Fantasy Achievements" trophies (2026+ feature). ESPN's
- * achievements payload carries no trophy names or ids — only positional
- * slots — so this catalog backs display once the slot→name mapping is known. */
-export const TROPHY_CATALOG = [
-  "Bronze Boss",
-  "Choke Artist",
-  "Fortune Teller",
-  "Ice Cold",
-  "League Champ",
-  "League Leader",
-  "MVFP",
-  "Never Took an L",
-  "No Mercy",
-  "Off The Charts",
-  "On Fire",
-  "Playoff Bound",
-  "Points Savage",
-  "Runner Up",
-  "Steamrolled",
-  "Tapped In",
-  "The Commish",
-  "The Negotiator",
-  "Top Dog",
-  "Two-Ply Try",
-] as const;
-
 export function trophyNameForSlot(slot: number, names: Record<number, string>): string | null {
   return names[slot] ?? null;
 }
 
-function featLabel(feat: AchievementFeat, startsPhrase: string | null, inProgress: boolean): { label: string; detail: string | null } {
+function featLabel(
+  feat: AchievementFeat,
+  startsPhrase: string | null,
+  inProgress: boolean
+): { label: string; detail: string | null } {
   switch (feat.kind) {
     case "shutout":
     case "no-hitter":
     case "perfect-game": {
       const label =
         feat.kind === "shutout"
-          ? inProgress ? "throws a shutout" : "threw a shutout"
+          ? inProgress
+            ? "throws a shutout"
+            : "threw a shutout"
           : feat.kind === "no-hitter"
-            ? inProgress ? "throws a no-hitter" : "threw a no-hitter"
-            : inProgress ? "throws a perfect game" : "threw a perfect game";
+            ? inProgress
+              ? "throws a no-hitter"
+              : "threw a no-hitter"
+            : inProgress
+              ? "throws a perfect game"
+              : "threw a perfect game";
       const p = feat.pitching;
       // The feat flag already carries the shape (a shutout is 0 runs by
       // definition); the K count is the context worth adding.
@@ -322,21 +303,26 @@ function featLabel(feat: AchievementFeat, startsPhrase: string | null, inProgres
     }
     case "grand-slam":
       return {
-        label: feat.count === 1
-          ? inProgress ? "hits a grand slam" : "hit a grand slam"
-          : inProgress ? `hits ${feat.count} grand slams` : `hit ${feat.count} grand slams`,
+        label:
+          feat.count === 1
+            ? inProgress
+              ? "hits a grand slam"
+              : "hit a grand slam"
+            : inProgress
+              ? `hits ${feat.count} grand slams`
+              : `hit ${feat.count} grand slams`,
         detail: null,
       };
   }
 }
 
 const LEADER_TEMPLATES: Record<WeeklyLeaderStat, (value: string, inProgress: boolean) => string> = {
-  points: (v, ip) => ip ? `leads the league with ${v} points` : `led the league with ${v} points`,
-  hr: (v, ip) => ip ? `leads all hitters with ${v} HR` : `led all hitters with ${v} HR`,
-  rbi: (v, ip) => ip ? `leads all hitters with ${v} RBI` : `led all hitters with ${v} RBI`,
-  runs: (v, ip) => ip ? `leads all hitters with ${v} runs` : `led all hitters with ${v} runs`,
-  sb: (v, ip) => ip ? `leads all hitters with ${v} SB` : `led all hitters with ${v} SB`,
-  pitcherK: (v, ip) => ip ? `leads in strikeouts with ${v}` : `struck out ${v} hitters`,
+  points: (v, ip) => (ip ? `leads the league with ${v} points` : `led the league with ${v} points`),
+  hr: (v, ip) => (ip ? `leads all hitters with ${v} HR` : `led all hitters with ${v} HR`),
+  rbi: (v, ip) => (ip ? `leads all hitters with ${v} RBI` : `led all hitters with ${v} RBI`),
+  runs: (v, ip) => (ip ? `leads all hitters with ${v} runs` : `led all hitters with ${v} runs`),
+  sb: (v, ip) => (ip ? `leads all hitters with ${v} SB` : `led all hitters with ${v} SB`),
+  pitcherK: (v, ip) => (ip ? `leads in strikeouts with ${v}` : `struck out ${v} hitters`),
 };
 
 /** ESPN position id: 1 = SP — a starter's pitching-slot days phrase as

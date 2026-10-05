@@ -244,10 +244,7 @@ function makeSeason(year: number, scoring: [number, number][]): Season {
 
 describe("getScoringRulesDrift", () => {
   it("flags a year whose points differ from the prior scored year", () => {
-    const rows = getScoringRulesDrift([
-      makeSeason(2024, [[5, 1]]),
-      makeSeason(2025, [[5, 2]]),
-    ]);
+    const rows = getScoringRulesDrift([makeSeason(2024, [[5, 1]]), makeSeason(2025, [[5, 2]])]);
     const hr = rows.find(r => r.statId === 5)!;
 
     expect(hr.valuesByYear.get(2024)).toBe(1);
@@ -257,11 +254,7 @@ describe("getScoringRulesDrift", () => {
   });
 
   it("treats a gap year as unscored, not as a change", () => {
-    const rows = getScoringRulesDrift([
-      makeSeason(2024, [[5, 1]]),
-      makeSeason(2025, []),
-      makeSeason(2026, [[5, 1]]),
-    ]);
+    const rows = getScoringRulesDrift([makeSeason(2024, [[5, 1]]), makeSeason(2025, []), makeSeason(2026, [[5, 1]])]);
     const hr = rows.find(r => r.statId === 5)!;
 
     expect(hr.valuesByYear.get(2025)).toBeNull();

@@ -203,8 +203,8 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             to={matchupTo(highestWeek.year, highestWeek.matchupId)}
             detail={
               <>
-                <b className="text-ink">{highestWeek.team.teamName}</b> · {yearLabel(highestWeek.year)}{" "}
-                Wk {highestWeek.week}
+                <b className="text-ink">{highestWeek.team.teamName}</b> · {yearLabel(highestWeek.year)} Wk{" "}
+                {highestWeek.week}
               </>
             }
             runnersUp={highestWeekRunnersUp.map(r => (
@@ -243,8 +243,8 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             to={matchupTo(highestLoss.year, highestLoss.matchupId)}
             detail={
               <>
-                <b className="text-ink">{highestLoss.team.teamName}</b> · {yearLabel(highestLoss.year)}{" "}
-                Wk {highestLoss.week} · lost {formatPoints(highestLoss.team.score)}–
+                <b className="text-ink">{highestLoss.team.teamName}</b> · {yearLabel(highestLoss.year)} Wk{" "}
+                {highestLoss.week} · lost {formatPoints(highestLoss.team.score)}–
                 {formatPoints(highestLoss.opponentScore)}
               </>
             }
@@ -264,8 +264,8 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             to={matchupTo(lowestWin.year, lowestWin.matchupId)}
             detail={
               <>
-                <b className="text-ink">{lowestWin.team.teamName}</b> · {yearLabel(lowestWin.year)} Wk{" "}
-                {lowestWin.week} · won {formatPoints(lowestWin.team.score)}–{formatPoints(lowestWin.opponentScore)}
+                <b className="text-ink">{lowestWin.team.teamName}</b> · {yearLabel(lowestWin.year)} Wk {lowestWin.week}{" "}
+                · won {formatPoints(lowestWin.team.score)}–{formatPoints(lowestWin.opponentScore)}
               </>
             }
             runnersUp={lowestWinRunnersUp.map(r => (
@@ -358,8 +358,8 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             to={seasonTo(bestToMiss.year)}
             detail={
               <>
-                <b className="text-ink">{bestToMiss.teamName}</b> · {yearLabel(bestToMiss.year)} ·
-                Finished No. {bestToMiss.finalRank}
+                <b className="text-ink">{bestToMiss.teamName}</b> · {yearLabel(bestToMiss.year)} · Finished No.{" "}
+                {bestToMiss.finalRank}
               </>
             }
             runnersUp={bestToMissRunnersUp.map(r => (
@@ -397,14 +397,14 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             to={seasonTo(overachiever.year)}
             detail={
               <>
-                <b className="text-ink">{overachiever.teamName}</b> · {yearLabel(overachiever.year)} ·
-                No. {overachiever.seed} Seed → Finished No. {overachiever.finalRank}
+                <b className="text-ink">{overachiever.teamName}</b> · {yearLabel(overachiever.year)} · No.{" "}
+                {overachiever.seed} Seed → Finished No. {overachiever.finalRank}
               </>
             }
             runnersUp={overachieverRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · No {r.seed} →{" "}
-                Finished No. {r.finalRank} ({r.gap >= 0 ? "+" : ""}
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · No {r.seed} → Finished No.{" "}
+                {r.finalRank} ({r.gap >= 0 ? "+" : ""}
                 {r.gap})
               </>
             ))}
@@ -418,14 +418,14 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             to={seasonTo(underachiever.year)}
             detail={
               <>
-                <b className="text-ink">{underachiever.teamName}</b> · {yearLabel(underachiever.year)} ·
-                No. {underachiever.seed} → Finished No. {underachiever.finalRank}
+                <b className="text-ink">{underachiever.teamName}</b> · {yearLabel(underachiever.year)} · No.{" "}
+                {underachiever.seed} → Finished No. {underachiever.finalRank}
               </>
             }
             runnersUp={underachieverRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · No. {r.seed} →{" "}
-                Finished No. {r.finalRank} ({r.gap})
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · No. {r.seed} → Finished No.{" "}
+                {r.finalRank} ({r.gap})
               </>
             ))}
           />
@@ -446,8 +446,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             })()}
             runnersUp={bestDiffRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} ·{" "}
-                {formatDifferential(r.differential)}
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · {formatDifferential(r.differential)}
               </>
             ))}
           />
@@ -468,8 +467,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             })()}
             runnersUp={worstDiffRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} ·{" "}
-                {formatDifferential(r.differential)}
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · {formatDifferential(r.differential)}
               </>
             ))}
           />
@@ -481,8 +479,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             accent="positive"
             detail={
               <>
-                <b className="text-ink">{bestSeasonPoints.teamName}</b> ·{" "}
-                {yearLabel(bestSeasonPoints.year)}
+                <b className="text-ink">{bestSeasonPoints.teamName}</b> · {yearLabel(bestSeasonPoints.year)}
               </>
             }
             to={(() => {
@@ -491,8 +488,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             })()}
             runnersUp={bestSeasonPointsRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} ·{" "}
-                {formatPoints(r.points)}
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · {formatPoints(r.points)}
               </>
             ))}
           />
@@ -504,8 +500,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             accent="negative"
             detail={
               <>
-                <b className="text-ink">{worstSeasonPoints.teamName}</b> ·{" "}
-                {yearLabel(worstSeasonPoints.year)}
+                <b className="text-ink">{worstSeasonPoints.teamName}</b> · {yearLabel(worstSeasonPoints.year)}
               </>
             }
             to={(() => {
@@ -514,8 +509,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             })()}
             runnersUp={worstSeasonPointsRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} ·{" "}
-                {formatPoints(r.points)}
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · {formatPoints(r.points)}
               </>
             ))}
           />
@@ -535,8 +529,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             })()}
             runnersUp={bestPerGameRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} ·{" "}
-                {formatPoints(r.pointsPerGame)}
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · {formatPoints(r.pointsPerGame)}
               </>
             ))}
           />
@@ -557,8 +550,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             }
             runnersUp={winStreakRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} ·{" "}
-                {formatStreak(r.length)}
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · {formatStreak(r.length)}
               </>
             ))}
           />
@@ -579,8 +571,7 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
             }
             runnersUp={lossStreakRunnersUp.map(r => (
               <>
-                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} ·{" "}
-                {formatStreak(r.length)}
+                <b className="text-ink">{r.teamName}</b> · {yearLabel(r.year)} · {formatStreak(r.length)}
               </>
             ))}
           />
@@ -591,7 +582,8 @@ export function Trivia({ teams, owners, matchups, seasons }: TriviaProps) {
           {[
             ...flaggedShortSeasons.map(s => `*The ${s.year} major league season was ${s.regular_season_weeks} weeks.`),
             ...flaggedInProgressSeasons.map(
-              s => `†The ${s.year} season is still in progress (through Week ${s.current_week}) — this record may still change.`
+              s =>
+                `†The ${s.year} season is still in progress (through Week ${s.current_week}) — this record may still change.`
             ),
           ].join(" ")}
         </p>

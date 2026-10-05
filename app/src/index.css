@@ -469,17 +469,27 @@ body {
 
 /* Piped wordmark: Lobster with a clean outline stroke and a single-offset
    drop shadow for sign-painter depth. Keeps real text (no raster/SVG), and
-   avoids the red/blue misregistration effect that was explicitly cut. */
+   avoids the red/blue misregistration effect that was explicitly cut.
+   Dark mode is solid white — no pinstripe fill, no background-clip. */
 .wordmark-piped {
   color: var(--hs-ink);
   -webkit-text-stroke: 2px var(--hs-red);
   paint-order: stroke fill;
   filter: drop-shadow(3px 3px 0 rgba(43, 36, 32, 0.12));
 }
-:root[data-theme="dark"] .wordmark-piped,
+
+:root[data-theme="dark"] .wordmark-piped {
+  color: #ffffff;
+  -webkit-text-stroke: 1px #ffffff;
+  paint-order: stroke fill;
+  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.35));
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .wordmark-piped {
-    -webkit-text-stroke: 2px var(--color-red);
+    color: #ffffff;
+    -webkit-text-stroke: 1px #ffffff;
+    paint-order: stroke fill;
     filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.35));
   }
 }

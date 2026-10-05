@@ -4,7 +4,13 @@ import type { BoxScoreEntry, Matchup, Team, TeamRecord } from "../types";
 
 const EMPTY_RECORD: TeamRecord = { wins: 0, losses: 0, ties: 0, points_for: 0, points_against: 0 };
 
-function makeTeam(year: number, espnTeamId: number, primaryOwnerId: string, finalRank: number, overrides: Partial<Team> = {}): Team {
+function makeTeam(
+  year: number,
+  espnTeamId: number,
+  primaryOwnerId: string,
+  finalRank: number,
+  overrides: Partial<Team> = {}
+): Team {
   return {
     year,
     espn_team_id: espnTeamId,
@@ -213,14 +219,22 @@ describe("computeMatchupTurningPoint", () => {
 
 describe("computeMatchupTurningPoints", () => {
   it("tags the single biggest differential across all matchups", () => {
-    const teams = [
-      makeTeam(2024, 1, "owner-a", 1),
-      makeTeam(2024, 2, "owner-b", 3),
-      makeTeam(2024, 3, "owner-c", 2),
-    ];
+    const teams = [makeTeam(2024, 1, "owner-a", 1), makeTeam(2024, 2, "owner-b", 3), makeTeam(2024, 3, "owner-c", 2)];
     const matchups = [
-      makeMatchup(2024, 1, 1, { espnTeamId: 1, ownerId: "owner-a", score: 100 }, { espnTeamId: 2, ownerId: "owner-b", score: 90 }),
-      makeMatchup(2024, 1, 2, { espnTeamId: 3, ownerId: "owner-c", score: 150 }, { espnTeamId: 2, ownerId: "owner-b", score: 90 }),
+      makeMatchup(
+        2024,
+        1,
+        1,
+        { espnTeamId: 1, ownerId: "owner-a", score: 100 },
+        { espnTeamId: 2, ownerId: "owner-b", score: 90 }
+      ),
+      makeMatchup(
+        2024,
+        1,
+        2,
+        { espnTeamId: 3, ownerId: "owner-c", score: 150 },
+        { espnTeamId: 2, ownerId: "owner-b", score: 90 }
+      ),
     ];
     const results = computeMatchupTurningPoints(matchups, new Map(), teams);
     const biggest = results.find(r => r.type === "biggest_differential");
@@ -238,8 +252,20 @@ describe("computeMatchupTurningPoints", () => {
       makeTeam(2024, 4, "owner-b", 1),
     ];
     const matchups = [
-      makeMatchup(2023, 1, 1, { espnTeamId: 1, ownerId: "owner-a", score: 100 }, { espnTeamId: 2, ownerId: "owner-b", score: 200 }),
-      makeMatchup(2024, 1, 1, { espnTeamId: 3, ownerId: "owner-a", score: 100 }, { espnTeamId: 4, ownerId: "owner-b", score: 120 }),
+      makeMatchup(
+        2023,
+        1,
+        1,
+        { espnTeamId: 1, ownerId: "owner-a", score: 100 },
+        { espnTeamId: 2, ownerId: "owner-b", score: 200 }
+      ),
+      makeMatchup(
+        2024,
+        1,
+        1,
+        { espnTeamId: 3, ownerId: "owner-a", score: 100 },
+        { espnTeamId: 4, ownerId: "owner-b", score: 120 }
+      ),
     ];
     const results = computeMatchupTurningPoints(matchups, new Map(), teams);
     // Neither is an upset (the better-ranked owner-b wins both), so the only

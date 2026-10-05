@@ -1,8 +1,17 @@
 import { Suspense, lazy } from "react";
 import { Link, Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { AppShell } from "./components/AppShell";
+import { AuthGuard } from "./components/AuthGuard";
 import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
 import { RouteLoading } from "./components/RouteLoading";
+import { AuthProvider } from "./lib/auth/AuthContext";
+import { Login } from "./routes/Login";
+import { Landing } from "./routes/Landing";
+import { NewImport } from "./routes/NewImport";
+import { ImportDetail } from "./routes/ImportDetail";
+import { VerifyEmail } from "./routes/VerifyEmail";
+import { ResetPassword } from "./routes/ResetPassword";
+import { OnboardingSession } from "./routes/OnboardingSession";
 import { useDocumentTitle } from "./hooks/useDocumentTitle";
 
 const Players = lazy(() => import("./routes/Players"));
@@ -62,124 +71,151 @@ function routeLoadingLabel(pathname: string): string {
   return "Loading…";
 }
 
-function App() {
+function AuthenticatedApp() {
   const location = useLocation();
   const loadingLabel = routeLoadingLabel(location.pathname);
   return (
     <Suspense fallback={<RouteLoading label={loadingLabel} />}>
       <Routes>
         <Route element={<AppShell />}>
-          <Route index element={<Navigate to="/season" replace />} />
           <Route
             path="head-to-head/:ownerA/:ownerB"
             element={
-              <RouteErrorBoundary routeName="Head to Head">
-                <PairDetail />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Head to Head">
+                  <PairDetail />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="season"
             element={
-              <RouteErrorBoundary routeName="Season">
-                <Season />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Season">
+                  <Season />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="season/:year"
             element={
-              <RouteErrorBoundary routeName="Season">
-                <Season />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Season">
+                  <Season />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="season/:year/:tab"
             element={
-              <RouteErrorBoundary routeName="Season">
-                <Season />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Season">
+                  <Season />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="season/:year/team/:teamId"
             element={
-              <RouteErrorBoundary routeName="Team">
-                <SeasonTeamPage />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Team">
+                  <SeasonTeamPage />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="matchup/:year/:matchupId"
             element={
-              <RouteErrorBoundary routeName="Matchup">
-                <Matchup />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Matchup">
+                  <Matchup />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="superlatives"
             element={
-              <RouteErrorBoundary routeName="Superlatives">
-                <Superlatives />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Superlatives">
+                  <Superlatives />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="superlatives/:tab"
             element={
-              <RouteErrorBoundary routeName="Superlatives">
-                <Superlatives />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Superlatives">
+                  <Superlatives />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="owner"
             element={
-              <RouteErrorBoundary routeName="Owner">
-                <Owner />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Owner">
+                  <Owner />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="owner/:ownerId"
             element={
-              <RouteErrorBoundary routeName="Owner">
-                <Owner />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Owner">
+                  <Owner />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="players"
             element={
-              <RouteErrorBoundary routeName="Players">
-                <Players />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Players">
+                  <Players />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="players/:year"
             element={
-              <RouteErrorBoundary routeName="Players">
-                <Players />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Players">
+                  <Players />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="players/:year/keepers/:keepersTab"
             element={
-              <RouteErrorBoundary routeName="Players">
-                <Players />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Players">
+                  <Players />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="players/:year/:tab"
             element={
-              <RouteErrorBoundary routeName="Players">
-                <Players />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Players">
+                  <Players />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route path="draft" element={<Navigate to="/players" replace />} />
@@ -187,9 +223,11 @@ function App() {
           <Route
             path="player/:playerId"
             element={
-              <RouteErrorBoundary routeName="Player">
-                <PlayerRoute />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Player">
+                  <PlayerRoute />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route path="keepers" element={<KeepersRedirect />} />
@@ -197,23 +235,69 @@ function App() {
           <Route
             path="analytics"
             element={
-              <RouteErrorBoundary routeName="Analytics">
-                <Analytics />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Analytics">
+                  <Analytics />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route
             path="analytics/:tab"
             element={
-              <RouteErrorBoundary routeName="Analytics">
-                <Analytics />
-              </RouteErrorBoundary>
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Analytics">
+                  <Analytics />
+                </RouteErrorBoundary>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="import/new"
+            element={
+              <AuthGuard>
+                <RouteErrorBoundary routeName="New Import">
+                  <NewImport />
+                </RouteErrorBoundary>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="imports/:id"
+            element={
+              <AuthGuard>
+                <RouteErrorBoundary routeName="Import">
+                  <ImportDetail />
+                </RouteErrorBoundary>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="onboarding/session/:importId"
+            element={
+              <AuthGuard>
+                <RouteErrorBoundary routeName="ESPN Session">
+                  <OnboardingSession />
+                </RouteErrorBoundary>
+              </AuthGuard>
             }
           />
           <Route path="*" element={<NotFound />} />
         </Route>
+        <Route path="verify" element={<VerifyEmail />} />
+        <Route path="reset-password" element={<ResetPassword />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="login" element={<Login />} />
       </Routes>
     </Suspense>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AuthenticatedApp />
+    </AuthProvider>
   );
 }
 

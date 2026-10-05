@@ -66,7 +66,3 @@ export const PITCHING_STAT_IDS: PitchingStatIdEntry[] = [
 ];
 
 export const ALL_STAT_IDS: StatIdEntry[] = [...BATTING_STAT_IDS, ...PITCHING_STAT_IDS];
-
-export function statIdLabel(statId: number): string {
-  return ALL_STAT_IDS.find(s => s.statId === statId)?.label ?? `#${statId}`;
-}

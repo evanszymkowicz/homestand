@@ -126,13 +126,6 @@ export function getYearRuns(years: number[]): { start: number; end: number }[] {
   return runs;
 }
 
-/** Overall year span of a sorted year list -- [2019, 2020, 2022] renders as
- * { start: 2019, end: 2022 } for a single "first–last" label. */
-export function getYearSpan(years: number[]): { start: number; end: number } | undefined {
-  if (years.length === 0) return undefined;
-  return { start: years[0], end: years[years.length - 1] };
-}
-
 export interface OwnerKeeperTenureRow {
   playerId: number;
   playerName: string;

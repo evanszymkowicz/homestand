@@ -26,7 +26,7 @@ export interface IdentityRow {
   share: number;
   points: number;
   pitchingPoints: number;
-   // Solves for two-way players whose stats were dumped into batting
+  // Solves for two-way players whose stats were dumped into batting
   battingPoints: number;
 }
 
@@ -122,9 +122,7 @@ export function getIdentityVsWinPct(
   const identityYears = getPitchingBattingIdentity(boxScoresByYear, teams, matchups);
   const rows: IdentityWinRow[] = [];
   for (const y of identityYears) {
-    const meanPoints = y.rows.length > 0
-      ? y.rows.reduce((sum, r) => sum + r.points, 0) / y.rows.length
-      : 0;
+    const meanPoints = y.rows.length > 0 ? y.rows.reduce((sum, r) => sum + r.points, 0) / y.rows.length : 0;
     for (const r of y.rows) {
       const team = teams.find(t => t.year === y.year && t.primary_owner_id === r.ownerId);
       if (!team) continue;
@@ -175,14 +173,8 @@ export interface FormStripYear {
  * weeks at or after current_week are also excluded -- ESPN schedules the
  * whole season upfront, so unplayed weeks already exist as 0-0 UNDECIDED
  * rows and the current week itself is a partial score. Full 2009+ coverage. */
-export function getHotColdFormStrips(
-  matchups: Matchup[],
-  teams: Team[],
-  seasons: Season[]
-): FormStripYear[] {
-  const currentWeekByYear = new Map(
-    seasons.filter(s => s.status === "in_progress").map(s => [s.year, s.current_week])
-  );
+export function getHotColdFormStrips(matchups: Matchup[], teams: Team[], seasons: Season[]): FormStripYear[] {
+  const currentWeekByYear = new Map(seasons.filter(s => s.status === "in_progress").map(s => [s.year, s.current_week]));
   const years = Array.from(new Set(teams.map(t => t.year))).sort((a, b) => b - a);
   const result: FormStripYear[] = [];
   for (const year of years) {

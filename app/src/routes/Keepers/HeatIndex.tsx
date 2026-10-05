@@ -135,9 +135,7 @@ export function HeatIndex({
                         : "text-ink-dim"
                 }`}
                 title="Draft ROI: actual season percentile minus the expected percentile from original draft position (positive = outperformed the pick).">
-                {entry.draftRoi === null
-                  ? "Draft ROI: n/a"
-                  : `Draft ROI: ${formatPercentileChange(entry.draftRoi)}`}
+                {entry.draftRoi === null ? "Draft ROI: n/a" : `Draft ROI: ${formatPercentileChange(entry.draftRoi)}`}
               </div>
               <div className="mt-0.5 text-[0.62rem] text-ink-faint">
                 {entry.originalDraftSlot

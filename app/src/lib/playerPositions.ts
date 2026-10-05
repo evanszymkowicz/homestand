@@ -58,10 +58,7 @@ export interface SeasonPositions {
  * every position he appears at within a game. The counts are useful for
  * ordering and for showing versatility, not as a games-played figure.
  */
-export function getPlayerSeasonPositions(
-  playerId: number,
-  playerSeasons: PlayerSeason[]
-): SeasonPositions[] {
+export function getPlayerSeasonPositions(playerId: number, playerSeasons: PlayerSeason[]): SeasonPositions[] {
   return playerSeasons
     .filter(row => row.player_id === playerId)
     .map(row => {

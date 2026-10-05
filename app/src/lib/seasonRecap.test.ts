@@ -4,12 +4,7 @@ import type { DraftPick, Matchup, PlayerSeasonPoints, Team, TeamRecord, Trade } 
 
 const EMPTY_RECORD: TeamRecord = { wins: 0, losses: 0, ties: 0, points_for: 0, points_against: 0 };
 
-function makeTeam(
-  year: number,
-  espnTeamId: number,
-  primaryOwnerId: string,
-  overrides: Partial<Team> = {}
-): Team {
+function makeTeam(year: number, espnTeamId: number, primaryOwnerId: string, overrides: Partial<Team> = {}): Team {
   const ownerIds = overrides.owner_ids ?? [primaryOwnerId];
   return {
     year,
@@ -61,7 +56,6 @@ function makeMatchup(year: number, week: number, homeScore: number, awayScore: n
   };
 }
 
-
 describe("generateSeasonRecap", () => {
   it("identifies champion and runner-up", () => {
     const teams = [
@@ -93,24 +87,15 @@ describe("generateSeasonRecap", () => {
   });
 
   it("returns null biggest mover for the first archive year", () => {
-    const teams = [
-      makeTeam(2009, 1, "owner-a", { final_rank: 1 }),
-      makeTeam(2009, 2, "owner-b", { final_rank: 2 }),
-    ];
+    const teams = [makeTeam(2009, 1, "owner-a", { final_rank: 1 }), makeTeam(2009, 2, "owner-b", { final_rank: 2 })];
     const matchups = [makeMatchup(2009, 1, 100, 90)];
     const recap = generateSeasonRecap(2009, teams, matchups, [], [], []);
     expect(recap!.biggestMover).toBeNull();
   });
 
   it("finds the highest-scoring single-week performance", () => {
-    const teams = [
-      makeTeam(2024, 1, "owner-a", { final_rank: 1 }),
-      makeTeam(2024, 2, "owner-b", { final_rank: 2 }),
-    ];
-    const matchups = [
-      makeMatchup(2024, 1, 150, 120),
-      makeMatchup(2024, 2, 180, 140),
-    ];
+    const teams = [makeTeam(2024, 1, "owner-a", { final_rank: 1 }), makeTeam(2024, 2, "owner-b", { final_rank: 2 })];
+    const matchups = [makeMatchup(2024, 1, 150, 120), makeMatchup(2024, 2, 180, 140)];
     const recap = generateSeasonRecap(2024, teams, matchups, [], [], []);
     expect(recap!.highestScoringWeek).toMatchObject({
       ownerIds: ["owner-a"],
@@ -120,10 +105,7 @@ describe("generateSeasonRecap", () => {
   });
 
   it("summarizes trades with player names", () => {
-    const teams = [
-      makeTeam(2024, 1, "owner-a", { final_rank: 1 }),
-      makeTeam(2024, 2, "owner-b", { final_rank: 2 }),
-    ];
+    const teams = [makeTeam(2024, 1, "owner-a", { final_rank: 1 }), makeTeam(2024, 2, "owner-b", { final_rank: 2 })];
     const trades: Trade[] = [
       {
         year: 2024,
@@ -136,8 +118,24 @@ describe("generateSeasonRecap", () => {
         team_b_owner_id: "owner-b",
         acting_member_key: null,
         items: [
-          { player_id: 1, item_type: "TRADE", from_espn_team_id: 1, to_espn_team_id: 2, from_lineup_slot_id: null, to_lineup_slot_id: null, source: "ledger" },
-          { player_id: 2, item_type: "TRADE", from_espn_team_id: 2, to_espn_team_id: 1, from_lineup_slot_id: null, to_lineup_slot_id: null, source: "ledger" },
+          {
+            player_id: 1,
+            item_type: "TRADE",
+            from_espn_team_id: 1,
+            to_espn_team_id: 2,
+            from_lineup_slot_id: null,
+            to_lineup_slot_id: null,
+            source: "ledger",
+          },
+          {
+            player_id: 2,
+            item_type: "TRADE",
+            from_espn_team_id: 2,
+            to_espn_team_id: 1,
+            from_lineup_slot_id: null,
+            to_lineup_slot_id: null,
+            source: "ledger",
+          },
         ],
       },
     ];
@@ -155,10 +153,7 @@ describe("generateSeasonRecap", () => {
   });
 
   it("falls back to unlinked picks when a trade side moves no player", () => {
-    const teams = [
-      makeTeam(2024, 1, "owner-a", { final_rank: 1 }),
-      makeTeam(2024, 2, "owner-b", { final_rank: 2 }),
-    ];
+    const teams = [makeTeam(2024, 1, "owner-a", { final_rank: 1 }), makeTeam(2024, 2, "owner-b", { final_rank: 2 })];
     const trades: Trade[] = [
       {
         year: 2024,
@@ -171,11 +166,21 @@ describe("generateSeasonRecap", () => {
         team_b_owner_id: "owner-b",
         acting_member_key: null,
         items: [
-          { player_id: 1, item_type: "TRADE", from_espn_team_id: 1, to_espn_team_id: 2, from_lineup_slot_id: null, to_lineup_slot_id: null, source: "ledger" },
+          {
+            player_id: 1,
+            item_type: "TRADE",
+            from_espn_team_id: 1,
+            to_espn_team_id: 2,
+            from_lineup_slot_id: null,
+            to_lineup_slot_id: null,
+            source: "ledger",
+          },
         ],
       },
     ];
-    const playerSeasonPoints: PlayerSeasonPoints[] = [{ year: 2024, player_id: 1, player_name: "Player One", points: 100 }];
+    const playerSeasonPoints: PlayerSeasonPoints[] = [
+      { year: 2024, player_id: 1, player_name: "Player One", points: 100 },
+    ];
     const matchups = [makeMatchup(2024, 1, 100, 90)];
     const recap = generateSeasonRecap(2024, teams, matchups, trades, playerSeasonPoints, []);
     expect(recap!.notableTrades[0].gave).toEqual([{ playerId: 1, name: "Player One" }]);
@@ -194,13 +199,36 @@ describe("generateSeasonRecap", () => {
   });
 
   it("identifies breakout players by value shift", () => {
-    const teams = [
-      makeTeam(2024, 1, "owner-a", { final_rank: 1 }),
-      makeTeam(2024, 2, "owner-b", { final_rank: 2 }),
-    ];
+    const teams = [makeTeam(2024, 1, "owner-a", { final_rank: 1 }), makeTeam(2024, 2, "owner-b", { final_rank: 2 })];
     const draftPicks: DraftPick[] = [
-      { year: 2024, overall_pick_number: 10, round_id: 1, round_pick_number: 10, espn_team_id: 1, owner_id: "owner-a", player_id: 1, player_name: "Late Pick", keeper: false, traded_pick: false, traded_from_espn_team_id: null, pro_team_id: null },
-      { year: 2024, overall_pick_number: 1, round_id: 1, round_pick_number: 1, espn_team_id: 1, owner_id: "owner-a", player_id: 2, player_name: "Early Pick", keeper: false, traded_pick: false, traded_from_espn_team_id: null, pro_team_id: null },
+      {
+        year: 2024,
+        overall_pick_number: 10,
+        round_id: 1,
+        round_pick_number: 10,
+        espn_team_id: 1,
+        owner_id: "owner-a",
+        player_id: 1,
+        player_name: "Late Pick",
+        keeper: false,
+        traded_pick: false,
+        traded_from_espn_team_id: null,
+        pro_team_id: null,
+      },
+      {
+        year: 2024,
+        overall_pick_number: 1,
+        round_id: 1,
+        round_pick_number: 1,
+        espn_team_id: 1,
+        owner_id: "owner-a",
+        player_id: 2,
+        player_name: "Early Pick",
+        keeper: false,
+        traded_pick: false,
+        traded_from_espn_team_id: null,
+        pro_team_id: null,
+      },
     ];
     const playerSeasonPoints: PlayerSeasonPoints[] = [
       { year: 2024, player_id: 1, player_name: "Late Pick", points: 500 },
@@ -213,5 +241,4 @@ describe("generateSeasonRecap", () => {
     expect(recap!.breakoutPlayers[0].playerName).toBe("Late Pick");
     expect(recap!.breakoutPlayers[0].valueShift).toBeGreaterThan(0);
   });
-
 });

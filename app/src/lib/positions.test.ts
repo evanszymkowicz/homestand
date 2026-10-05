@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { getEligiblePositionIds, matchesPositionScope, OF_POSITION_ID, orderEligiblePositionIdsForPicker } from "./positions";
+import {
+  getEligiblePositionIds,
+  matchesPositionScope,
+  OF_POSITION_ID,
+  orderEligiblePositionIdsForPicker,
+} from "./positions";
 
 describe("getEligiblePositionIds", () => {
   it("maps every real single-position slot to positions.ts's id space", () => {

@@ -20,7 +20,7 @@ const PROVISIONAL_CLASS: Record<number, string> = {
 };
 
 export function RankBadge({ rank, plain = false, provisional = false }: RankBadgeProps) {
-  const badgeClass = plain ? "" : (provisional ? PROVISIONAL_CLASS[rank] : SOLID_CLASS[rank]) ?? "";
+  const badgeClass = plain ? "" : ((provisional ? PROVISIONAL_CLASS[rank] : SOLID_CLASS[rank]) ?? "");
 
   return (
     <span

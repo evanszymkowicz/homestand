@@ -39,8 +39,12 @@ function computePositions(rounds: BracketRound[]): Map<string, number> {
         const teamB = prevMatchup.away?.espn_team_id;
         const current = rounds[r].matchups[m];
 
-        if (current.home.espn_team_id === teamA || current.home.espn_team_id === teamB ||
-            current.away?.espn_team_id === teamA || current.away?.espn_team_id === teamB) {
+        if (
+          current.home.espn_team_id === teamA ||
+          current.home.espn_team_id === teamB ||
+          current.away?.espn_team_id === teamA ||
+          current.away?.espn_team_id === teamB
+        ) {
           sourceKeys.push(prev);
         }
       }
@@ -92,8 +96,7 @@ export function BracketTree({ rounds, teams, champion, turningPointByMatchup }: 
           <div key={round.week} className="absolute" style={{ left: roundIdx * 200 }}>
             <div
               className="text-center text-[0.66rem] font-semibold tracking-wide text-ink-faint uppercase"
-              style={{ height: 32 }}
-            >
+              style={{ height: 32 }}>
               {ROUND_LABELS[roundIdx] ?? `Round ${roundIdx + 1}`}
             </div>
             {round.matchups.map((matchup, matchupIdx) => {

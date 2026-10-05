@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { loadBoxScores, loadBoxScoresPartial } from "./data";
+import { loadBoxScores, loadBoxScoresPartial, setImportContext } from "./data";
 
 function okResponse(body: unknown): Response {
   return { ok: true, status: 200, json: async () => body } as unknown as Response;
@@ -22,6 +22,54 @@ beforeEach(() => {
 afterEach(() => {
   vi.useRealTimers();
   vi.unstubAllGlobals();
+  setImportContext(null);
+});
+
+/** The proxy is a catch-all route whose `resolveCollection` allowlist lives in
+ * app/functions/api/data/[importId]/[[collection]].ts. These pin the exact URL
+ * shapes the loaders emit so a loader can never ask for a path the proxy
+ * rejects -- the failure mode that silently broke every box-score read when the
+ * route matched only a single segment and the SPA fallback answered with HTML. */
+describe("scoped request URLs", () => {
+  async function urlFor(load: () => Promise<unknown>): Promise<string> {
+    const fetchMock = vi.fn().mockResolvedValue(okResponse([]));
+    vi.stubGlobal("fetch", fetchMock);
+    await load();
+    return String(fetchMock.mock.calls[0][0]);
+  }
+
+  it("routes every collection through the authenticated proxy", async () => {
+    setImportContext("import-abc");
+    expect(await urlFor(() => loadBoxScores(2024))).toBe("/api/data/import-abc/box_scores/2024.json");
+  });
+
+  it("keeps nested box_scores paths two segments deep", async () => {
+    setImportContext("import-abc");
+    const url = await urlFor(() => loadBoxScoresPartial([2019, 2020]));
+    expect(url).toBe("/api/data/import-abc/box_scores/2019.json");
+  });
+
+  it("never falls back to the public static bundle when no import is selected", async () => {
+    setImportContext(null);
+    // Still the proxy (and therefore still gated), just with a sentinel tenant
+    // that matches no row, so every loader 404s instead of reading /data/ off disk.
+    expect(await urlFor(() => loadBoxScores(2024))).toBe("/api/data/none/box_scores/2024.json");
+  });
+
+  it("does not serve one tenant's cached response to another", async () => {
+    // Same path, different tenant: a path-only cache key would return the first
+    // tenant's promise here and never hit the network again.
+    const first = vi.fn().mockResolvedValue(okResponse([{ player_id: 1 }]));
+    vi.stubGlobal("fetch", first);
+    setImportContext("tenant-a");
+    await expect(loadBoxScores(2024)).resolves.toEqual([{ player_id: 1 }]);
+
+    const second = vi.fn().mockResolvedValue(okResponse([{ player_id: 2 }]));
+    vi.stubGlobal("fetch", second);
+    setImportContext("tenant-b");
+    await expect(loadBoxScores(2024)).resolves.toEqual([{ player_id: 2 }]);
+    expect(second.mock.calls[0][0]).toBe("/api/data/tenant-b/box_scores/2024.json");
+  });
 });
 
 describe("fetchJsonWithRetry (via loadBoxScores)", () => {
@@ -87,7 +135,10 @@ describe("loadBoxScoresPartial", () => {
   });
 
   it("throws when every year failed", async () => {
-    vi.stubGlobal("fetch", vi.fn(async () => statusResponse(500)));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => statusResponse(500))
+    );
     const pending = loadBoxScoresPartial([1994, 1993]).then(
       () => {
         throw new Error("should have thrown");

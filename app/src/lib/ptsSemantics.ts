@@ -1,4 +1,3 @@
-
 export const PTS_SEMANTICS_TOOLTIP_SEASON_SHORT = [
   "Points the player scored while on a fantasy roster during matchup periods: started slots and bench/IL days alike.",
   "",

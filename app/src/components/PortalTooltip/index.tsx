@@ -78,7 +78,10 @@ export function PortalTooltip({
   if (anchor) {
     const width = panelSize?.width ?? 0;
     const height = panelSize?.height ?? 0;
-    const left = Math.max(EDGE_PX, Math.min(anchor.left + anchor.width / 2 - width / 2, window.innerWidth - width - EDGE_PX));
+    const left = Math.max(
+      EDGE_PX,
+      Math.min(anchor.left + anchor.width / 2 - width / 2, window.innerWidth - width - EDGE_PX)
+    );
     const top = Math.max(
       EDGE_PX,
       Math.min(openDown ? anchor.bottom + GAP_PX : anchor.top - GAP_PX - height, window.innerHeight - height - EDGE_PX)

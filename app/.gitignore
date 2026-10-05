@@ -29,3 +29,11 @@ public/data
 
 # Local wrangler state (miniflare D1/dev caches) — regenerable, never commit
 .wrangler
+
+# Local env / secrets
+.env
+.dev.vars
+_worker.bundle
+
+# Dev-local email outbox — holds verification and password-reset tokens.
+.outbox

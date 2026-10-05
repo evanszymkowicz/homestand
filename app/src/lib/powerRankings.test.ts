@@ -64,14 +64,20 @@ function makeMatchup(
 
 describe("computeWeeklyPowerRankings", () => {
   it("ranks teams by cumulative points each week", () => {
-    const teams = [
-      makeTeam(2024, 1, "owner-a"),
-      makeTeam(2024, 2, "owner-b"),
-      makeTeam(2024, 3, "owner-c"),
-    ];
+    const teams = [makeTeam(2024, 1, "owner-a"), makeTeam(2024, 2, "owner-b"), makeTeam(2024, 3, "owner-c")];
     const matchups = [
-      makeMatchup(2024, 1, { espnTeamId: 1, ownerId: "owner-a", score: 100 }, { espnTeamId: 2, ownerId: "owner-b", score: 90 }),
-      makeMatchup(2024, 1, { espnTeamId: 3, ownerId: "owner-c", score: 80 }, { espnTeamId: 1, ownerId: "owner-a", score: 0 }),
+      makeMatchup(
+        2024,
+        1,
+        { espnTeamId: 1, ownerId: "owner-a", score: 100 },
+        { espnTeamId: 2, ownerId: "owner-b", score: 90 }
+      ),
+      makeMatchup(
+        2024,
+        1,
+        { espnTeamId: 3, ownerId: "owner-c", score: 80 },
+        { espnTeamId: 1, ownerId: "owner-a", score: 0 }
+      ),
     ];
     const result = computeWeeklyPowerRankings(2024, matchups, teams);
     expect(result.weeks).toHaveLength(1);
@@ -87,7 +93,12 @@ describe("computeWeeklyPowerRankings", () => {
   it("excludes playoff games entirely, so the last week is the regular-season total", () => {
     const teams = [makeTeam(2024, 1, "owner-a"), makeTeam(2024, 2, "owner-b")];
     const matchups = [
-      makeMatchup(2024, 1, { espnTeamId: 1, ownerId: "owner-a", score: 50 }, { espnTeamId: 2, ownerId: "owner-b", score: 100 }),
+      makeMatchup(
+        2024,
+        1,
+        { espnTeamId: 1, ownerId: "owner-a", score: 50 },
+        { espnTeamId: 2, ownerId: "owner-b", score: 100 }
+      ),
       makeMatchup(
         2024,
         2,
@@ -112,8 +123,18 @@ describe("computeWeeklyPowerRankings", () => {
       makeTeam(2024, 2, "owner-b", { overall: { ...EMPTY_RECORD, points_for: 100 } }),
     ];
     const matchups = [
-      makeMatchup(2024, 1, { espnTeamId: 1, ownerId: "owner-a", score: 50 }, { espnTeamId: 2, ownerId: "owner-b", score: 100 }),
-      makeMatchup(2024, 2, { espnTeamId: 1, ownerId: "owner-a", score: 100 }, { espnTeamId: 2, ownerId: "owner-b", score: 0 }),
+      makeMatchup(
+        2024,
+        1,
+        { espnTeamId: 1, ownerId: "owner-a", score: 50 },
+        { espnTeamId: 2, ownerId: "owner-b", score: 100 }
+      ),
+      makeMatchup(
+        2024,
+        2,
+        { espnTeamId: 1, ownerId: "owner-a", score: 100 },
+        { espnTeamId: 2, ownerId: "owner-b", score: 0 }
+      ),
       makeMatchup(
         2024,
         3,

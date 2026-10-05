@@ -216,7 +216,12 @@ function statCell(value: number | undefined, hasLine: boolean): string {
 }
 
 const BATTING_STAT_COLUMNS: StatColumnDef[] = [
-  { key: "ab", label: "AB", value: s => statCell(s.batting?.ab, s.batting !== null), sortValue: s => s.batting?.ab ?? 0 },
+  {
+    key: "ab",
+    label: "AB",
+    value: s => statCell(s.batting?.ab, s.batting !== null),
+    sortValue: s => s.batting?.ab ?? 0,
+  },
   { key: "r", label: "R", value: s => statCell(s.batting?.r, s.batting !== null), sortValue: s => s.batting?.r ?? 0 },
   {
     key: "1b",
@@ -236,7 +241,12 @@ const BATTING_STAT_COLUMNS: StatColumnDef[] = [
     value: s => statCell(s.batting?.triples, s.batting !== null),
     sortValue: s => s.batting?.triples ?? 0,
   },
-  { key: "hr", label: "HR", value: s => statCell(s.batting?.hr, s.batting !== null), sortValue: s => s.batting?.hr ?? 0 },
+  {
+    key: "hr",
+    label: "HR",
+    value: s => statCell(s.batting?.hr, s.batting !== null),
+    sortValue: s => s.batting?.hr ?? 0,
+  },
   {
     key: "rbi",
     label: "RBI",
@@ -263,8 +273,18 @@ const BATTING_STAT_COLUMNS: StatColumnDef[] = [
     value: s => statCell(s.batting?.hbp, s.batting !== null),
     sortValue: s => s.batting?.hbp ?? 0,
   },
-  { key: "sb", label: "SB", value: s => statCell(s.batting?.sb, s.batting !== null), sortValue: s => s.batting?.sb ?? 0 },
-  { key: "cs", label: "CS", value: s => statCell(s.batting?.cs, s.batting !== null), sortValue: s => s.batting?.cs ?? 0 },
+  {
+    key: "sb",
+    label: "SB",
+    value: s => statCell(s.batting?.sb, s.batting !== null),
+    sortValue: s => s.batting?.sb ?? 0,
+  },
+  {
+    key: "cs",
+    label: "CS",
+    value: s => statCell(s.batting?.cs, s.batting !== null),
+    sortValue: s => s.batting?.cs ?? 0,
+  },
   {
     key: "gidp",
     label: "GIDP",
@@ -280,7 +300,12 @@ const PITCHING_STAT_COLUMNS: StatColumnDef[] = [
     value: s => (s.pitching !== null ? formatInnings(s.pitching.outs) : "—"),
     sortValue: s => s.pitching?.outs ?? 0,
   },
-  { key: "h", label: "H", value: s => statCell(s.pitching?.h, s.pitching !== null), sortValue: s => s.pitching?.h ?? 0 },
+  {
+    key: "h",
+    label: "H",
+    value: s => statCell(s.pitching?.h, s.pitching !== null),
+    sortValue: s => s.pitching?.h ?? 0,
+  },
   {
     key: "ra",
     label: "RA",
@@ -334,7 +359,12 @@ const PITCHING_STAT_COLUMNS: StatColumnDef[] = [
     value: s => statCell(s.pitching?.pg, s.pitching !== null),
     sortValue: s => s.pitching?.pg ?? 0,
   },
-  { key: "w", label: "W", value: s => statCell(s.pitching?.wins, s.pitching !== null), sortValue: s => s.pitching?.wins ?? 0 },
+  {
+    key: "w",
+    label: "W",
+    value: s => statCell(s.pitching?.wins, s.pitching !== null),
+    sortValue: s => s.pitching?.wins ?? 0,
+  },
   {
     key: "l",
     label: "L",

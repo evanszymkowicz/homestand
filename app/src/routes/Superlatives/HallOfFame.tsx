@@ -99,9 +99,7 @@ export function HallOfFame({ owners, seasons, keepers, seasonPoints }: HallOfFam
 
       <div>
         <SectionHeading className="mb-3">Keeper Bust Hall of Fame</SectionHeading>
-        <p className="mb-3 text-xs text-ink-faint">
-          Lowest fantasy points produced in a kept season.
-        </p>
+        <p className="mb-3 text-xs text-ink-faint">Lowest fantasy points produced in a kept season.</p>
         <KeeperBustTable rows={keeperBusts} owners={owners} />
       </div>
     </div>

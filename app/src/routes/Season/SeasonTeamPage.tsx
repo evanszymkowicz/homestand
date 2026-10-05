@@ -49,27 +49,19 @@ export default function SeasonTeamPage() {
   );
   useDocumentTitle(team ? `${team.team_name} · ${team.year}` : "Team");
 
-  const boxScoresState = useAsync(
-    () => {
-      if (!team || !season || season.coverage.box_scores === "missing") return Promise.resolve([]);
-      return loadBoxScores(team.year);
-    },
-    [team?.year, season?.coverage.box_scores]
-  );
+  const boxScoresState = useAsync(() => {
+    if (!team || !season || season.coverage.box_scores === "missing") return Promise.resolve([]);
+    return loadBoxScores(team.year);
+  }, [team?.year, season?.coverage.box_scores]);
 
   const teamKeepers = useMemo(
-    () =>
-      team && season
-        ? keepers.filter(k => k.year === season.year && k.espn_team_id === team.espn_team_id)
-        : [],
+    () => (team && season ? keepers.filter(k => k.year === season.year && k.espn_team_id === team.espn_team_id) : []),
     [keepers, team, season]
   );
 
   const teamEntries = useMemo(
     () =>
-      team && boxScoresState.status === "success"
-        ? getSeasonTeamEntries(boxScoresState.data, team.espn_team_id)
-        : [],
+      team && boxScoresState.status === "success" ? getSeasonTeamEntries(boxScoresState.data, team.espn_team_id) : [],
     [boxScoresState, team]
   );
   const roster = useMemo(() => aggregateSeasonRoster(teamEntries), [teamEntries]);
@@ -151,13 +143,9 @@ export default function SeasonTeamPage() {
             Roster
           </SectionHeading>
 
-          {!boxScoresCovered && (
-            <p className="text-sm text-ink-dim">No box-score data on file for {season.year}.</p>
-          )}
+          {!boxScoresCovered && <p className="text-sm text-ink-dim">No box-score data on file for {season.year}.</p>}
 
-          {boxScoresCovered && boxScoresState.status === "loading" && (
-            <p className="text-ink-dim">Loading roster…</p>
-          )}
+          {boxScoresCovered && boxScoresState.status === "loading" && <p className="text-ink-dim">Loading roster…</p>}
 
           {boxScoresCovered && boxScoresState.status === "error" && (
             <p className="text-ink-dim">Couldn't load box scores. Try refreshing the page.</p>

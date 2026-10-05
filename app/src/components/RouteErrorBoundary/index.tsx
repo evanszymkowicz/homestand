@@ -26,10 +26,7 @@ export class RouteErrorBoundary extends Component<Props, State> {
       <div className="flex min-h-[50vh] items-center justify-center p-8 text-center text-ink-dim">
         <div>
           <p>Something went wrong loading {this.props.routeName}.</p>
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-            className="mt-2 text-accent underline">
+          <button type="button" onClick={() => window.location.reload()} className="mt-2 text-accent underline">
             Try again
           </button>
         </div>

@@ -8,7 +8,6 @@ import {
   getOwnerKeeperTenureRows,
   getOwnerStreaks,
   getYearRuns,
-  getYearSpan,
 } from "./ownerHistory";
 import type { DraftPick, Keeper, Owner, PlayerSeasonPoints, Season, Team, TeamRecord } from "../types";
 import type { OwnerKeeperPlayerSummary } from "./ownerHistory";
@@ -305,17 +304,6 @@ describe("getYearRuns", () => {
       { start: 2025, end: 2025 },
     ]);
     expect(getYearRuns([])).toEqual([]);
-  });
-});
-
-describe("getYearSpan", () => {
-  it("returns the first and last year regardless of gaps", () => {
-    expect(getYearSpan([2019, 2020, 2021, 2023, 2025])).toEqual({ start: 2019, end: 2025 });
-    expect(getYearSpan([2020])).toEqual({ start: 2020, end: 2020 });
-  });
-
-  it("returns undefined for an empty list", () => {
-    expect(getYearSpan([])).toBeUndefined();
   });
 });
 

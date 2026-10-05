@@ -10,7 +10,7 @@ interface ErrorBoundaryState {
 
 /** Root recovery boundary: an unhandled render error shows this fallback
  *  Data.ts evicts rejected promises, so a fresh mount re-fetches.
-*/
+ */
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = { error: null };
 

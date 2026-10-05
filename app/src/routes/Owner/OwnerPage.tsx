@@ -130,7 +130,7 @@ export function OwnerPage({
             label="Titles"
             value={String(titleRow?.titles ?? 0)}
             labelBelow
-            
+
             detail={`${titleRow?.runnerUps ?? 0} Runner-up finish${(titleRow?.runnerUps ?? 0) === 1 ? "" : "es"}`}
             accent={titleRow && titleRow.titles > 0 ? "gold" : undefined}
           />
@@ -139,23 +139,15 @@ export function OwnerPage({
             value={formatRecord(standing.wins, standing.losses, standing.ties)}
             detail={`${standing.seasons} season${standing.seasons === 1 ? "" : "s"}`}
             labelBelow
-            
           />
-          <StatCard label="Win%" value={formatWinPct(standing.winPct)} detail="All-Time" labelBelow  />
+          <StatCard label="Win%" value={formatWinPct(standing.winPct)} detail="All-Time" labelBelow />
           <StatCard
             label="Points For"
             value={formatPoints(points.pointsFor)}
             detail={`${formatPoints(points.pointsForPerGame)} per matchup`}
             labelBelow
-            
           />
-          <StatCard
-            label="Points Against"
-            value={formatPoints(points.pointsAgainst)}
-            detail="All-Time"
-            labelBelow
-            
-          />
+          <StatCard label="Points Against" value={formatPoints(points.pointsAgainst)} detail="All-Time" labelBelow />
         </div>
       ) : (
         <p className="mt-4 text-ink-dim">No career data on record yet.</p>

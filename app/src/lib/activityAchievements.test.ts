@@ -3,13 +3,40 @@ import { getAchievementFeats, getBattingFeats, getWeeklyStatLeaders } from "./ac
 import type { BoxScoreEntry, BattingLine, PitchingLine } from "../types";
 
 const NO_BATTING: BattingLine = {
-  ab: 0, r: 0, singles: 0, doubles: 0, triples: 0, hr: 0, rbi: 0,
-  bb: 0, hbp: 0, k: 0, sb: 0, cs: 0, gidp: 0, cyc: 0, gshr: 0, e: 0,
+  ab: 0,
+  r: 0,
+  singles: 0,
+  doubles: 0,
+  triples: 0,
+  hr: 0,
+  rbi: 0,
+  bb: 0,
+  hbp: 0,
+  k: 0,
+  sb: 0,
+  cs: 0,
+  gidp: 0,
+  cyc: 0,
+  gshr: 0,
+  e: 0,
 };
 
 const NO_PITCHING: PitchingLine = {
-  outs: 0, h: 0, r: 0, er: 0, bb: 0, hb: 0, k: 0, wins: 0, losses: 0,
-  sv: 0, bs: 0, hd: 0, sho: 0, nh: 0, pg: 0,
+  outs: 0,
+  h: 0,
+  r: 0,
+  er: 0,
+  bb: 0,
+  hb: 0,
+  k: 0,
+  wins: 0,
+  losses: 0,
+  sv: 0,
+  bs: 0,
+  hd: 0,
+  sho: 0,
+  nh: 0,
+  pg: 0,
 };
 
 let nextId = 1;

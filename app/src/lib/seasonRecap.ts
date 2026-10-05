@@ -107,7 +107,11 @@ function findBiggestMover(year: number, teams: Team[]): SeasonRecapBiggestMover 
   return best;
 }
 
-function findHighestScoringWeek(year: number, matchups: Matchup[], teams: Team[]): SeasonRecapHighestScoringWeek | null {
+function findHighestScoringWeek(
+  year: number,
+  matchups: Matchup[],
+  teams: Team[]
+): SeasonRecapHighestScoringWeek | null {
   let best: { team: Team; week: number; score: number } | null = null;
   for (const m of matchups) {
     if (m.year !== year || m.winner === "UNDECIDED") continue;
@@ -131,7 +135,12 @@ function findHighestScoringWeek(year: number, matchups: Matchup[], teams: Team[]
 
 const PICKS_ASSET: SeasonRecapTradeAsset[] = [{ playerId: null, name: "picks" }];
 
-function summarizeTrade(trade: Trade, year: number, yearTeams: Team[], points: PlayerSeasonPoints[]): SeasonRecapTrade | null {
+function summarizeTrade(
+  trade: Trade,
+  year: number,
+  yearTeams: Team[],
+  points: PlayerSeasonPoints[]
+): SeasonRecapTrade | null {
   const teamA = yearTeams.find(t => t.espn_team_id === trade.team_a_espn_team_id);
   const teamB = yearTeams.find(t => t.espn_team_id === trade.team_b_espn_team_id);
   if (!teamA || !teamB) return null;
@@ -147,7 +156,10 @@ function summarizeTrade(trade: Trade, year: number, yearTeams: Team[], points: P
     };
     if (item.from_espn_team_id === trade.team_a_espn_team_id && item.to_espn_team_id === trade.team_b_espn_team_id) {
       sideA.push(asset);
-    } else if (item.from_espn_team_id === trade.team_b_espn_team_id && item.to_espn_team_id === trade.team_a_espn_team_id) {
+    } else if (
+      item.from_espn_team_id === trade.team_b_espn_team_id &&
+      item.to_espn_team_id === trade.team_a_espn_team_id
+    ) {
       sideB.push(asset);
     }
   }

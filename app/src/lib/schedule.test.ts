@@ -92,10 +92,7 @@ describe("getBracketChampionTeamId", () => {
 
 describe("getPlayoffWeeksFromMatchups", () => {
   it("returns no weeks when there are no playoff matchups", () => {
-    const matchups = [
-      makeMatchup(1, 1, 1, 2, "HOME", null),
-      makeMatchup(2, 2, 3, 4, "AWAY", null),
-    ];
+    const matchups = [makeMatchup(1, 1, 1, 2, "HOME", null), makeMatchup(2, 2, 3, 4, "AWAY", null)];
     expect(getPlayoffWeeksFromMatchups(matchups, 2023)).toEqual([]);
   });
 

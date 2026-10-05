@@ -38,9 +38,7 @@ function groupByWeek(season: Season, matchups: Matchup[], weeks: number[]): Map<
   for (const week of weeks) {
     byWeek.set(
       week,
-      matchups
-        .filter(m => m.year === season.year && m.week === week)
-        .sort((a, b) => a.matchup_id - b.matchup_id)
+      matchups.filter(m => m.year === season.year && m.week === week).sort((a, b) => a.matchup_id - b.matchup_id)
     );
   }
   return byWeek;
@@ -87,10 +85,7 @@ function defaultWeek(season: Season, weeks: number[], byWeek: Map<number, Matchu
  * (from season.regular_season_weeks — never a hardcoded count) plus the weeks that actually have playoff matchups **/
 
 export function WeekScoreboard({ season, teams, matchups, owners }: WeekScoreboardProps) {
-  const playoffWeeks = useMemo(
-    () => getPlayoffWeeksFromMatchups(matchups, season.year),
-    [matchups, season.year]
-  );
+  const playoffWeeks = useMemo(() => getPlayoffWeeksFromMatchups(matchups, season.year), [matchups, season.year]);
   const weeks = useMemo(
     () => [...getSeasonWeeks(season), ...playoffWeeks].sort((a, b) => a - b),
     [season, playoffWeeks]
@@ -139,14 +134,13 @@ export function WeekScoreboard({ season, teams, matchups, owners }: WeekScoreboa
     <div>
       {!comebackCovered && (
         <p className="mb-3 text-xs text-ink-dim">
-          Comeback turning points need day-by-day box scores, which this season does not have in full, so
-          they are omitted.
+          Comeback turning points need day-by-day box scores, which this season does not have in full, so they are
+          omitted.
         </p>
       )}
       {comebackCovered && boxScoreState.status === "error" && (
         <p className="mb-3 text-xs text-ink-dim">
-          Box scores for {season.year} failed to load, so comeback turning points are unavailable this
-          season.
+          Box scores for {season.year} failed to load, so comeback turning points are unavailable this season.
         </p>
       )}
       <div className="scrollbar-accent mb-4 flex gap-2 overflow-x-auto pb-3">

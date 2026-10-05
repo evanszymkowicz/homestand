@@ -131,8 +131,24 @@ const TEAMS: Team[] = [
 ];
 
 const OWNERS: Owner[] = [
-  { owner_id: "owner-1", canonical_name: "Owner One", espn_member_keys: [], team_names_by_year: {}, co_owners: [], last_active_year: 2026, absent_from_latest_season: false },
-  { owner_id: "owner-2", canonical_name: "Owner Two", espn_member_keys: [], team_names_by_year: {}, co_owners: [], last_active_year: 2026, absent_from_latest_season: false },
+  {
+    owner_id: "owner-1",
+    canonical_name: "Owner One",
+    espn_member_keys: [],
+    team_names_by_year: {},
+    co_owners: [],
+    last_active_year: 2026,
+    absent_from_latest_season: false,
+  },
+  {
+    owner_id: "owner-2",
+    canonical_name: "Owner Two",
+    espn_member_keys: [],
+    team_names_by_year: {},
+    co_owners: [],
+    last_active_year: 2026,
+    absent_from_latest_season: false,
+  },
 ];
 
 const PLAYERS: Player[] = [
@@ -650,7 +666,9 @@ describe("buildActivityFeed — achievements", () => {
       },
     ];
     const result = feed({ boxScores: twoStartWeek });
-    expect(result.achievements.some(a => a.label === "leads in strikeouts with 18" && a.detail === "2 starts")).toBe(true);
+    expect(result.achievements.some(a => a.label === "leads in strikeouts with 18" && a.detail === "2 starts")).toBe(
+      true
+    );
     expect(result.achievements.every(a => !a.label.includes("IP") && !(a.detail ?? "").includes("IP"))).toBe(true);
   });
 

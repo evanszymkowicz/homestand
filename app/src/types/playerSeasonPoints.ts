@@ -58,4 +58,3 @@ export interface PlayerSeasonBackfill {
   default_position_id: number | null;
   source: string;
 }
-

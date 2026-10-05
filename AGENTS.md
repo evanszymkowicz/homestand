@@ -9,11 +9,14 @@ serves it as an interactive dashboard.
 
 ## Status
 
-S0 (bootstrap) in flight. The dashboard app, the Python pipeline, and the anonymized demo
-dataset are in place. Auth, the server-side ESPN crawl, and per-account Cloudflare storage
-are not yet built. Read before starting work:
+S1/S2 landed; S5 scoping landed. Invite-only auth with D1 sessions, encrypted ESPN
+credential storage, the manual session-cookie fallback, the tenant-scoped data proxy, and the
+landing page are in place. The automated crawl-to-scoped-data path is not finished. Read before
+starting work:
 
 - `context/features/homestand-league-import-spec.md` — the canonical architecture and phased plan.
+- `context/future-items.md` — known-open work, including one item that **blocks public
+  reachability** (`login` / `reset-request` / `probe` are unthrottled).
 - `context/ai-interaction.md` — how to work in this repo: data rules, verification expectations.
 - `context/coding-standards.md` — Python and TypeScript/React conventions.
 - `data/README.md` — the processed data dictionary. Read before consuming any JSON.
@@ -24,8 +27,9 @@ Commands are listed in `CHEATSHEET.md`. Two traps worth keeping in context:
 
 - `normalize.py` is idempotent and has **no `--years` flag**: a partial run truncates every
   processed file while leaving `box_scores/` intact. Run `validate.py` after every normalize.
-- `npx tsc -b app --noEmit` from the repo root. There is no root tsconfig, so the `app` arg
-  is required; add `--force` if results look stale.
+- `cd app && npx tsc -b --noEmit`. There is no root tsconfig and no root `node_modules` —
+  TypeScript lives in `app/`, so `tsc` must run from there. Add `--force` if results look
+  stale (a plain `-b` skips up-to-date projects).
 
 `app/scripts/sync-data.mjs` copies `data/processed/` into `app/public/data/` before `dev`,
 `test`, and `build` — never edit `app/public/data/` directly.

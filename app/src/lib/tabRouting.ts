@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 export function useUrlTab<T extends string>(
   basePath: string,
   defaultTab: T,
-  validTabs: readonly T[],
+  validTabs: readonly T[]
 ): { currentTab: T; setTab: (tab: T) => void } {
   const { tab } = useParams<{ tab?: string }>();
   const navigate = useNavigate();

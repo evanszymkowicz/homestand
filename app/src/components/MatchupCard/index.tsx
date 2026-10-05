@@ -96,37 +96,26 @@ function Side({
   const text = bracket ? "text-xs" : "text-sm";
 
   return (
-    <div
-      className={`flex items-center justify-between ${bracket ? "gap-1.5 px-2 py-1.5" : "gap-3 px-3 py-2"}`}>
+    <div className={`flex items-center justify-between ${bracket ? "gap-1.5 px-2 py-1.5" : "gap-3 px-3 py-2"}`}>
       <div className={bracket ? "min-w-0 flex-1" : "min-w-0"}>
         <div className={`flex items-center gap-1.5 ${text} ${emphasis}`}>
           <span className="truncate">
-            {bracket && team?.playoff_seed != null && (
-              <span className="text-ink-faint">{team.playoff_seed}.</span>
-            )}
+            {bracket && team?.playoff_seed != null && <span className="text-ink-faint">{team.playoff_seed}.</span>}
             {team?.team_name ?? (bracket ? "TBD" : "Unknown team")}
           </span>
-          {!bracket &&
-            champion &&
-            side.espn_team_id === champion.teamId && (
-              <span className="flex-none" role="img" aria-label={champion.label} title={champion.label}>
-                {champion.emoji}
-              </span>
-            )}
+          {!bracket && champion && side.espn_team_id === champion.teamId && (
+            <span className="flex-none" role="img" aria-label={champion.label} title={champion.label}>
+              {champion.emoji}
+            </span>
+          )}
           {marker}
         </div>
-        {!bracket && (
-          <div className="truncate text-xs text-ink-faint">
-            {team ? teamOwnerNames(team, owners) : "—"}
-          </div>
-        )}
+        {!bracket && <div className="truncate text-xs text-ink-faint">{team ? teamOwnerNames(team, owners) : "—"}</div>}
       </div>
       <div className={`flex-none tabular-nums ${text} ${emphasis}`}>{formatPoints(side.score)}</div>
     </div>
   );
 }
-
-
 
 /** One matchup as a card, shared by the week scoreboard and the playoff
  *  brackets -- so a turning point or champion badge added here shows up in
@@ -134,14 +123,7 @@ function Side({
  *  font-weight only (never color alone — same CVD rule the head-to-head grid
  *  follows). Byes render as a single side with a "Bye" line instead of a
  *  second row. */
-export function MatchupCard({
-  matchup,
-  teams,
-  owners,
-  champion,
-  turningPoint,
-  variant = "fluid",
-}: MatchupCardProps) {
+export function MatchupCard({ matchup, teams, owners, champion, turningPoint, variant = "fluid" }: MatchupCardProps) {
   const isBracket = variant === "bracket";
   const hasAway = matchup.away != null;
   const shared = { year: matchup.year, teams, owners: owners ?? [], bracket: isBracket };
@@ -153,9 +135,7 @@ export function MatchupCard({
         {...shared}
         side={matchup.home}
         isWinner={matchup.winner === "HOME"}
-        marker={
-          isBracket && turningPoint ? <TurningPointTag turningPoint={turningPoint} inline /> : undefined
-        }
+        marker={isBracket && turningPoint ? <TurningPointTag turningPoint={turningPoint} inline /> : undefined}
         champion={isBracket ? undefined : champion}
       />
       {isBracket && <div className="border-t border-border" />}

@@ -50,15 +50,7 @@ function TradeAssets({ assets }: { assets: SeasonRecapTradeAsset[] }) {
   );
 }
 
-function NotableTrades({
-  recap,
-  season,
-  owners,
-}: {
-  recap: SeasonRecap;
-  season: Season;
-  owners: Owner[];
-}) {
+function NotableTrades({ recap, season, owners }: { recap: SeasonRecap; season: Season; owners: Owner[] }) {
   if (recap.notableTrades.length === 0) {
     return (
       <div className="px-3 py-2 text-sm text-ink-faint">
@@ -93,15 +85,7 @@ function NotableTrades({
   );
 }
 
-function BreakoutPlayers({
-  recap,
-  season,
-  owners,
-}: {
-  recap: SeasonRecap;
-  season: Season;
-  owners: Owner[];
-}) {
+function BreakoutPlayers({ recap, season, owners }: { recap: SeasonRecap; season: Season; owners: Owner[] }) {
   if (recap.breakoutPlayers.length === 0) {
     return (
       <div className="px-3 py-2 text-sm text-ink-faint">
@@ -119,27 +103,26 @@ function BreakoutPlayers({
           hidden -- but they are not comparable to a full-coverage season. */}
       {season.coverage.stat_lines !== "full" && (
         <p className="px-3 pb-1 pt-2 text-xs text-ink-faint">
-          Season totals for this era are backfilled from whole-week box scores, so percentiles are
-          approximate.
+          Season totals for this era are backfilled from whole-week box scores, so percentiles are approximate.
         </p>
       )}
       <ul className="divide-y divide-border">
         {recap.breakoutPlayers.map((player, i) => (
           <li key={i} className="px-3 py-2 text-sm">
-          <div className="flex items-baseline justify-between gap-2">
-            <span className="font-semibold text-ink">
-              <PlayerLink playerId={player.playerId} name={player.playerName} />
-            </span>
-            <span className="text-xs text-ink-faint">
-              <OwnerLink owners={owners} ownerId={player.ownerId} />
-            </span>
-          </div>
-          <div className="text-xs text-ink-faint">
-            Drafted #{player.draftPosition} · {formatPoints(player.finalPercentile)} percentile ·{" "}
-            {formatDifferential(player.valueShift)} value shift
-          </div>
-        </li>
-      ))}
+            <div className="flex items-baseline justify-between gap-2">
+              <span className="font-semibold text-ink">
+                <PlayerLink playerId={player.playerId} name={player.playerName} />
+              </span>
+              <span className="text-xs text-ink-faint">
+                <OwnerLink owners={owners} ownerId={player.ownerId} />
+              </span>
+            </div>
+            <div className="text-xs text-ink-faint">
+              Drafted #{player.draftPosition} · {formatPoints(player.finalPercentile)} percentile ·{" "}
+              {formatDifferential(player.valueShift)} value shift
+            </div>
+          </li>
+        ))}
       </ul>
     </>
   );
@@ -159,15 +142,7 @@ export function SeasonRecap({
   const sortedYears = useMemo(() => [...seasons.map(s => s.year)].sort((a, b) => b - a), [seasons]);
 
   const recap = useMemo<SeasonRecap | null>(
-    () =>
-      generateSeasonRecap(
-        season.year,
-        teams,
-        matchups,
-        trades,
-        playerSeasonPoints,
-        draftPicks
-      ),
+    () => generateSeasonRecap(season.year, teams, matchups, trades, playerSeasonPoints, draftPicks),
     [season, teams, matchups, trades, playerSeasonPoints, draftPicks]
   );
 
@@ -188,14 +163,8 @@ export function SeasonRecap({
     },
     {
       label: "Biggest Mover",
-      value: recap.biggestMover ? (
-        <OwnerLinks owners={owners} ownerIds={recap.biggestMover.ownerIds} />
-      ) : (
-        "—"
-      ),
-      sub: recap.biggestMover
-        ? `#${recap.biggestMover.fromRank} → #${recap.biggestMover.toRank}`
-        : "No prior season",
+      value: recap.biggestMover ? <OwnerLinks owners={owners} ownerIds={recap.biggestMover.ownerIds} /> : "—",
+      sub: recap.biggestMover ? `#${recap.biggestMover.fromRank} → #${recap.biggestMover.toRank}` : "No prior season",
     },
     {
       label: "Best Week",

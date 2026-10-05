@@ -142,6 +142,18 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 
+# Wrangler local state (miniflare D1/dev caches, bundler tmp bundles). Lives at
+# the repo root as well as app/ -- app/.gitignore covers app/, this covers the
+# root copy that `wrangler pages dev` and the D1 commands drop here.
+.wrangler/
+
+# Playwright reports (playwright + @playwright/test are devDeps; app/test/ is
+# where specs live). Regenerated per run.
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
 # ESPN credentials — espn_s2/SWID cookies live here and only here (see context/ai-interaction.md)
 config.json
 
@@ -152,6 +164,17 @@ __pycache__/
 venv/
 .ruff_cache/
 .pytest_cache/
+.mypy_cache/
+
+# Editor / OS cruft. app/.gitignore has its own copy; these patterns need to
+# exist at the root too or a stray .DS_Store next to data/ or scripts/ shows up
+# as untracked.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
 
 # Playwright MCP scratch output (snapshots/console logs from ad hoc dev-server testing)
 .playwright-mcp/
@@ -164,3 +187,22 @@ live-scoreboard-out/
 data/wsob.db
 # scripts/db/dump_d1.py's generated publish artifact
 data/wsob.d1.sql
+
+# Per-tenant import working dirs (data/tenants/{importId}/{raw,manual,processed}).
+# Crawled ESPN responses and the owner map derived from them are real people's
+# data -- real owner names, real roster moves -- so these must never be committed
+# even though the anonymized demo dataset in data/processed/ is.
+data/tenants/
+# The write-once ESPN archive. Verbatim API responses, so they carry member
+# GUIDs -- which ARE member SWIDs. data/raw/ is extract.py's staging dir;
+# data/audit/ is referenced by scripts/hooks/protect-raw-data.mjs and
+# .githooks/pre-commit but was missing here.
+data/raw/
+data/audit/
+
+# NOTE: app/worker-configuration.d.ts is deliberately NOT ignored, even though
+# `wrangler types` generates it. It is the only declaration of the `Env`
+# interface (built from wrangler.jsonc's bindings) and of the Workers runtime
+# globals, and app/tsconfig.functions.json includes it -- without it every
+# Pages Function fails with "Cannot find name 'Env'". Regenerate with
+# `npx wrangler types` after changing bindings, then commit the result.

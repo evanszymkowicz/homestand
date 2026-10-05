@@ -67,16 +67,13 @@ export function TeamSeasonRosterModal({ team, keepers, seasons, onClose }: TeamS
   // 2018's slots are a season-end snapshot, not day-accurate, so IL needs "full".
   const slotsAreDayAccurate = season?.coverage.stat_lines === "full";
   // loadTransactions() is cached module-wide by other routes, so this rarely adds a fetch.
-  const state = useAsync(
-    async (): Promise<{ boxScores: BoxScoreEntry[]; transactions: Transaction[] }> => {
-      const [boxScores, transactions] = await Promise.all([
-        boxScoresCovered ? loadBoxScores(team.year) : Promise.resolve<BoxScoreEntry[]>([]),
-        transactionsCovered ? loadTransactions() : Promise.resolve<Transaction[]>([]),
-      ]);
-      return { boxScores, transactions };
-    },
-    [team.year, boxScoresCovered, transactionsCovered]
-  );
+  const state = useAsync(async (): Promise<{ boxScores: BoxScoreEntry[]; transactions: Transaction[] }> => {
+    const [boxScores, transactions] = await Promise.all([
+      boxScoresCovered ? loadBoxScores(team.year) : Promise.resolve<BoxScoreEntry[]>([]),
+      transactionsCovered ? loadTransactions() : Promise.resolve<Transaction[]>([]),
+    ]);
+    return { boxScores, transactions };
+  }, [team.year, boxScoresCovered, transactionsCovered]);
 
   const teamKeepers = useMemo(
     () => keepers.filter(k => k.year === team.year && k.espn_team_id === team.espn_team_id),

@@ -88,18 +88,12 @@ describe("getPlayerSeasonPositions -- eligible", () => {
 describe("getJerseyHistory", () => {
   it("shows Kyle Schwarber on the Cubs in 2020, not the Nationals", () => {
     const playerId = 33712;
-    const playerSeasons = readProcessed<PlayerSeason[]>("player_seasons.json").filter(
-      ps => ps.player_id === playerId
-    );
-    const draftPicks = readProcessed<DraftPick[]>("draft_picks.json").filter(
-      dp => dp.player_id === playerId
-    );
+    const playerSeasons = readProcessed<PlayerSeason[]>("player_seasons.json").filter(ps => ps.player_id === playerId);
+    const draftPicks = readProcessed<DraftPick[]>("draft_picks.json").filter(dp => dp.player_id === playerId);
     const mlbTeams = readProcessed<MlbTeam[]>("mlb_teams.json");
 
     const seasonPositions = getPlayerSeasonPositions(playerId, playerSeasons);
-    const proTeamIdByYear = new Map(
-      draftPicks.map(dp => [dp.year, dp.pro_team_id as number])
-    );
+    const proTeamIdByYear = new Map(draftPicks.map(dp => [dp.year, dp.pro_team_id as number]));
     const mlbTeamById = new Map(mlbTeams.map(t => [t.pro_team_id, t]));
     const runs = getJerseyHistory(seasonPositions, proTeamIdByYear, mlbTeamById);
 

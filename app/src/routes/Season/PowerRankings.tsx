@@ -84,9 +84,7 @@ export function PowerRankings({ season, seasons, teams, matchups, owners }: Powe
     return <p className="text-sm text-ink-dim">No matchups on file for this season.</p>;
   }
 
-  const order = rows
-    .map(team => ({ team, rank: team.rankByWeek[index] }))
-    .sort((a, b) => a.rank - b.rank);
+  const order = rows.map(team => ({ team, rank: team.rankByWeek[index] })).sort((a, b) => a.rank - b.rank);
 
   const week = weeks[index];
 
@@ -183,9 +181,7 @@ export function PowerRankings({ season, seasons, teams, matchups, owners }: Powe
                           ? "var(--color-matchup-loss)"
                           : "var(--color-ink-faint)",
                   }}>
-                  <span aria-hidden="true">
-                    {delta > 0 ? `▲${delta}` : delta < 0 ? `▼${-delta}` : "–"}
-                  </span>
+                  <span aria-hidden="true">{delta > 0 ? `▲${delta}` : delta < 0 ? `▼${-delta}` : "–"}</span>
                   {/* The arrow glyph is the visual cue; carry the meaning as text
                       rather than aria-label, which a role-less span does not
                       reliably expose. */}

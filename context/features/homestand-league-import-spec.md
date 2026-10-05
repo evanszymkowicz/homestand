@@ -1,7 +1,7 @@
 # Homestand: Invite-Only ESPN League Import Service
 
 **Status:** Approved, S0-ready — revised 2026-10-04
-**Decisions locked:** Separate fork repo · Invite-only email signup · **Email/invite-tier subscription model in the first milestone (no Stripe, no payment form)** · ESPN email/password backend auth (automated + manual session fallback) · **Server-side crawl only — no browser extension of any kind** · Backend crawl script using stored session · **Demo tenant is a deterministic anonymized copy of the real league archive (no mock-league generator)** · Cloudflare storage provisioning · Baseball scorebook visual identity
+**Decisions locked:** Separate fork repo · Invite-only email signup · **Email/invite-tier subscription model in the first milestone (no Stripe, no payment form)** · **ESPN auth via pasted session cookie only — automated password login is impossible (ESPN captcha, no fantasy OAuth); see § ESPN credential flow** · **Server-side crawl (no extension shipped; auth is a one-paste cookie header)** · Backend crawl script using stored session · **Demo tenant is a deterministic anonymized copy of the real league archive (no mock-league generator)** · Cloudflare storage provisioning · Baseball scorebook visual identity
 
 ## Fork Timing
 
@@ -18,7 +18,7 @@ The demo experience is a seeded "John Doe" account that loads an anonymized snap
 1. The site is invite-only: no open registration; an admin-generated invite token (sent by email) is required to create an account.
 2. A visitor can click **"Try the demo"** to log in as the seeded John Doe account without registering or providing ESPN credentials.
 3. An invited user creates an account with email + password; email verification is required before first login.
-4. During onboarding the user enters their ESPN email, ESPN password, and ESPN league ID; the backend uses these to obtain an ESPN session and import the league.
+4. During onboarding the user enters their ESPN league ID and pastes their ESPN session cookie; the backend replays it to import the league. (Revised 2026-10-05 — ESPN blocks automated password login; see § ESPN credential flow.)
 5. The backend provisions per-account Cloudflare storage (R2 raw archive + D1 normalized data) and runs the unmodified Python pipeline (`normalize.py` + `validate.py`) against the imported league.
 6. Authenticated users see only their own imports; data is scoped per account and invisible to others.
 7. Free-tier accounts are limited to 1 import with a short TTL eviction; subscription state is modeled through email/invite status rather than a public payment form in the first milestone.
@@ -91,20 +91,34 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
 
 ### ESPN credential flow
 
-- During onboarding the user supplies their **ESPN email**, **ESPN password**, and **ESPN league ID**.
-- The backend stores the ESPN credentials encrypted at rest (see Security & ToS Register).
-- A background crawl script authenticates to ESPN using the stored credentials, obtains a session ID (`espn_s2`/`SWID` equivalent), and fetches the league's API responses.
-- The system supports **two auth modes**:
-  1. **Automated login:** the crawl script submits the stored email/password and extracts the session cookies from the response.
-  2. **Manual session fallback (decided 2026-10-04 — paste-a-cookie form):** if ESPN presents
-     MFA, CAPTCHA, or any unhandled challenge, the user is sent to a dedicated **authenticated
-     in-app route** (its own page, not a modal — the instructions need room and the page must be
-     linkable so it can be emailed back to a user whose crawl failed mid-flight) and pastes the
-     two cookie values there. The backend validates them before accepting, stores them encrypted
-     like the password, and resumes the crawl with those tokens.
+> **Revised 2026-10-05 — automated password login is not possible.** ESPN put a
+> captcha on the web login flow; automated submissions are rejected with
+> `PALOMINO_CHECK_FAILED`, and the `espn-api` maintainer removed username/password
+> support from the library for this reason. ESPN also issues no fantasy API keys and
+> offers no OAuth for the v3 fantasy endpoints — every client library
+> (`espn-api`, `ffscrapr`, `espn-fantasy-baseball`) authenticates with the
+> `espn_s2` + `SWID` cookies copied from a signed-in browser. A Selenium-based
+> captcha workaround exists in the community but was rejected: it automates a login
+> challenge, which is exactly the ToS exposure the register below calls
+> higher-risk than a browser extension. **The cookie paste is the only auth path.**
+> It is optimized to one copy operation (§ one-paste below). The
+> `encrypted_email`/`encrypted_password`/`mode` columns were dropped in migration
+> `0006_credentials_cookies_only.sql` so the schema cannot hold an ESPN password.
 
-     - Fields: `espn_s2` and `SWID` (`SWID` is the `SWID`-style value including its
-      `SWID=...` wrapper as ESPN presents it).
+- During onboarding the user supplies their **ESPN league ID**, season range, and a pasted
+  **ESPN cookie header**. There is no ESPN password field — collecting one we could never use
+  would mislead the user.
+- The backend stores the two cookies encrypted at rest (see Security & ToS Register).
+- A background crawl script replays the stored session and fetches the league's API responses.
+- Auth is a single mode: a **paste-a-cookie form** on a dedicated **authenticated in-app
+  route** (its own page, not a modal — the instructions need room and the page must be
+  linkable so it can be emailed back to a user whose crawl failed mid-flight).
+
+     - **One paste, not two hunts.** The user pastes their entire `Cookie:` request header —
+       one copy from the Network panel yields both values, and the server parses `espn_s2` and
+       `SWID` out of it (`app/lib/espnSession.ts`). Discrete fields stay accepted for anyone who
+       copied just those two. This is the minimum user work achievable without captcha-solving or
+       OAuth, and it is the whole lever left, since the cookies themselves are unavoidable.
      - **Validate before accepting.** A single probe request against a cheap ESPN endpoint
        confirms the pair is live and unexpired; a bad pair is rejected inline with an
        explanation rather than failing later inside the crawl.
@@ -112,11 +126,12 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
        fields are write-only, and the route must not accept them via query string (they would
        land in server logs and browser history).
      - Instructions must be copy-pasteable and version-pinned: "log in at espn.com in this
-       browser, open devtools → Application → Cookies → `https://espn.com`, copy `espn_s2` and
-       `SWID`." Browser chrome differs, so name the panel rather than hand-waving at devtools.
-     - Pasting a session **overrides** automated login for that account until the credential is
-       updated — the automated path must not keep retrying over a known-good manual session.
-- The session is refreshed as needed; if authentication fails, the user is notified by email and in-app and can update credentials or switch to manual session entry.
+       browser, open devtools → Network → any request → Headers → Request Headers → cookie."
+       Browser chrome differs, so name the panel per browser rather than hand-waving at devtools.
+- **Cookies expire, and there is no refresh.** The crawl cannot renew a session it has no password
+  for, so a stale cookie fails the import permanently rather than recovering on its own. If
+  authentication fails, the user is notified by email and in-app and pastes a fresh cookie string.
+  The UI must say this rather than implying a retry will help.
 - Cookie values and session IDs are treated as secrets: logged carefully, never exposed in UI or logs, rotated on credential updates.
 
 ### Session-scoped, invisible-to-others data
@@ -154,8 +169,7 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
 
 **Scope:**
 - Secure storage for ESPN credentials (encrypted at rest; see Security & ToS Register).
-- Backend script that authenticates to ESPN (automated login, or the manual paste-a-cookie
-  session) and fetches:
+- Backend script that authenticates to ESPN by replaying the stored session cookie and fetches:
   - All 8 season views for the requested league ID and season range.
   - Per-period box scores (2018+ modern era, 2017 and earlier `leagueHistory` era).
   - 2019+ transaction ledger.
@@ -166,8 +180,8 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
 
 **Deliverables:**
 - Encrypted credential store.
-- Backend crawl script (Pages Function, Worker, or CI-triggered service) with automated login
-    plus the manual paste-a-cookie fallback.
+- Backend crawl script (Pages Function, Worker, or CI-triggered service) that replays the stored
+    paste-a-cookie session.
     - **Manual session page** — its own authenticated route with `espn_s2` + `SWID` fields,
       a live validation probe before acceptance, and write-only inputs (never query-string,
       never echoed back). This is the S1 deliverable the fallback hinges on; see
@@ -182,6 +196,11 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
 - Email + password signup gated on a valid invite token.
 - Email verification + password reset.
 - Turnstile on signup form (free bot protection).
+- **Rate limits on `login`, `reset-request` and `probe`** via Cloudflare's native
+  `ratelimits` binding (added 2026-10-05). Turnstile only gates signup, so without
+  these the password endpoint was an unthrottled PBKDF2 oracle, reset-request an
+  email-bomb primitive, and probe an ESPN-session oracle. See
+  `functions/lib/rateLimit.ts` for the keying scheme and the ceilings the API imposes.
 - Seeded John Doe instant-demo account ("Try the demo" button) preloaded with the anonymized demo dataset.
 - Free-tier accounts live (1 import, short TTL idle eviction).
 
@@ -195,7 +214,7 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
 ### S3 — Ingest + Provisioning
 
 **Scope:**
-- Authenticated onboarding form: ESPN email, ESPN password, league ID, season range.
+- Authenticated onboarding form: league ID, season range; then the separate paste-a-cookie page.
 - Entitlement + capacity checks at the door (Free tier: 1 import max; global cap: ~70 active leagues on R2 free tier).
 - Provisions R2 raw archive and queues normalization.
 - Upload/import progress tracking (backend-persistent state).
@@ -239,9 +258,12 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
 
 ### Credential hygiene
 
-- The backend **must store ESPN email/password encrypted at rest**. Use a Cloudflare Workers-compatible encryption mechanism (e.g., AES-256-GCM with a secret key stored in `wrangler secret put`, or a dedicated secrets service).
-- ESPN session tokens (`espn_s2`/`SWID`) are stored encrypted and treated as secrets.
-- The manual fallback accepts these values from the user, so they are a credential ingress:
+- ESPN session tokens (`espn_s2`/`SWID`) are stored encrypted at rest (AES-GCM with a secret key
+  from `wrangler secret put`) and treated as secrets. **Revised 2026-10-05: there is no ESPN
+  password to store** — automated login is captcha-blocked, and the password columns were dropped
+  in migration `0006_credentials_cookies_only.sql`. Holding a revocable session is also the
+  better posture than holding a login.
+- The cookie paste is a credential ingress:
   write-only form fields, validated server-side before acceptance, rejected inline on failure,
   never echoed into the page or an error message, never passed in a URL or query string (which
   would persist them in server logs and browser history), and wiped on account or import
@@ -258,7 +280,11 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
   - Clear in-app disclosure that the service accesses ESPN on the user's behalf.
   - Easy credential revocation and import deletion.
 - Endpoint churn: ESPN changes response shapes without notice. The parity harness + versioned crawl profile tracks upstream `espn_client.py` changes.
-- MFA/CAPTCHA: ESPN may challenge automated logins. The architecture supports both automated password login and a manual session-cookie fallback; S1 implements both paths so users are never blocked by an auth challenge.
+- MFA/CAPTCHA: **confirmed, not hypothetical** (2026-10-05). ESPN's web login is captcha-gated;
+  automated attempts fail with `PALOMINO_CHECK_FAILED`, and the `espn-api` maintainer dropped
+  username/password support for this reason. The cookie paste is the only path, so no user is ever
+  blocked by a challenge — they are never challenged, because we never attempt a password login.
+  A Selenium captcha workaround was rejected as captcha circumvention.
 
 ### Data isolation and privacy
 
@@ -337,11 +363,13 @@ at render). Scrub at the loader, not in the bytes.
 
 ## Open Questions
 
-1. ~~ESPN authentication surface~~ **Decided:** build both automated password login and manual session-cookie fallback.
+1. ~~ESPN authentication surface~~ **Decided (revised 2026-10-05):** cookie paste only. Automated
+   password login is impossible (captcha); no fantasy OAuth exists. Minimized to one copy.
 2. ~~Subscription fulfillment~~ **Decided:** email-only / invite-tier model in the first milestone; Stripe deferred.
-3. ~~Browser extension as the harvester~~ **Decided (2026-10-04):** dropped. The crawl runs
-   server-side; see §ESPN credential flow and §Out of Scope. Any extension-shaped idea is
-   out of scope for this milestone.
+3. ~~Browser extension as the harvester~~ **Decided (2026-10-04, relaxed 2026-10-05):** the crawl
+   runs server-side and a standalone extension is dropped. The user later clarified the ban was
+   about a *separate app*, not about the extension ban per se, and asked for minimum user work —
+   which was then minimized to a one-paste cookie header instead. See §ESPN credential flow.
 4. ~~Demo data source~~ **Decided (2026-10-04):** a deterministic anonymized copy of the real
    archive, not a synthetic mock-league generator. See §Demo Dataset.
 5. ~~Draft status~~ **Decided (2026-10-04):** approved and S0-ready. S0 work is unblocked by
@@ -358,11 +386,13 @@ inside a phase, not a spec question.
   names** (plus personal notes). Team names are scrubbed because they are usually derived
   from the owner and would deanonymize the owner names. See §Demo Dataset for the full rule
   and the determinism requirement.
-- ~~**Manual session UX shape**~~ **Decided (2026-10-04): a paste-a-cookie form on its own
-  authenticated in-app route** — `espn_s2` + `SWID`, validated before acceptance, write-only
-  fields, stored encrypted. See §ESPN credential flow. (The authenticated-redirect variant was
-  rejected: you cannot read another origin's cookies, so it only works via an extension or
-  bookmarklet, both descoped.)
+- ~~**Manual session UX shape**~~ **Decided (revised 2026-10-05): a one-paste cookie-header form
+  on its own authenticated in-app route** — the user copies their whole `Cookie:` request header,
+  the server parses `espn_s2` + `SWID` out of it. Validated before acceptance, write-only fields,
+  stored encrypted. See §ESPN credential flow. The user relaxed the earlier extension ban in favour
+  of minimum user work, and a **bookmarklet was still rejected**: it asks users to install something
+  that silently posts their live session cookies to us, which is a pattern that erodes trust and
+  draws a security review, and it is unreliable across page CSPs. One copy beats two cookie hunts.
 
 ## Upstream Sync Strategy
 

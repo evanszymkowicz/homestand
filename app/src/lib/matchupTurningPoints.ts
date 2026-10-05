@@ -36,9 +36,7 @@ function upsetRanks(matchup: Matchup, teams: Team[]): [number, number] | null {
   const winnerTeam = findTeam(teams, matchup.year, sides[0].espnTeamId);
   const loserTeam = findTeam(teams, matchup.year, sides[1].espnTeamId);
   if (!winnerTeam || !loserTeam) return null;
-  return loserTeam.final_rank < winnerTeam.final_rank
-    ? [winnerTeam.final_rank, loserTeam.final_rank]
-    : null;
+  return loserTeam.final_rank < winnerTeam.final_rank ? [winnerTeam.final_rank, loserTeam.final_rank] : null;
 }
 
 /** Max deficit (in points) the winner overcame during the matchup week, or null
@@ -59,8 +57,12 @@ function getComebackDeficit(matchup: Matchup, boxScores: BoxScoreEntry[]): numbe
   const sides = getMatchupSides(matchup);
   if (!sides) return null;
 
-  const winnerEntries = boxScores.filter(e => e.year === matchup.year && e.week === matchup.week && e.espn_team_id === sides[0].espnTeamId);
-  const loserEntries = boxScores.filter(e => e.year === matchup.year && e.week === matchup.week && e.espn_team_id === sides[1].espnTeamId);
+  const winnerEntries = boxScores.filter(
+    e => e.year === matchup.year && e.week === matchup.week && e.espn_team_id === sides[0].espnTeamId
+  );
+  const loserEntries = boxScores.filter(
+    e => e.year === matchup.year && e.week === matchup.week && e.espn_team_id === sides[1].espnTeamId
+  );
   if (winnerEntries.length === 0 || loserEntries.length === 0) return null;
 
   const dayPoints = (entries: BoxScoreEntry[]) => {
@@ -156,11 +158,7 @@ export function computeMatchupTurningPoints(
     const turningPoint = computeMatchupTurningPoint(matchup, boxScores, teams);
     if (turningPoint) {
       results.push(turningPoint);
-    } else if (
-      biggest &&
-      matchup.year === biggest.matchup.year &&
-      matchup.matchup_id === biggest.matchup.matchup_id
-    ) {
+    } else if (biggest && matchup.year === biggest.matchup.year && matchup.matchup_id === biggest.matchup.matchup_id) {
       results.push({
         matchupId: matchup.matchup_id,
         type: "biggest_differential",

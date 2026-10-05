@@ -18,12 +18,6 @@ export function linearStrength(value: number, center: number, scaleMax: number, 
   return ((value - center) / scaleMax) * maxStrength;
 }
 
-/** Diverging fill for a 0-100 percentile. Neutral at the
- * 50th, full pole at the 0th/100th. */
-export function percentileBackground(percentile: number, maxStrength = 70): CSSProperties {
-  return divergingBackground(linearStrength(percentile, 50, 50, maxStrength), maxStrength);
-}
-
 /** A diverging scale needs a neutral *gray* midpoint. divergingBackground mixes
  * toward the surface instead, which is right for grid cells (their borders still
  * bound them) but renders an un-bordered bar at the 50th percentile invisible --
@@ -38,16 +32,6 @@ export function percentileBarBackground(percentile: number): CSSProperties {
   if (strength === 0) return { backgroundColor: NEUTRAL_BAR_FILL };
   const pole = strength > 0 ? "var(--color-diverge-pos)" : "var(--color-diverge-neg)";
   return { backgroundColor: `color-mix(in oklab, ${pole} ${Math.abs(strength)}%, ${NEUTRAL_BAR_FILL})` };
-}
-
-/** Square-root scaled strength -- compresses a wide value range so small
- * values stay visibly tinted instead of being swamped by a handful of large
- * outliers (the scoring-rules drift grid's no-hitter/perfect-game rows next
- * to single-point stats). Sign follows the raw value. */
-export function sqrtStrength(value: number, maxAbs: number, maxStrength = 55): number {
-  if (maxAbs === 0) return 0;
-  const sign = value >= 0 ? 1 : -1;
-  return sign * (Math.sqrt(Math.abs(value)) / Math.sqrt(maxAbs)) * maxStrength;
 }
 
 /** Heat index for a traded points delta. */

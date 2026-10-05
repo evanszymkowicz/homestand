@@ -180,7 +180,6 @@ describe("getMatchupTransactionMarkers", () => {
   });
 });
 
-
 function makeTeamPoints(year: number, playerId: number, ownerId: string, points: number): PlayerTeamSeasonPoints {
   return {
     year,

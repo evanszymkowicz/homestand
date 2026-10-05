@@ -207,9 +207,9 @@ export function buildSeasonStatRows(
       cardPoints: cardPointsFor(cardPointsByYearPlayer, year, playerId, rosteredPoints),
       lineupSplit: hasSplit
         ? {
-          counted: (stints ?? []).reduce((sum, s) => sum + s.counted_points, 0),
-          bench: (stints ?? []).reduce((sum, s) => sum + s.bench_points, 0),
-        }
+            counted: (stints ?? []).reduce((sum, s) => sum + s.counted_points, 0),
+            bench: (stints ?? []).reduce((sum, s) => sum + s.bench_points, 0),
+          }
         : null,
       batting: battingLines.length > 0 ? sumLines(battingLines) : null,
       pitching: pitchingLines.length > 0 ? sumLines(pitchingLines) : null,
@@ -404,9 +404,9 @@ export function buildAllTimeStatRows(
     const positionIds =
       eligibility && eligibility.ids.size > 0
         ? primaryFirst(
-          Array.from(eligibility.ids).sort((a, b) => a - b),
-          eligibility.latestDefault ?? -1
-        )
+            Array.from(eligibility.ids).sort((a, b) => a - b),
+            eligibility.latestDefault ?? -1
+          )
         : [];
     const stats = statsByPlayer.get(playerId);
     rows.push({

@@ -9,7 +9,6 @@ import type {
   Player,
   PlayerSeason,
   PlayerSeasonBackfill,
-  PlayerSeasonOwnership,
   PlayerSeasonPoints,
   PlayerTeamSeasonPoints,
   Trade,
@@ -21,9 +20,19 @@ import type {
 
 const cache = new Map<string, Promise<unknown>>();
 
-// All builds read processed JSON from the bundled /data/ copy
-// (app/public/data/ via sync-data.mjs). No D1 call at runtime.
-const dataBaseUrl = `${import.meta.env.BASE_URL}data/`;
+// Every read goes through the tenant-scoped proxy. There is deliberately no
+// fallback to the build-time static bundle: the processed JSON is not public,
+// so the proxy is the only way in. An account with no completed import gets
+// 404s from every loader, which the routes already render as "unknown".
+let currentImportId: string | null = null;
+
+export function setImportContext(importId: string | null) {
+  currentImportId = importId;
+}
+
+function dataBaseUrl(): string {
+  return `/api/data/${currentImportId ?? "none"}/`;
+}
 
 const FETCH_TIMEOUT_MS = 30_000;
 const RETRY_DELAYS_MS = [500, 1000, 2000];
@@ -63,18 +72,21 @@ async function fetchJsonWithRetry<T>(url: string): Promise<T> {
 }
 
 function loadJson<T>(path: string): Promise<T> {
-  const resolved = path;
-  const cached = cache.get(resolved) as Promise<T> | undefined;
+  // Key on tenant + path, not path alone. Keying on path means a tenant switch
+  // silently hands the previous account's data to whoever asks next, and the
+  // invariant is maintained only by remembering to clear() on switch.
+  const key = `${currentImportId ?? "none"}/${path}`;
+  const cached = cache.get(key) as Promise<T> | undefined;
   if (cached) return cached;
 
-  const promise = fetchJsonWithRetry<T>(`${dataBaseUrl}${resolved}`);
-  cache.set(resolved, promise);
+  const promise = fetchJsonWithRetry<T>(`${dataBaseUrl()}${path}`);
+  cache.set(key, promise);
   // Evict rejected promises: otherwise the first transient failure would be
   // replayed forever -- every later caller gets the cached rejection even
   // after the outage ends. The guard keeps an already-replaced entry intact,
   // and this catch also marks the promise handled between callers.
   promise.catch(() => {
-    if (cache.get(resolved) === promise) cache.delete(resolved);
+    if (cache.get(key) === promise) cache.delete(key);
   });
   return promise;
 }
@@ -124,10 +136,6 @@ export function loadMlbTeams(): Promise<MlbTeam[]> {
 
 export function loadPlayerSeasonPoints(): Promise<PlayerSeasonPoints[]> {
   return loadJson<PlayerSeasonPoints[]>("player_season_points.json");
-}
-
-export function loadPlayerSeasonOwnership(): Promise<PlayerSeasonOwnership[]> {
-  return loadJson<PlayerSeasonOwnership[]>("player_season_ownership.json");
 }
 
 export function loadPlayerTeamSeasonPoints(): Promise<PlayerTeamSeasonPoints[]> {

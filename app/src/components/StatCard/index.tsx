@@ -17,15 +17,7 @@ interface StatCardProps {
   to?: string;
 }
 
-export function StatCard({
-  label,
-  value,
-  detail,
-  accent,
-  runnersUp,
-  labelBelow,
-  to,
-}: StatCardProps) {
+export function StatCard({ label, value, detail, accent, runnersUp, labelBelow, to }: StatCardProps) {
   const accentColor =
     accent === "positive"
       ? "var(--color-diverge-pos)"

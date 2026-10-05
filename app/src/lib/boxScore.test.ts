@@ -284,7 +284,6 @@ describe("getPlayerWeekSlots", () => {
   });
 });
 
-
 describe("PointsPerDay reconciliation", () => {
   it("matches the header score for a complete week with no missing periods", () => {
     const entries = [
@@ -330,4 +329,3 @@ describe("PointsPerDay reconciliation", () => {
     expect(total).not.toBeCloseTo(15, 5);
   });
 });
-
