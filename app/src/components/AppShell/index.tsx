@@ -12,15 +12,7 @@ export function AppShell() {
     <div className="min-h-screen bg-bg text-ink">
       <div className="mx-auto max-w-5xl px-4 pb-20 pt-8 sm:px-6">
         <header className="mb-6 flex items-center gap-3 border-b-2 border-ink pb-4">
-          <span
-            aria-hidden="true"
-            className="flex h-9 w-9 flex-none items-center justify-center rounded-[7px] bg-accent text-xs font-extrabold text-accent-ink sm:h-10 sm:w-10">
-            WS
-          </span>
-          <div className="flex flex-col gap-0.5">
-            <span className="text-eyebrow font-bold tracking-widest text-accent uppercase">World Series or Bust</span>
-            <h1 className="text-2xl leading-none font-extrabold tracking-tight sm:text-3xl">Record Book</h1>
-          </div>
+          <h1 className="font-brand text-4xl leading-none sm:text-5xl">Homestand</h1>
           <div className="ml-auto flex items-center gap-1">
             <ActivityButton onClick={() => setActivityOpen(true)} />
             <ThemeToggle />

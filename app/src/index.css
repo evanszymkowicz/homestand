@@ -18,6 +18,10 @@
   src: url("/fonts/GeistMono-Variable.woff2") format("woff2-variations");
 }
 
+/* Brand wordmark face. Lobster (SIL OFL 1.1) — the closest freely-licensable
+   face to the classic baseball city-name script style. Real text, never an
+   outlined SVG or raster, so screen readers and text scaling keep working. */
+
 /*
  * Design tokens:
  * Light values in :root (also the no-JS default), dark overrides selected by
@@ -210,6 +214,11 @@
 
   --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
+  /* Lobster: the brand wordmark face (loaded via <link> in index.html — Tailwind's
+     build strips remote CSS @imports, so it can't come through index.css). Real
+     text, never an outlined SVG or raster, so screen readers and text scaling
+     keep working. */
+  --font-brand: "Lobster", "Geist Sans", ui-serif, Georgia, serif;
 }
 
 body {
