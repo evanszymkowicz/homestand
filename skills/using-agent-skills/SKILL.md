@@ -17,7 +17,7 @@ When a task arrives, identify the development phase and apply the corresponding 
 For this project, also consult `AGENTS.md` and `context/coding-standards.md` — they
 trump generic skill guidance when they conflict.
 
-### Project-specific workflow (World Series or Bust Record Book)
+### Project-specific workflow (Homestand)
 
 This repo has its own phased feature workflow. Prefer it when the work is tied to
 `context/current-feature.md` or the ESPN data pipeline:

@@ -31,13 +31,13 @@ export const KIND_LABELS: Record<EventKind, string> = {
   record: "Records",
 };
 
-const SCOPE_KEY = "wsob-activity-scope";
+const SCOPE_KEY = "homestand-activity-scope";
 // v2: the "trophy" kind post-dates v1's stored filter lists, and parseStoredFilters
 // only prunes unknown kinds (it never adds missing ones) -- a v1 list would leave
 // ESPN Trophies silently unchecked for returning sessions. Bump the key instead so
 // every session starts from the all-on default once.
-const FILTERS_KEY = "wsob-activity-filters-v2";
-const OWNER_KEY = "wsob-activity-owner";
+const FILTERS_KEY = "homestand-activity-filters-v2";
+const OWNER_KEY = "homestand-activity-owner";
 
 export function parseStoredScope(raw: string | null): ActivityScope {
   return raw === "season" ? "season" : "matchup";
