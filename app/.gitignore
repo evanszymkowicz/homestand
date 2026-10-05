@@ -1,0 +1,31 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Synced from ../data/processed/ at dev/build time by scripts/sync-data.mjs — never edit
+# directly, never commit (see context/ai-interaction.md data rules).
+public/data
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local wrangler state (miniflare D1/dev caches) — regenerable, never commit
+.wrangler

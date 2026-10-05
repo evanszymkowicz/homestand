@@ -1,0 +1,157 @@
+[
+  {
+    "pro_team_id": 0,
+    "abbrev": "FA",
+    "name": "Free Agent/No Team On File"
+  },
+  {
+    "pro_team_id": 1,
+    "abbrev": "BAL",
+    "name": "Baltimore Orioles"
+  },
+  {
+    "pro_team_id": 2,
+    "abbrev": "BOS",
+    "name": "Boston Red Sox"
+  },
+  {
+    "pro_team_id": 3,
+    "abbrev": "LAA",
+    "name": "Los Angeles Angels"
+  },
+  {
+    "pro_team_id": 4,
+    "abbrev": "CWS",
+    "name": "Chicago White Sox"
+  },
+  {
+    "pro_team_id": 5,
+    "abbrev": "CLE",
+    "name": "Cleveland Guardians"
+  },
+  {
+    "pro_team_id": 6,
+    "abbrev": "DET",
+    "name": "Detroit Tigers"
+  },
+  {
+    "pro_team_id": 7,
+    "abbrev": "KC",
+    "name": "Kansas City Royals"
+  },
+  {
+    "pro_team_id": 8,
+    "abbrev": "MIL",
+    "name": "Milwaukee Brewers"
+  },
+  {
+    "pro_team_id": 9,
+    "abbrev": "MIN",
+    "name": "Minnesota Twins"
+  },
+  {
+    "pro_team_id": 10,
+    "abbrev": "NYY",
+    "name": "New York Yankees"
+  },
+  {
+    "pro_team_id": 11,
+    "abbrev": "OAK",
+    "name": "Athletics"
+  },
+  {
+    "pro_team_id": 12,
+    "abbrev": "SEA",
+    "name": "Seattle Mariners"
+  },
+  {
+    "pro_team_id": 13,
+    "abbrev": "TEX",
+    "name": "Texas Rangers"
+  },
+  {
+    "pro_team_id": 14,
+    "abbrev": "TOR",
+    "name": "Toronto Blue Jays"
+  },
+  {
+    "pro_team_id": 15,
+    "abbrev": "ATL",
+    "name": "Atlanta Braves"
+  },
+  {
+    "pro_team_id": 16,
+    "abbrev": "CHC",
+    "name": "Chicago Cubs"
+  },
+  {
+    "pro_team_id": 17,
+    "abbrev": "CIN",
+    "name": "Cincinnati Reds"
+  },
+  {
+    "pro_team_id": 18,
+    "abbrev": "HOU",
+    "name": "Houston Astros"
+  },
+  {
+    "pro_team_id": 19,
+    "abbrev": "LAD",
+    "name": "Los Angeles Dodgers"
+  },
+  {
+    "pro_team_id": 20,
+    "abbrev": "WSH",
+    "name": "Washington Nationals"
+  },
+  {
+    "pro_team_id": 21,
+    "abbrev": "NYM",
+    "name": "New York Mets"
+  },
+  {
+    "pro_team_id": 22,
+    "abbrev": "PHI",
+    "name": "Philadelphia Phillies"
+  },
+  {
+    "pro_team_id": 23,
+    "abbrev": "PIT",
+    "name": "Pittsburgh Pirates"
+  },
+  {
+    "pro_team_id": 24,
+    "abbrev": "STL",
+    "name": "St. Louis Cardinals"
+  },
+  {
+    "pro_team_id": 25,
+    "abbrev": "SD",
+    "name": "San Diego Padres"
+  },
+  {
+    "pro_team_id": 26,
+    "abbrev": "SF",
+    "name": "San Francisco Giants"
+  },
+  {
+    "pro_team_id": 27,
+    "abbrev": "COL",
+    "name": "Colorado Rockies"
+  },
+  {
+    "pro_team_id": 28,
+    "abbrev": "MIA",
+    "name": "Miami Marlins"
+  },
+  {
+    "pro_team_id": 29,
+    "abbrev": "ARI",
+    "name": "Arizona Diamondbacks"
+  },
+  {
+    "pro_team_id": 30,
+    "abbrev": "TB",
+    "name": "Tampa Bay Rays"
+  }
+]

@@ -1,0 +1,3768 @@
+[
+  {
+    "year": 2009,
+    "regular_season_weeks": 22,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.2
+      },
+      {
+        "stat_id": 3,
+        "points": 2.2
+      },
+      {
+        "stat_id": 4,
+        "points": 3.2
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.2
+      },
+      {
+        "stat_id": 10,
+        "points": 0.5
+      },
+      {
+        "stat_id": 12,
+        "points": 0.5
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.5
+      },
+      {
+        "stat_id": 24,
+        "points": -1.5
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.1
+      },
+      {
+        "stat_id": 30,
+        "points": 5.0
+      },
+      {
+        "stat_id": 31,
+        "points": 2.0
+      },
+      {
+        "stat_id": 34,
+        "points": 0.6666666666666666
+      },
+      {
+        "stat_id": 37,
+        "points": -1.0
+      },
+      {
+        "stat_id": 39,
+        "points": -1.0
+      },
+      {
+        "stat_id": 42,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -1.5
+      },
+      {
+        "stat_id": 48,
+        "points": 0.8
+      },
+      {
+        "stat_id": 53,
+        "points": 7.0
+      },
+      {
+        "stat_id": 54,
+        "points": -5.0
+      },
+      {
+        "stat_id": 57,
+        "points": 4.0
+      },
+      {
+        "stat_id": 58,
+        "points": -5.0
+      },
+      {
+        "stat_id": 60,
+        "points": 1.0
+      },
+      {
+        "stat_id": 64,
+        "points": 6.0
+      },
+      {
+        "stat_id": 65,
+        "points": 10.0
+      },
+      {
+        "stat_id": 66,
+        "points": 15.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 25,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 99,
+        "2": 99,
+        "3": 99,
+        "4": 99,
+        "5": 99,
+        "6": 99,
+        "7": 99,
+        "8": 99,
+        "9": 99,
+        "10": 99,
+        "11": 99
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": null,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 0,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": null,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1250240400000,
+      "max_trades": null,
+      "revision_hours": 24,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2010,
+    "regular_season_weeks": 22,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.2
+      },
+      {
+        "stat_id": 3,
+        "points": 2.2
+      },
+      {
+        "stat_id": 4,
+        "points": 3.2
+      },
+      {
+        "stat_id": 5,
+        "points": 3.5
+      },
+      {
+        "stat_id": 7,
+        "points": 1.2
+      },
+      {
+        "stat_id": 10,
+        "points": 0.5
+      },
+      {
+        "stat_id": 12,
+        "points": 0.5
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.2
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.3
+      },
+      {
+        "stat_id": 27,
+        "points": -0.1
+      },
+      {
+        "stat_id": 30,
+        "points": 5.0
+      },
+      {
+        "stat_id": 34,
+        "points": 0.7
+      },
+      {
+        "stat_id": 37,
+        "points": -1.0
+      },
+      {
+        "stat_id": 39,
+        "points": -1.0
+      },
+      {
+        "stat_id": 42,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -1.2
+      },
+      {
+        "stat_id": 48,
+        "points": 0.8
+      },
+      {
+        "stat_id": 53,
+        "points": 7.0
+      },
+      {
+        "stat_id": 54,
+        "points": -5.0
+      },
+      {
+        "stat_id": 57,
+        "points": 4.0
+      },
+      {
+        "stat_id": 58,
+        "points": -4.0
+      },
+      {
+        "stat_id": 60,
+        "points": 1.0
+      },
+      {
+        "stat_id": 64,
+        "points": 6.0
+      },
+      {
+        "stat_id": 65,
+        "points": 10.0
+      },
+      {
+        "stat_id": 66,
+        "points": 15.0
+      },
+      {
+        "stat_id": 72,
+        "points": -0.3
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 25,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 3.0,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1268575200000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1280480400000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2011,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 3.5
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.0
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.3
+      },
+      {
+        "stat_id": 27,
+        "points": -0.1
+      },
+      {
+        "stat_id": 30,
+        "points": 5.0
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.9
+      },
+      {
+        "stat_id": 39,
+        "points": -0.9
+      },
+      {
+        "stat_id": 42,
+        "points": -0.9
+      },
+      {
+        "stat_id": 44,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -0.4
+      },
+      {
+        "stat_id": 48,
+        "points": 0.2
+      },
+      {
+        "stat_id": 53,
+        "points": 5.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 6.0
+      },
+      {
+        "stat_id": 65,
+        "points": 10.0
+      },
+      {
+        "stat_id": 66,
+        "points": 15.0
+      },
+      {
+        "stat_id": 72,
+        "points": -0.3
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.5714285714285714,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1300284000000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1314954000000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2012,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 3.8
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.0
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.3
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 30,
+        "points": 5.0
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.9
+      },
+      {
+        "stat_id": 39,
+        "points": -0.9
+      },
+      {
+        "stat_id": 42,
+        "points": -0.9
+      },
+      {
+        "stat_id": 44,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -0.4
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 5.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 6.0
+      },
+      {
+        "stat_id": 65,
+        "points": 10.0
+      },
+      {
+        "stat_id": 66,
+        "points": 15.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": null,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1332424800000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": null,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2013,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.0
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.3
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 30,
+        "points": 4.0
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -0.4
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 5.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": null,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1363960800000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1377853200000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2014,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.0
+      },
+      {
+        "stat_id": 24,
+        "points": -1.4
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -0.4
+      },
+      {
+        "stat_id": 48,
+        "points": 0.4
+      },
+      {
+        "stat_id": 53,
+        "points": 5.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": null,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1395064800000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": null,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2015,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.0
+      },
+      {
+        "stat_id": 24,
+        "points": -1.4
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -0.4
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": null,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1427464800000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1438333200000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2016,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.0
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -0.4
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": null,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1458885600000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1470992400000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2017,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 2.0
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -1.0
+      },
+      {
+        "stat_id": 45,
+        "points": -0.4
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "missing",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1490450400000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1502528400000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2018,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "partial",
+      "stat_lines": "partial",
+      "transactions": "missing",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1521914400000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": null,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2019,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "full",
+      "transactions": "full",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1552608000000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1565798400000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2020,
+    "regular_season_weeks": 8,
+    "playoff_weeks": 1,
+    "playoff_team_count": 2,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "full",
+      "transactions": "full",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 9,
+    "notes": [
+      "2020 (COVID-19): Instead of the usual playoffs, the season ended with a single winner-take-all championship game."
+    ],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1595167200000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1599840000000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2021,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "full",
+      "transactions": "full",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1616630400000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1629475200000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2022,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "full",
+      "transactions": "full",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1649008800000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1660924800000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2023,
+    "regular_season_weeks": 22,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "full",
+      "transactions": "full",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 25,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1679752800000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1691769600000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2024,
+    "regular_season_weeks": 22,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "full",
+      "transactions": "full",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 25,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1711314000000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1722614400000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2025,
+    "regular_season_weeks": 22,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "full",
+      "transactions": "full",
+      "achievements": "missing"
+    },
+    "status": "final",
+    "current_week": 25,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "MANUAL",
+      "keeper_deadline_date": 1742072400000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1754064000000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  },
+  {
+    "year": 2026,
+    "regular_season_weeks": 21,
+    "playoff_weeks": 3,
+    "playoff_team_count": 6,
+    "playoff_brackets": [
+      "LOSERS_CONSOLATION_LADDER",
+      "WINNERS_BRACKET",
+      "WINNERS_CONSOLATION_LADDER"
+    ],
+    "divisions": [
+      {
+        "division_id": 0,
+        "name": "American League"
+      },
+      {
+        "division_id": 1,
+        "name": "National League"
+      }
+    ],
+    "scoring": [
+      {
+        "stat_id": 0,
+        "points": -0.4
+      },
+      {
+        "stat_id": 3,
+        "points": 2.4
+      },
+      {
+        "stat_id": 4,
+        "points": 3.4
+      },
+      {
+        "stat_id": 5,
+        "points": 4.2
+      },
+      {
+        "stat_id": 7,
+        "points": 1.4
+      },
+      {
+        "stat_id": 10,
+        "points": 0.6
+      },
+      {
+        "stat_id": 12,
+        "points": 0.3
+      },
+      {
+        "stat_id": 20,
+        "points": 1.0
+      },
+      {
+        "stat_id": 21,
+        "points": 1.0
+      },
+      {
+        "stat_id": 23,
+        "points": 1.8
+      },
+      {
+        "stat_id": 24,
+        "points": -1.2
+      },
+      {
+        "stat_id": 26,
+        "points": -0.4
+      },
+      {
+        "stat_id": 27,
+        "points": -0.2
+      },
+      {
+        "stat_id": 34,
+        "points": 0.8
+      },
+      {
+        "stat_id": 37,
+        "points": -0.8
+      },
+      {
+        "stat_id": 39,
+        "points": -0.8
+      },
+      {
+        "stat_id": 42,
+        "points": -0.8
+      },
+      {
+        "stat_id": 44,
+        "points": -0.4
+      },
+      {
+        "stat_id": 45,
+        "points": -1.0
+      },
+      {
+        "stat_id": 48,
+        "points": 0.3
+      },
+      {
+        "stat_id": 53,
+        "points": 4.0
+      },
+      {
+        "stat_id": 54,
+        "points": -3.0
+      },
+      {
+        "stat_id": 57,
+        "points": 3.0
+      },
+      {
+        "stat_id": 58,
+        "points": -3.0
+      },
+      {
+        "stat_id": 64,
+        "points": 4.0
+      },
+      {
+        "stat_id": 65,
+        "points": 7.0
+      },
+      {
+        "stat_id": 66,
+        "points": 9.0
+      }
+    ],
+    "coverage": {
+      "teams": "full",
+      "matchups": "full",
+      "draft": "full",
+      "rosters": "full",
+      "players": "full",
+      "box_scores": "full",
+      "stat_lines": "full",
+      "transactions": "full",
+      "achievements": "full"
+    },
+    "status": "final",
+    "current_week": 24,
+    "notes": [],
+    "settings": {
+      "league_id": 6121,
+      "league_name": "World Series or Bust",
+      "league_size": 10,
+      "is_public": false
+    },
+    "roster_rules": {
+      "lineup_slot_counts": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 5,
+        "6": 1,
+        "7": 1,
+        "12": 3,
+        "14": 6,
+        "15": 2,
+        "16": 7,
+        "17": 2
+      },
+      "position_limits": {
+        "0": 0,
+        "1": 10,
+        "12": 0,
+        "13": 0
+      },
+      "bench_unlimited": true,
+      "move_limit": null,
+      "lineup_lock_time": "INDIVIDUAL_GAME",
+      "roster_lock_time": "FIRSTGAME_SCORINGPERIOD",
+      "using_undroppable_list": false
+    },
+    "acquisition_rules": {
+      "acquisition_type": "FREEAGENCY",
+      "waiver_hours": 24,
+      "waiver_order_reset": false,
+      "waiver_process_days": [],
+      "waiver_process_hour": 3,
+      "minimum_bid": 0.0,
+      "using_acquisition_budget": false,
+      "acquisition_budget": null,
+      "acquisition_limit": null,
+      "matchup_acquisition_limit": 0.7142857142857143,
+      "transaction_locking_enabled": false
+    },
+    "draft_settings": {
+      "draft_type": "SNAKE",
+      "order_type": "MANUAL",
+      "keeper_count": 5,
+      "keeper_order_type": "TRADITIONAL",
+      "keeper_deadline_date": 1774299600000,
+      "auction_budget": null,
+      "time_per_pick": 60
+    },
+    "trade_rules": {
+      "deadline_date": 1786723200000,
+      "max_trades": null,
+      "revision_hours": 48,
+      "veto_votes_required": 0
+    }
+  }
+]

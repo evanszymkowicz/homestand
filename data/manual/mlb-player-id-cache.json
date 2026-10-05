@@ -1,0 +1,4 @@
+{
+  "_readme": "Auto-maintained bank of confirmed (our player_id) -> MLB Stats API personId resolutions, written by scripts/detect_real_trades.py so repeat runs skip the name-search call. Only unambiguous live-search resolutions land here -- never guesses. Human entries in mlb-player-id-overrides.json always win (consulted first), so a stale cache entry can never shadow one. Safe to delete outright; the next run simply re-resolves via search.",
+  "resolved": {}
+}

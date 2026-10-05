@@ -1,0 +1,4 @@
+{
+  "_readme": "Hand-maintained list of owner_ids who have left the league but whose most recent team-season still shows them as active in teams.json (the year they retired hasn't been backfilled yet). Read directly by the app (synced to app/public/data by sync-data.mjs alongside data/processed/) rather than folded into owners.json/teams.json by the Python pipeline, since retirement isn't an ESPN API fact -- it's a real-world event the commissioner reports. Used to exclude a retired owner from 'current owners' scoped views (e.g. Keepers by Owner) without touching their real historical/all-time stats. Remove an entry here (don't just leave it) if the owner returns to the league.",
+  "retired_owner_ids": ["anthony-paradiso"]
+}

@@ -1,0 +1,1298 @@
+[
+  {
+    "owner_id": "a-klam",
+    "canonical_name": "Otis Nash",
+    "espn_member_keys": [
+      {
+        "member_key": "8624a01bf250b1e5",
+        "years": [
+          2012,
+          2013,
+          2014,
+          2015
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2012": [
+        "Queens Wolves"
+      ],
+      "2013": [
+        "Backyard Jacks"
+      ],
+      "2014": [
+        "Grand Thunder"
+      ],
+      "2015": [
+        "Canal Thunder"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2015,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "aaron-moses",
+    "canonical_name": "Gus Lamb",
+    "espn_member_keys": [
+      {
+        "member_key": "fd6cb43fd66065ba",
+        "years": [
+          2013,
+          2014,
+          2015,
+          2016
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2013": [
+        "Main Bandits"
+      ],
+      "2014": [
+        "Grand Wolves"
+      ],
+      "2015": [
+        "Bush Vipers"
+      ],
+      "2016": [
+        "Front Express"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2016,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "adam-krivoshey",
+    "canonical_name": "Eddie Hart",
+    "espn_member_keys": [
+      {
+        "member_key": "8430e5059f92b182",
+        "years": [
+          2017,
+          2018,
+          2019
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2017": [
+        "Grand Jacks"
+      ],
+      "2018": [
+        "Backyard Hurricanes"
+      ],
+      "2019": [
+        "Backyard Lumberjacks"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2019,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "andrew-fort",
+    "canonical_name": "Hank Zane",
+    "espn_member_keys": [
+      {
+        "member_key": "90663304fb2446bd",
+        "years": [
+          2020,
+          2021,
+          2022
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2020": [
+        "Union Lumberjacks"
+      ],
+      "2021": [
+        "Harbor Clippers"
+      ],
+      "2022": [
+        "Old Nine"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2022,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "anthony-paradiso",
+    "canonical_name": "Bo Quill",
+    "espn_member_keys": [
+      {
+        "member_key": "db3b6ad1f22b7c0e",
+        "years": [
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2016": [
+        "Grand Dingers"
+      ],
+      "2017": [
+        "Railroad Sluggers"
+      ],
+      "2018": [
+        "Main Rangers"
+      ],
+      "2019": [
+        "Park Bombers"
+      ],
+      "2020": [
+        "Westside Thunder"
+      ],
+      "2021": [
+        "Eastside Firebirds"
+      ],
+      "2022": [
+        "Bush Grays"
+      ],
+      "2023": [
+        "Main Wolves"
+      ],
+      "2024": [
+        "Westside Lumberjacks"
+      ],
+      "2025": [
+        "Park Ironmen"
+      ],
+      "2026": [
+        "Old Lumberjacks"
+      ]
+    },
+    "co_owners": [
+      "sam-silbert"
+    ],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "arthur-elkind",
+    "canonical_name": "Dusty Zane",
+    "espn_member_keys": [
+      {
+        "member_key": "982c8c65ea101e8f",
+        "years": [
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Backyard Jacks"
+      ],
+      "2010": [
+        "Harbor Vipers"
+      ],
+      "2011": [
+        "Downtown Vipers"
+      ],
+      "2012": [
+        "Grand Dingers"
+      ],
+      "2013": [
+        "North Outlaws"
+      ],
+      "2014": [
+        "Main Rangers"
+      ],
+      "2015": [
+        "Canal Lumberjacks"
+      ],
+      "2016": [
+        "North Clippers"
+      ],
+      "2017": [
+        "Lake Express"
+      ],
+      "2018": [
+        "Iron Firebirds"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2018,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "brian-ritz",
+    "canonical_name": "Walt Crane",
+    "espn_member_keys": [
+      {
+        "member_key": "007a483bd683adb1",
+        "years": [
+          2009
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Downtown Sluggers"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2009,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "caleb-cohen",
+    "canonical_name": "Dusty Grant",
+    "espn_member_keys": [
+      {
+        "member_key": "e13014ce70970ede",
+        "years": [
+          2009,
+          2010,
+          2011,
+          2012
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Valley Quakes"
+      ],
+      "2010": [
+        "Westside Wolves"
+      ],
+      "2011": [
+        "Park Sluggers"
+      ],
+      "2012": [
+        "Main Thunder"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2012,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "chris-dimisa",
+    "canonical_name": "Scout Foster",
+    "espn_member_keys": [
+      {
+        "member_key": "ba9e99437549f543",
+        "years": [
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2016": [
+        "Old Bandits"
+      ],
+      "2017": [
+        "Main Brushbacks"
+      ],
+      "2018": [
+        "Lake Express"
+      ],
+      "2019": [
+        "Eastside Brushbacks"
+      ],
+      "2020": [
+        "Iron Jacks"
+      ],
+      "2021": [
+        "Union Brushbacks"
+      ],
+      "2022": [
+        "Railroad Clippers"
+      ],
+      "2023": [
+        "Old Dingers"
+      ],
+      "2024": [
+        "Keystone Dingers"
+      ],
+      "2025": [
+        "Main Jacks"
+      ],
+      "2026": [
+        "Iron Jacks"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "david-carnivale",
+    "canonical_name": "Pip Irwin",
+    "espn_member_keys": [
+      {
+        "member_key": "e2a9e4eaf60b8810",
+        "years": [
+          2010
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2010": [
+        "Railroad Muckdogs"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2010,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "evan-szymkowicz",
+    "canonical_name": "Kip James",
+    "espn_member_keys": [
+      {
+        "member_key": "9d8b942fa8e04ddf",
+        "years": [
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2019": [
+        "Keystone Bandits"
+      ],
+      "2020": [
+        "Eastside Wolves"
+      ],
+      "2021": [
+        "Park Muckdogs"
+      ],
+      "2022": [
+        "Junior Kings"
+      ],
+      "2023": [
+        "Iron Nine"
+      ],
+      "2024": [
+        "Grand Pioneers"
+      ],
+      "2025": [
+        "Queens Firebirds"
+      ],
+      "2026": [
+        "Valley Outlaws"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "grant-berberich",
+    "canonical_name": "Vic Banks",
+    "espn_member_keys": [
+      {
+        "member_key": "919f3dd5a4549442",
+        "years": [
+          2009,
+          2010,
+          2011
+        ]
+      },
+      {
+        "member_key": "9367e2284eb37ad3",
+        "years": [
+          2009,
+          2010,
+          2011
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Backyard Rangers"
+      ],
+      "2010": [
+        "Park Muckdogs"
+      ],
+      "2011": [
+        "Keystone Lumberjacks"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2011,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "isaac-nelson",
+    "canonical_name": "Walt Cobb",
+    "espn_member_keys": [
+      {
+        "member_key": "4ea9949cb7e40b29",
+        "years": [
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      },
+      {
+        "member_key": "e059572def6dbae1",
+        "years": [
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2023": [
+        "Harbor Ironmen"
+      ],
+      "2024": [
+        "Front Kings"
+      ],
+      "2025": [
+        "Old Bandits"
+      ],
+      "2026": [
+        "Iron Wolves"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "jake-carroll",
+    "canonical_name": "Vic Hart",
+    "espn_member_keys": [
+      {
+        "member_key": "afbfcd1db3219343",
+        "years": [
+          2009,
+          2010
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Iron Firebirds"
+      ],
+      "2010": [
+        "Junior Kings"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2010,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "jared-schoeffel",
+    "canonical_name": "Ike Baker",
+    "espn_member_keys": [
+      {
+        "member_key": "4737585b4eaa092e",
+        "years": [
+          2012
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2012": [
+        "Backyard Rangers"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2012,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "john-packer",
+    "canonical_name": "Quinn Parker",
+    "espn_member_keys": [
+      {
+        "member_key": "0063b525f316f6ca",
+        "years": [
+          2011,
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2011": [
+        "Old Nine"
+      ],
+      "2012": [
+        "Downtown Grays"
+      ],
+      "2013": [
+        "Old Wolves"
+      ],
+      "2014": [
+        "Park Clippers"
+      ],
+      "2015": [
+        "Lake Clippers"
+      ],
+      "2016": [
+        "Eastside Bandits"
+      ],
+      "2017": [
+        "Lake Kings"
+      ],
+      "2018": [
+        "Canal Firebirds"
+      ],
+      "2019": [
+        "Keystone Rangers"
+      ],
+      "2020": [
+        "Queens Dingers"
+      ],
+      "2021": [
+        "Front Vipers"
+      ],
+      "2022": [
+        "Westside Rangers"
+      ],
+      "2023": [
+        "Triple Sluggers"
+      ],
+      "2024": [
+        "Park Sluggers"
+      ],
+      "2025": [
+        "Bush Ironmen"
+      ],
+      "2026": [
+        "Backyard Lumberjacks"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "jon-krivoshey",
+    "canonical_name": "Homer Evans",
+    "espn_member_keys": [
+      {
+        "member_key": "5ce4e1e56222da2f",
+        "years": [
+          2015,
+          2016,
+          2017,
+          2018
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2015": [
+        "Lake Ironmen"
+      ],
+      "2016": [
+        "Grand Hurricanes"
+      ],
+      "2017": [
+        "Junior Outlaws"
+      ],
+      "2018": [
+        "Lake Vipers"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2018,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "kevin-stankiewicz",
+    "canonical_name": "Chip Otto",
+    "espn_member_keys": [
+      {
+        "member_key": "baa83240767f7806",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2020": [
+        "Old Rangers"
+      ],
+      "2021": [
+        "Grand Nine"
+      ],
+      "2022": [
+        "Triple Grays"
+      ],
+      "2023": [
+        "Downtown Sluggers"
+      ],
+      "2024": [
+        "Triple Outlaws"
+      ],
+      "2025": [
+        "North Muckdogs"
+      ],
+      "2026": [
+        "Canal Firebirds"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "lane-bender",
+    "canonical_name": "Ziggy James",
+    "espn_member_keys": [
+      {
+        "member_key": "fcf7d396f666b1ce",
+        "years": [
+          2009
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Union Brushbacks"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2009,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "luis-garcia",
+    "canonical_name": "Vic Nash",
+    "espn_member_keys": [
+      {
+        "member_key": "24ba3b63b9307ee5",
+        "years": [
+          2011,
+          2012,
+          2013,
+          2014
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2011": [
+        "North Sluggers"
+      ],
+      "2012": [
+        "Lake Vipers"
+      ],
+      "2013": [
+        "Canal Pioneers"
+      ],
+      "2014": [
+        "Grand Bandits"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2014,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "mark-greenspan",
+    "canonical_name": "Rex Quill",
+    "espn_member_keys": [
+      {
+        "member_key": "3fefd480caf2e616",
+        "years": [
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2012": [
+        "Harbor Clippers"
+      ],
+      "2013": [
+        "Triple Sluggers"
+      ],
+      "2014": [
+        "Grand Jacks"
+      ],
+      "2015": [
+        "Keystone Rangers"
+      ],
+      "2016": [
+        "Bush Muckdogs"
+      ],
+      "2017": [
+        "South Jacks"
+      ],
+      "2018": [
+        "Bush Vipers"
+      ],
+      "2019": [
+        "Valley Vipers"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2019,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "matthew-stewart",
+    "canonical_name": "Pip Underwood",
+    "espn_member_keys": [
+      {
+        "member_key": "a2c6064451df026f",
+        "years": [
+          2013,
+          2014,
+          2015
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2013": [
+        "Railroad Outlaws"
+      ],
+      "2014": [
+        "Downtown Express"
+      ],
+      "2015": [
+        "Junior Outlaws"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2015,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "mike-wright",
+    "canonical_name": "Vic Baker",
+    "espn_member_keys": [
+      {
+        "member_key": "5c2ff02245e61016",
+        "years": [
+          2020,
+          2021,
+          2022
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2020": [
+        "Lake Bombers"
+      ],
+      "2021": [
+        "Canal Thunder"
+      ],
+      "2022": [
+        "Railroad Outlaws"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2022,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "nathan-forman",
+    "canonical_name": "Gus York",
+    "espn_member_keys": [
+      {
+        "member_key": "062d142b586fe407",
+        "years": [
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2019": [
+        "Railroad Sluggers"
+      ],
+      "2020": [
+        "Westside Dingers"
+      ],
+      "2021": [
+        "Canal Lumberjacks"
+      ],
+      "2022": [
+        "Keystone Bandits"
+      ],
+      "2023": [
+        "Main Firebirds"
+      ],
+      "2024": [
+        "Valley Sluggers"
+      ],
+      "2025": [
+        "Iron Jacks"
+      ],
+      "2026": [
+        "Old Thunder"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "nick-harley",
+    "canonical_name": "Rex Klein",
+    "espn_member_keys": [
+      {
+        "member_key": "eabef9ed0faf2800",
+        "years": [
+          2010,
+          2011
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2010": [
+        "North Aces"
+      ],
+      "2011": [
+        "Old Dingers"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2011,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "ryan-cooper",
+    "canonical_name": "Duke Dean",
+    "espn_member_keys": [
+      {
+        "member_key": "b604a5070ef4fd9f",
+        "years": [
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Bush Bombers"
+      ],
+      "2010": [
+        "Westside Brushbacks"
+      ],
+      "2011": [
+        "Eastside Lumberjacks"
+      ],
+      "2012": [
+        "Park Clippers"
+      ],
+      "2013": [
+        "Harbor Aces"
+      ],
+      "2014": [
+        "Canal Wolves"
+      ],
+      "2015": [
+        "Keystone Jacks"
+      ],
+      "2016": [
+        "Downtown Grays"
+      ],
+      "2017": [
+        "Old Wolves"
+      ],
+      "2018": [
+        "Grand Rangers"
+      ],
+      "2019": [
+        "Keystone Brushbacks"
+      ],
+      "2020": [
+        "Downtown Aces"
+      ],
+      "2021": [
+        "Valley Vipers"
+      ],
+      "2022": [
+        "Union Bandits"
+      ],
+      "2023": [
+        "Valley Express"
+      ],
+      "2024": [
+        "North Bombers"
+      ],
+      "2025": [
+        "Lake Clippers"
+      ],
+      "2026": [
+        "Old Jacks"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": true
+  },
+  {
+    "owner_id": "sam-falck",
+    "canonical_name": "Kip Parker",
+    "espn_member_keys": [
+      {
+        "member_key": "4014ed7ed727c2c4",
+        "years": [
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Front Quakes"
+      ],
+      "2010": [
+        "Keystone Brushbacks"
+      ],
+      "2011": [
+        "Junior Express"
+      ],
+      "2012": [
+        "Triple Sluggers"
+      ],
+      "2013": [
+        "Lake Outlaws"
+      ],
+      "2014": [
+        "North Vipers"
+      ],
+      "2015": [
+        "Union Hurricanes"
+      ],
+      "2016": [
+        "Iron Bandits"
+      ],
+      "2017": [
+        "Valley Quakes"
+      ],
+      "2018": [
+        "Iron Hurricanes"
+      ],
+      "2019": [
+        "Valley Bombers"
+      ],
+      "2020": [
+        "Junior Quakes"
+      ],
+      "2021": [
+        "Park Clippers"
+      ],
+      "2022": [
+        "Railroad Ironmen"
+      ],
+      "2023": [
+        "Bush Vipers"
+      ],
+      "2024": [
+        "Iron Hurricanes"
+      ],
+      "2025": [
+        "Triple Aces"
+      ],
+      "2026": [
+        "Triple Clippers"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "sam-silbert",
+    "canonical_name": "Bo Evans",
+    "espn_member_keys": [
+      {
+        "member_key": "0adf5ec4a2572850",
+        "years": [
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      },
+      {
+        "member_key": "ec64471c564426f0",
+        "years": [
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Grand Hurricanes"
+      ],
+      "2010": [
+        "Backyard Firebirds"
+      ],
+      "2011": [
+        "Eastside Nine"
+      ],
+      "2012": [
+        "Railroad Grays"
+      ],
+      "2013": [
+        "Park Ironmen"
+      ],
+      "2014": [
+        "Queens Nine"
+      ],
+      "2015": [
+        "Downtown Express"
+      ],
+      "2016": [
+        "South Bandits"
+      ],
+      "2017": [
+        "Junior Sluggers"
+      ],
+      "2018": [
+        "Westside Lumberjacks"
+      ],
+      "2019": [
+        "Junior Clippers"
+      ],
+      "2020": [
+        "Westside Thunder"
+      ],
+      "2021": [
+        "Eastside Firebirds"
+      ],
+      "2022": [
+        "Bush Grays"
+      ],
+      "2023": [
+        "Main Wolves"
+      ],
+      "2024": [
+        "Westside Lumberjacks"
+      ],
+      "2025": [
+        "Park Ironmen"
+      ],
+      "2026": [
+        "Old Lumberjacks"
+      ]
+    },
+    "co_owners": [
+      "anthony-paradiso"
+    ],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "steve-leblanc",
+    "canonical_name": "Pip Cobb",
+    "espn_member_keys": [
+      {
+        "member_key": "caf3f7ec9d51c66c",
+        "years": [
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2023": [
+        "Union Bandits"
+      ],
+      "2024": [
+        "Canal Jacks"
+      ],
+      "2025": [
+        "Union Hurricanes"
+      ],
+      "2026": [
+        "Lake Clippers"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2026,
+    "absent_from_latest_season": false,
+    "is_commissioner": false
+  },
+  {
+    "owner_id": "steven-zelsdorff",
+    "canonical_name": "Ned Grant",
+    "espn_member_keys": [
+      {
+        "member_key": "e3d5491e9367a991",
+        "years": [
+          2009,
+          2010,
+          2011
+        ]
+      }
+    ],
+    "team_names_by_year": {
+      "2009": [
+        "Westside Firebirds"
+      ],
+      "2010": [
+        "Lake Aces"
+      ],
+      "2011": [
+        "Valley Muckdogs"
+      ]
+    },
+    "co_owners": [],
+    "last_active_year": 2011,
+    "absent_from_latest_season": true,
+    "is_commissioner": false
+  }
+]

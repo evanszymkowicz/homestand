@@ -1,0 +1,2 @@
+requests>=2.31
+ruff>=0.15

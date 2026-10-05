@@ -1,0 +1,254 @@
+{
+  "_readme": "Per-season quirks that normalize.py reads rather than hardcodes, per context/features/phase-2-normalization-spec.md: '2020's real week count and format, any scoring-rule changes, anything the audit flagged.' Only documented, source-verified facts go here -- nothing inferred or assumed. Grows as normalize.py/validate.py surface new per-season findings (e.g. keeper-roster mismatches). '_note' is the internal audit trail and is NEVER shown to end users by itself -- normalize.py's build_season() only copies it into the public-facing seasons.json 'notes' field (rendered directly in the app's Season view) when the entry also sets '_public: true'. Most '_note' entries here are internal data-provenance writeups (file paths, script names, reconciliation math) that would be confusing or unprofessional if shown to league members verbatim -- only set '_public' when the note is genuine, human-readable narrative a league member would want to read (e.g. 2020's shortened-season explanation).",
+  "seasons": {
+    "2014": {
+      "draft_pick_count": 299
+    },
+    "2018": {
+      "box_scores_coverage": "partial"
+    },
+    "2025": {
+      "ohtani_pitching_box_score_coverage": "partial"
+    },
+    "2020": {
+      "regular_season_weeks": 8,
+      "playoff_weeks": 1,
+      "playoff_team_count": 2,
+      "playoff_brackets": [
+        "WINNERS_BRACKET",
+        "LOSERS_CONSOLATION_LADDER"
+      ],
+      "_public": true,
+      "_note": ""
+    },
+    "2026": {
+      "box_score_revision_gaps": {
+        "_note": "Historical home for documented residuals between box-score figures and ESPN's official scores for the in-progress 2026 season. WEEKS 18-19 originally carried mixed-regime capture artifacts (backfilled snapshots vs live day-by-day) plus late MLB stat revisions landing after capture; active-slot sums drifted up to +/-112pt against official scores while player total_points mostly reconciled. RESOLVED 2026-08-25: extract.py gained --refresh-decided-weeks (wired into the heavy workflow step), which force-refetches every scoring period of fully-decided regular-season weeks on each heavy run, so per-period captures are always re-taken against ESPN's post-revision finals before normalize/validate reconcile them. The first healed run reconciled every documented gap to +/-0.0 and week 20 reconciled exactly on its first decided validation -- all weekly_shortfalls pins were removed. The pinning mechanism stays as the tripwire: validate.py warns (never fails) when a pinned gap heals to zero -- prompting pin removal like this one -- and fails only when a nonzero gap drifts beyond +/-2.0pt of its documented amount (new revisions landed: refresh the numbers from a fresh normalize run). New pins should only be added when a genuinely unhealable ESPN-side residual is observed.",
+        "weekly_shortfalls": []
+      }
+    }
+  },
+  "pre_2019_box_score_fidelity": {
+    "_note": ""
+  },
+  "unresolvable_draft_picks": {
+    "player_ids": [
+      {
+        "year": 2020,
+        "espn_team_id": 6,
+        "round_id": 24,
+        "player_id": 35831
+      },
+      {
+        "year": 2020,
+        "espn_team_id": 10,
+        "round_id": 29,
+        "player_id": 42419
+      },
+      {
+        "year": 2022,
+        "espn_team_id": 4,
+        "round_id": 30,
+        "player_id": 41562
+      },
+      {
+        "year": 2023,
+        "espn_team_id": 1,
+        "round_id": 28,
+        "player_id": 4987420
+      },
+      {
+        "year": 2023,
+        "espn_team_id": 6,
+        "round_id": 30,
+        "player_id": 4623366
+      },
+      {
+        "year": 2025,
+        "espn_team_id": 6,
+        "round_id": 30,
+        "player_id": 42427
+      }
+    ],
+    "_note": ""
+  },
+  "keeper_validation_exceptions": {
+    "exceptions": [
+      {
+        "year": 2011,
+        "espn_team_id": 10,
+        "player_id": 30280,
+        "player_name": "Carlos Santana",
+        "found_on_prior_year_espn_team_id": null
+      },
+      {
+        "year": 2013,
+        "espn_team_id": 5,
+        "player_id": 4553,
+        "player_name": "CC Sabathia",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      },
+      {
+        "year": 2014,
+        "espn_team_id": 5,
+        "player_id": 6035,
+        "player_name": "David Wright",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      },
+      {
+        "year": 2015,
+        "espn_team_id": 3,
+        "player_id": 33172,
+        "player_name": "Kris Bryant",
+        "found_on_prior_year_espn_team_id": null
+      },
+      {
+        "year": 2015,
+        "espn_team_id": 10,
+        "player_id": 5890,
+        "player_name": "Jose Bautista",
+        "found_on_prior_year_espn_team_id": [
+          4
+        ]
+      },
+      {
+        "year": 2015,
+        "espn_team_id": 7,
+        "player_id": 28958,
+        "player_name": "David Price",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      },
+      {
+        "year": 2015,
+        "espn_team_id": 4,
+        "player_id": 32080,
+        "player_name": "Yoenis Cespedes",
+        "found_on_prior_year_espn_team_id": [
+          10
+        ]
+      },
+      {
+        "year": 2015,
+        "espn_team_id": 1,
+        "player_id": 30043,
+        "player_name": "Michael Brantley",
+        "found_on_prior_year_espn_team_id": [
+          3
+        ]
+      },
+      {
+        "year": 2015,
+        "espn_team_id": 3,
+        "player_id": 28968,
+        "player_name": "Carlos Carrasco",
+        "found_on_prior_year_espn_team_id": null
+      },
+      {
+        "year": 2019,
+        "espn_team_id": 2,
+        "player_id": 31313,
+        "player_name": "Patrick Corbin",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      },
+      {
+        "year": 2019,
+        "espn_team_id": 8,
+        "player_id": 29949,
+        "player_name": "Madison Bumgarner",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      },
+      {
+        "year": 2020,
+        "espn_team_id": 8,
+        "player_id": 29155,
+        "player_name": "Charlie Morton",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      },
+      {
+        "year": 2022,
+        "espn_team_id": 4,
+        "player_id": 30836,
+        "player_name": "Mike Trout",
+        "found_on_prior_year_espn_team_id": [
+          3
+        ]
+      },
+      {
+        "year": 2022,
+        "espn_team_id": 3,
+        "player_id": 39251,
+        "player_name": "Walker Buehler",
+        "found_on_prior_year_espn_team_id": [
+          4
+        ]
+      },
+      {
+        "year": 2023,
+        "espn_team_id": 5,
+        "player_id": 6341,
+        "player_name": "Justin Verlander",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      },
+      {
+        "year": 2023,
+        "espn_team_id": 1,
+        "player_id": 32691,
+        "player_name": "Corey Seager",
+        "found_on_prior_year_espn_team_id": [
+          5
+        ]
+      },
+      {
+        "year": 2023,
+        "espn_team_id": 5,
+        "player_id": 37498,
+        "player_name": "Pete Alonso",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      },
+      {
+        "year": 2025,
+        "espn_team_id": 1,
+        "player_id": 41044,
+        "player_name": "Julio Rodriguez",
+        "found_on_prior_year_espn_team_id": [
+          3
+        ]
+      },
+      {
+        "year": 2025,
+        "espn_team_id": 1,
+        "player_id": 4917869,
+        "player_name": "Jackson Chourio",
+        "found_on_prior_year_espn_team_id": [
+          3
+        ]
+      },
+      {
+        "year": 2025,
+        "espn_team_id": 3,
+        "player_id": 33039,
+        "player_name": "Mookie Betts",
+        "found_on_prior_year_espn_team_id": [
+          1
+        ]
+      }
+    ],
+    "_note": ""
+  }
+}

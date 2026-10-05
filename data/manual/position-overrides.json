@@ -1,0 +1,14 @@
+{
+  "_readme": "One-off corrections for player-seasons where ESPN's own player_seasons.json default_position_id (the season's declared PRIMARY, surfaced in app/src/lib/playerPositions.ts's getPlayerSeasonPositions and app/src/routes/Player/index.tsx's positionByPlayerSeason) doesn't match where the player actually played most that year, per this project's own 10-game qualification floor (the same floor already used for `played`/`secondary`). This is NOT a general games-derived override -- the app deliberately keeps `primary` (ESPN's declared position) and `played` (games_played_by_position) independent, and that separation is intentional: a shortstop who spent most of a year at second still legitimately carries his declared position most seasons. Entries here exist only for player-years spot-checked and confirmed ESPN's declared value reads wrong against real games played. A general games-derived primary-position rule (replacing default_position_id league-wide, subject to the same 10-game floor) is tracked as a future item in context/future-items.md -- once/if that ships, this file becomes redundant and can be retired. Until then, this file is NOT pipeline output: it's read directly by the app (app/scripts/sync-data.mjs copies it straight to public/data/, same as jersey-history-overrides.json/retired-owners.json) and merged into both playerPositions.ts and Player/index.tsx's positionByPlayerSeason without touching player_seasons.json, so scripts/validate.py's default_position_id-non-null invariant stays intact. Each entry is one (player_id, year) pair; position_id uses the same enum as app/src/lib/positions.ts's POSITION_LABELS.",
+  "overrides": [
+    {
+      "player_id": 30836,
+      "player_name": "Mike Trout",
+      "year": 2026,
+      "position_id": 8,
+      "espn_default_position_id": 10,
+      "source": "data/processed/player_seasons.json games_played_by_position as of 2026-07-30 (in-season, still climbing): CF 74, DH 13",
+      "note": "ESPN's own default_position_id still reads 10 (DH) for 2026, but Trout has played CF far more than DH all season. Filed as a one-off ahead of the league-wide games-derived primary-position rule in future-items.md."
+    }
+  ]
+}

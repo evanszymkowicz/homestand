@@ -1,0 +1,383 @@
+{
+  "_readme": "Hand-corrected (year, player_id) -> pro_team_id pairs where that season's own kona_player_info.json resolves to 0 (\"FA\") even though the player had a real MLB team for the whole labeled season. Root cause (see context/research/schema-decisions.md's 'MLB franchise data (pro_team_id) is per-season' section for the original, incomplete finding): ESPN keeps a fantasy season's player data mutable through the following offseason, up until that league's next keeper deadline locks it in. A handful of star free agents didn't re-sign until deep into that following offseason (in a few cases, the 2021-22 lockout froze all signings until March), so the snapshot this project reads for the labeled season is actually a frozen post-season/pre-next-season state, not an in-season one -- it reflects the moment just before the *next* draft, not the season itself. Confirmed against real season-by-season rosters for each entry below; add a new entry (with the same reasoning verified) rather than assuming every 0 is this bug -- some 0s are genuine deep-bench/low-ownership gaps.",
+  "overrides": [
+    {
+      "year": 2017,
+      "player_id": 30004,
+      "player_name": "Todd Frazier",
+      "pro_team_id": 4
+    },
+    {
+      "year": 2017,
+      "player_id": 30145,
+      "player_name": "Jake Arrieta",
+      "pro_team_id": 16
+    },
+    {
+      "year": 2017,
+      "player_id": 31065,
+      "player_name": "J.D. Martinez",
+      "pro_team_id": 6
+    },
+    {
+      "year": 2020,
+      "player_id": 32014,
+      "player_name": "Trevor Bauer",
+      "pro_team_id": 17
+    },
+    {
+      "year": 2021,
+      "player_id": 30193,
+      "player_name": "Freddie Freeman",
+      "pro_team_id": 15
+    },
+    {
+      "year": 2021,
+      "player_id": 32150,
+      "player_name": "Trevor Story",
+      "pro_team_id": 27
+    },
+    {
+      "year": 2021,
+      "player_id": 28963,
+      "player_name": "Clayton Kershaw",
+      "pro_team_id": 19
+    },
+    {
+      "year": 2023,
+      "player_id": 37515,
+      "player_name": "Brandon Woodruff",
+      "pro_team_id": 8
+    },
+    {
+      "year": 2023,
+      "player_id": 32760,
+      "player_name": "Josh Hader",
+      "pro_team_id": 25
+    },
+    {
+      "year": 2024,
+      "player_id": 34886,
+      "player_name": "Alex Bregman",
+      "pro_team_id": 18
+    },
+    {
+      "year": 2024,
+      "player_id": 37498,
+      "player_name": "Pete Alonso",
+      "pro_team_id": 21
+    },
+    {
+      "year": 2025,
+      "player_id": 34967,
+      "player_name": "Kyle Tucker",
+      "pro_team_id": 16
+    },
+    {
+      "year": 2025,
+      "player_id": 36581,
+      "player_name": "Framber Valdez",
+      "pro_team_id": 18
+    },
+    {
+      "year": 2025,
+      "player_id": 34886,
+      "player_name": "Alex Bregman",
+      "pro_team_id": 2
+    },
+    {
+      "year": 2021,
+      "player_id": 28976,
+      "player_name": "Max Scherzer",
+      "pro_team_id": 20
+    },
+    {
+      "year": 2024,
+      "player_id": 28976,
+      "player_name": "Max Scherzer",
+      "pro_team_id": 13
+    },
+    {
+      "year": 2025,
+      "player_id": 28976,
+      "player_name": "Max Scherzer",
+      "pro_team_id": 14
+    },
+    {
+      "year": 2022,
+      "player_id": 31065,
+      "player_name": "J.D. Martinez",
+      "pro_team_id": 2
+    },
+    {
+      "year": 2023,
+      "player_id": 31065,
+      "player_name": "J.D. Martinez",
+      "pro_team_id": 19
+    },
+    {
+      "year": 2024,
+      "player_id": 31065,
+      "player_name": "J.D. Martinez",
+      "pro_team_id": 21
+    },
+    {
+      "year": 2015,
+      "player_id": 30004,
+      "player_name": "Todd Frazier",
+      "pro_team_id": 17
+    },
+    {
+      "year": 2020,
+      "player_id": 30145,
+      "player_name": "Jake Arrieta",
+      "pro_team_id": 22
+    },
+    {
+      "year": 2023,
+      "player_id": 28963,
+      "player_name": "Clayton Kershaw",
+      "pro_team_id": 19
+    },
+    {
+      "year": 2025,
+      "player_id": 37515,
+      "player_name": "Brandon Woodruff",
+      "pro_team_id": 8
+    },
+    {
+      "year": 2025,
+      "player_id": 37498,
+      "player_name": "Pete Alonso",
+      "pro_team_id": 21
+    },
+    {
+      "year": 2017,
+      "player_id": 28701,
+      "player_name": "Andrew McCutchen",
+      "pro_team_id": 23
+    },
+    {
+      "year": 2018,
+      "player_id": 28701,
+      "player_name": "Andrew McCutchen",
+      "pro_team_id": 26
+    },
+    {
+      "year": 2021,
+      "player_id": 28701,
+      "player_name": "Andrew McCutchen",
+      "pro_team_id": 22
+    },
+    {
+      "year": 2022,
+      "player_id": 28701,
+      "player_name": "Andrew McCutchen",
+      "pro_team_id": 8
+    },
+    {
+      "year": 2018,
+      "player_id": 31027,
+      "player_name": "Paul Goldschmidt",
+      "pro_team_id": 29
+    },
+    {
+      "year": 2024,
+      "player_id": 31027,
+      "player_name": "Paul Goldschmidt",
+      "pro_team_id": 24
+    },
+    {
+      "year": 2025,
+      "player_id": 31027,
+      "player_name": "Paul Goldschmidt",
+      "pro_team_id": 10
+    },
+    {
+      "year": 2022,
+      "player_id": 6341,
+      "player_name": "Justin Verlander",
+      "pro_team_id": 18
+    },
+    {
+      "year": 2018,
+      "player_id": 6242,
+      "player_name": "Nelson Cruz",
+      "pro_team_id": 12
+    },
+    {
+      "year": 2020,
+      "player_id": 6242,
+      "player_name": "Nelson Cruz",
+      "pro_team_id": 9
+    },
+    {
+      "year": 2022,
+      "player_id": 5883,
+      "player_name": "Zack Greinke",
+      "pro_team_id": 7
+    },
+    {
+      "year": 2023,
+      "player_id": 5883,
+      "player_name": "Zack Greinke",
+      "pro_team_id": 7
+    },
+    {
+      "year": 2018,
+      "player_id": 6204,
+      "player_name": "Robinson Cano",
+      "pro_team_id": 12
+    },
+    {
+      "year": 2020,
+      "player_id": 28721,
+      "player_name": "Ryan Braun",
+      "pro_team_id": 8
+    },
+    {
+      "year": 2020,
+      "player_id": 32129,
+      "player_name": "Francisco Lindor",
+      "pro_team_id": 5
+    },
+    {
+      "year": 2015,
+      "player_id": 28841,
+      "player_name": "Justin Upton",
+      "pro_team_id": 25
+    },
+    {
+      "year": 2020,
+      "player_id": 30280,
+      "player_name": "Carlos Santana",
+      "pro_team_id": 5
+    },
+    {
+      "year": 2022,
+      "player_id": 30280,
+      "player_name": "Carlos Santana",
+      "pro_team_id": 7
+    },
+    {
+      "year": 2023,
+      "player_id": 30280,
+      "player_name": "Carlos Santana",
+      "pro_team_id": 23
+    },
+    {
+      "year": 2025,
+      "player_id": 30280,
+      "player_name": "Carlos Santana",
+      "pro_team_id": 5
+    },
+    {
+      "year": 2024,
+      "player_id": 30782,
+      "player_name": "Anthony Rizzo",
+      "pro_team_id": 10
+    },
+    {
+      "year": 2023,
+      "player_id": 5403,
+      "player_name": "Adam Wainwright",
+      "pro_team_id": 24
+    },
+    {
+      "year": 2018,
+      "player_id": 28954,
+      "player_name": "Jay Bruce",
+      "pro_team_id": 21
+    },
+    {
+      "year": 2019,
+      "player_id": 31267,
+      "player_name": "Zack Wheeler",
+      "pro_team_id": 21
+    },
+    {
+      "year": 2019,
+      "player_id": 4553,
+      "player_name": "CC Sabathia",
+      "pro_team_id": 10
+    },
+    {
+      "year": 2021,
+      "player_id": 30819,
+      "player_name": "Kyle Seager",
+      "pro_team_id": 12
+    },
+    {
+      "year": 2021,
+      "player_id": 30112,
+      "player_name": "Buster Posey",
+      "pro_team_id": 26
+    },
+    {
+      "year": 2020,
+      "player_id": 29607,
+      "player_name": "Justin Turner",
+      "pro_team_id": 19
+    },
+    {
+      "year": 2023,
+      "player_id": 29607,
+      "player_name": "Justin Turner",
+      "pro_team_id": 2
+    },
+    {
+      "year": 2024,
+      "player_id": 29607,
+      "player_name": "Justin Turner",
+      "pro_team_id": 2
+    },
+    {
+      "year": 2022,
+      "player_id": 30442,
+      "player_name": "Aroldis Chapman",
+      "pro_team_id": 10
+    },
+    {
+      "year": 2019,
+      "player_id": 28536,
+      "player_name": "Ben Zobrist",
+      "pro_team_id": 16
+    },
+    {
+      "year": 2023,
+      "player_id": 30981,
+      "player_name": "Corey Kluber",
+      "pro_team_id": 2
+    },
+    {
+      "year": 2021,
+      "player_id": 32653,
+      "player_name": "Carlos Correa",
+      "pro_team_id": 18
+    },
+    {
+      "year": 2025,
+      "player_id": 32177,
+      "player_name": "J.T. Realmuto",
+      "pro_team_id": 22
+    },
+    {
+      "year": 2019,
+      "player_id": 29563,
+      "player_name": "Josh Donaldson",
+      "pro_team_id": 15
+    },
+    {
+      "year": 2021,
+      "player_id": 5883,
+      "player_name": "Zack Greinke",
+      "pro_team_id": 18
+    },
+    {
+      "year": 2020,
+      "player_id": 33712,
+      "player_name": "Kyle Schwarber",
+      "pro_team_id": 16
+    }
+  ]
+}

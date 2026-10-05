@@ -1,0 +1,12 @@
+{
+  "_comment_league_id": "Your ESPN fantasy baseball league ID, from the league URL (e.g. .../league?leagueId=6121 -> 6121). See data/README.md for the full field reference.",
+  "league_id": 0,
+  "_comment_espn_s2": "The 'espn_s2' cookie value from a logged-in ESPN session. Keep this file as config.json only — it's gitignored and must never be committed.",
+  "espn_s2": "",
+  "_comment_swid": "The 'SWID' cookie value, including its curly braces, e.g. {XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}.",
+  "swid": "{PASTE-YOUR-SWID-COOKIE-HERE}",
+  "_comment_year_start": "First season to extract/audit, inclusive. The league's earliest accessible season is 2009.",
+  "year_start": 2009,
+  "_comment_year_end": "Last season to extract/audit, inclusive. Use the current or most recently completed season.",
+  "year_end": 2025
+}

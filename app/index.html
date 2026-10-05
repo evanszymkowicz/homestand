@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Theme bootstrap: sets data-theme before first paint so the CSS
+      // attribute selectors never flash the wrong palette. Keep in sync with
+      // lib/themeContext.tsx (same storage key + resolution).
+      (function () {
+        var t = null;
+        try {
+          t = localStorage.getItem("homestand-theme");
+        } catch (e) {
+          // storage can throw in privacy modes — fall through to the media query
+        }
+        if (t === "dark" || t === "light") {
+          document.documentElement.setAttribute("data-theme", t);
+        } else {
+          document.documentElement.setAttribute(
+            "data-theme",
+            matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+          );
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homestand</title>
+    <meta
+      name="description"
+      content="Import your ESPN fantasy baseball league history and browse championships, head-to-head records, drafts, keepers, and superlatives." />
+    <meta property="og:title" content="Homestand" />
+    <meta
+      property="og:description"
+      content="Import your ESPN fantasy baseball league history and browse championships, head-to-head records, drafts, keepers, and superlatives." />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "_readme": "Hand-maintained list of player_ids who have retired, mapped to their last active season. ESPN never marks a retired player inactive in the kona player pool (they linger as free agents with active:true), so without this cap a retired player's seasons_seen and latest-season player_seasons row keep extending into the year they retired. Read by scripts/normalize.py to trim players.json seasons_seen and drop player_seasons.json rows above the cap. This is the player-side mirror of retired-owners.json -- retirement isn't an ESPN API fact, it's a real-world event the commissioner reports. Remove an entry if the player returns to MLB.",
+  "retired_players": {
+    "28955": 2022,
+    "28963": 2025,
+    "29515": 2023
+  }
+}

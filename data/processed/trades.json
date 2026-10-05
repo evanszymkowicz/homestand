@@ -1,0 +1,567 @@
+[
+  {
+    "year": 2019,
+    "trade_id": "12b5cc44-ead5-45b3-8909-9d2bfad58993",
+    "proposed_date": null,
+    "executed_date": 1555440437364,
+    "team_a_espn_team_id": 1,
+    "team_a_owner_id": "ryan-cooper",
+    "team_b_espn_team_id": 5,
+    "team_b_owner_id": "john-packer",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 31591,
+        "item_type": "DROP",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": null,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 30452,
+        "item_type": "DROP",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": null,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 32574,
+        "item_type": "TRADE",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 29607,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 32769,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 33712,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2020,
+    "trade_id": "164f7821-fdcf-4871-b928-539505b2e860",
+    "proposed_date": null,
+    "executed_date": 1596900200675,
+    "team_a_espn_team_id": 5,
+    "team_a_owner_id": "john-packer",
+    "team_b_espn_team_id": 10,
+    "team_b_owner_id": "mike-wright",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 31174,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 10,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 33172,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 10,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 5403,
+        "item_type": "TRADE",
+        "from_espn_team_id": 10,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 30951,
+        "item_type": "TRADE",
+        "from_espn_team_id": 10,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2020,
+    "trade_id": "99e652b5-2953-4c42-863e-70cc2f85e1a9",
+    "proposed_date": null,
+    "executed_date": 1597074848559,
+    "team_a_espn_team_id": 10,
+    "team_a_owner_id": "mike-wright",
+    "team_b_espn_team_id": 5,
+    "team_b_owner_id": "john-packer",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 32672,
+        "item_type": "TRADE",
+        "from_espn_team_id": 10,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 32094,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 10,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2021,
+    "trade_id": "1dbff5cb-84e8-4388-b44e-f65fd2b87bfe",
+    "proposed_date": 1617770960317,
+    "executed_date": 1617890464574,
+    "team_a_espn_team_id": 5,
+    "team_a_owner_id": "john-packer",
+    "team_b_espn_team_id": 8,
+    "team_b_owner_id": "evan-szymkowicz",
+    "acting_member_key": "0063b525f316f6ca",
+    "items": [
+      {
+        "player_id": 36488,
+        "item_type": "TRADE",
+        "from_espn_team_id": 8,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 30583,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 8,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      }
+    ]
+  },
+  {
+    "year": 2021,
+    "trade_id": "c93bfffc-0c11-4dba-a04d-ce7f2617fce8",
+    "proposed_date": null,
+    "executed_date": 1623182694247,
+    "team_a_espn_team_id": 1,
+    "team_a_owner_id": "ryan-cooper",
+    "team_b_espn_team_id": 5,
+    "team_b_owner_id": "john-packer",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 33106,
+        "item_type": "DROP",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": null,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 33190,
+        "item_type": "TRADE",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 28963,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 31283,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2021,
+    "trade_id": "9725f8ef-394c-478f-8291-c4d0e98525f8",
+    "proposed_date": null,
+    "executed_date": 1627581237658,
+    "team_a_espn_team_id": 3,
+    "team_a_owner_id": "andrew-fort",
+    "team_b_espn_team_id": 5,
+    "team_b_owner_id": "john-packer",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 32818,
+        "item_type": "TRADE",
+        "from_espn_team_id": 3,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 31065,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 3,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2021,
+    "trade_id": "9dc30f64-d167-4cd9-9ac9-462693228c73",
+    "proposed_date": null,
+    "executed_date": 1628277544848,
+    "team_a_espn_team_id": 5,
+    "team_a_owner_id": "john-packer",
+    "team_b_espn_team_id": 10,
+    "team_b_owner_id": "mike-wright",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 33712,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 10,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 32055,
+        "item_type": "TRADE",
+        "from_espn_team_id": 10,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2022,
+    "trade_id": "514ce079-cc76-4cc6-add1-22995a5959c5",
+    "proposed_date": null,
+    "executed_date": 1649442403960,
+    "team_a_espn_team_id": 1,
+    "team_a_owner_id": "ryan-cooper",
+    "team_b_espn_team_id": 5,
+    "team_b_owner_id": "john-packer",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 29563,
+        "item_type": "TRADE",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 31730,
+        "item_type": "TRADE",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 32691,
+        "item_type": "TRADE",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 6341,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 31027,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 33303,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2022,
+    "trade_id": "93480ad6-f05a-4583-92aa-05c6f18f4021",
+    "proposed_date": 1649352725178,
+    "executed_date": 1649516265187,
+    "team_a_espn_team_id": 8,
+    "team_a_owner_id": "evan-szymkowicz",
+    "team_b_espn_team_id": 5,
+    "team_b_owner_id": "john-packer",
+    "acting_member_key": "9d8b942fa8e04ddf",
+    "items": [
+      {
+        "player_id": 30583,
+        "item_type": "TRADE",
+        "from_espn_team_id": 8,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 32653,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 8,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      }
+    ]
+  },
+  {
+    "year": 2024,
+    "trade_id": "09ac4ef7-87f0-4e23-9818-df665899770f",
+    "proposed_date": null,
+    "executed_date": 1712849449774,
+    "team_a_espn_team_id": 2,
+    "team_a_owner_id": "nathan-forman",
+    "team_b_espn_team_id": 5,
+    "team_b_owner_id": "john-packer",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 4726080,
+        "item_type": "DROP",
+        "from_espn_team_id": 2,
+        "to_espn_team_id": null,
+        "from_lineup_slot_id": 14,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 33912,
+        "item_type": "TRADE",
+        "from_espn_team_id": 2,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 32078,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 2,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 32653,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 2,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2025,
+    "trade_id": "36ac1d45-6198-465b-bdb5-04d11eb500af",
+    "proposed_date": null,
+    "executed_date": 1743097407240,
+    "team_a_espn_team_id": 3,
+    "team_a_owner_id": "steve-leblanc",
+    "team_b_espn_team_id": 5,
+    "team_b_owner_id": "john-packer",
+    "acting_member_key": "b604a5070ef4fd9f",
+    "items": [
+      {
+        "player_id": 4298641,
+        "item_type": "TRADE",
+        "from_espn_team_id": 3,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 4622181,
+        "item_type": "TRADE",
+        "from_espn_team_id": 3,
+        "to_espn_team_id": 5,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      },
+      {
+        "player_id": 41433,
+        "item_type": "TRADE",
+        "from_espn_team_id": 5,
+        "to_espn_team_id": 3,
+        "from_lineup_slot_id": null,
+        "to_lineup_slot_id": null,
+        "source": "box_score_diff"
+      }
+    ]
+  },
+  {
+    "year": 2026,
+    "trade_id": "531f736a-564e-4bc8-8921-c2fb69dedd70",
+    "proposed_date": 1786293007838,
+    "executed_date": 1786299773514,
+    "team_a_espn_team_id": 8,
+    "team_a_owner_id": "evan-szymkowicz",
+    "team_b_espn_team_id": 1,
+    "team_b_owner_id": "ryan-cooper",
+    "acting_member_key": "9d8b942fa8e04ddf",
+    "items": [
+      {
+        "player_id": 4297835,
+        "item_type": "TRADE",
+        "from_espn_team_id": 8,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": 17,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 32175,
+        "item_type": "TRADE",
+        "from_espn_team_id": 8,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": 16,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 4990055,
+        "item_type": "TRADE",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": 8,
+        "from_lineup_slot_id": 5,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      }
+    ]
+  },
+  {
+    "year": 2026,
+    "trade_id": "2b55bb2f-c3d7-40e7-a133-8994220bd1ab",
+    "proposed_date": 1786585736557,
+    "executed_date": 1786629204887,
+    "team_a_espn_team_id": 8,
+    "team_a_owner_id": "evan-szymkowicz",
+    "team_b_espn_team_id": 1,
+    "team_b_owner_id": "ryan-cooper",
+    "acting_member_key": "9d8b942fa8e04ddf",
+    "items": [
+      {
+        "player_id": 40884,
+        "item_type": "TRADE",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": 8,
+        "from_lineup_slot_id": 15,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 5149072,
+        "item_type": "TRADE",
+        "from_espn_team_id": 8,
+        "to_espn_team_id": 1,
+        "from_lineup_slot_id": 6,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 42468,
+        "item_type": "TRADE",
+        "from_espn_team_id": 1,
+        "to_espn_team_id": 8,
+        "from_lineup_slot_id": 5,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      },
+      {
+        "player_id": 41364,
+        "item_type": "DROP",
+        "from_espn_team_id": 8,
+        "to_espn_team_id": null,
+        "from_lineup_slot_id": 15,
+        "to_lineup_slot_id": null,
+        "source": "ledger"
+      }
+    ]
+  }
+]

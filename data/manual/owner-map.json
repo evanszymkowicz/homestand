@@ -1,0 +1,1786 @@
+{
+  "_readme": "Manual mapping of every ESPN team/owner record (2009-present) to a canonical owner. Hand-derived from data/raw/{year}/mTeam.json's `members[]` (firstName/lastName) and `teams[].owners[]`/`primaryOwner`. Join key is first+last name, case-insensitive, per league convention (context/features/phase-2-normalization-spec.md); `name_variants` covers cases where ESPN's own member record for a person changed over time (e.g. a nickname used before they set a real name). ESPN member IDs (SWIDs) are deliberately NOT stored here -- data/README.md and context/ai-interaction.md treat them as credential-like, so identity resolution reads them transiently from data/raw/ at parse time (scripts/lib/mapping.py) rather than duplicating them into this committed file. No unmapped or ambiguous team-seasons as of this pass -- every 2009-2025 season resolved cleanly from ESPN's own member records, so no commissioner input was needed (see context/research/data-audit-findings.md for the underlying data quality). Precious, hand-edited: do not regenerate wholesale without preserving the _note fields.",
+  "owners": [
+    {
+      "owner_id": "a-klam",
+      "canonical_name": "Otis Nash",
+      "name_variants": []
+    },
+    {
+      "owner_id": "aaron-moses",
+      "canonical_name": "Gus Lamb",
+      "name_variants": []
+    },
+    {
+      "owner_id": "adam-krivoshey",
+      "canonical_name": "Eddie Hart",
+      "name_variants": []
+    },
+    {
+      "owner_id": "andrew-fort",
+      "canonical_name": "Hank Zane",
+      "name_variants": []
+    },
+    {
+      "owner_id": "anthony-paradiso",
+      "canonical_name": "Bo Quill",
+      "name_variants": []
+    },
+    {
+      "owner_id": "arthur-elkind",
+      "canonical_name": "Dusty Zane",
+      "name_variants": []
+    },
+    {
+      "owner_id": "brian-ritz",
+      "canonical_name": "Walt Crane",
+      "name_variants": []
+    },
+    {
+      "owner_id": "caleb-cohen",
+      "canonical_name": "Dusty Grant",
+      "name_variants": []
+    },
+    {
+      "owner_id": "chris-dimisa",
+      "canonical_name": "Scout Foster",
+      "name_variants": []
+    },
+    {
+      "owner_id": "david-carnivale",
+      "canonical_name": "Pip Irwin",
+      "name_variants": []
+    },
+    {
+      "owner_id": "evan-szymkowicz",
+      "canonical_name": "Kip James",
+      "name_variants": []
+    },
+    {
+      "owner_id": "grant-berberich",
+      "canonical_name": "Vic Banks",
+      "name_variants": []
+    },
+    {
+      "owner_id": "isaac-nelson",
+      "canonical_name": "Walt Cobb",
+      "name_variants": []
+    },
+    {
+      "owner_id": "jake-carroll",
+      "canonical_name": "Vic Hart",
+      "name_variants": []
+    },
+    {
+      "owner_id": "jared-schoeffel",
+      "canonical_name": "Ike Baker",
+      "name_variants": []
+    },
+    {
+      "owner_id": "john-packer",
+      "canonical_name": "Quinn Parker",
+      "name_variants": []
+    },
+    {
+      "owner_id": "jon-krivoshey",
+      "canonical_name": "Homer Evans",
+      "name_variants": []
+    },
+    {
+      "owner_id": "kevin-stankiewicz",
+      "canonical_name": "Chip Otto",
+      "name_variants": []
+    },
+    {
+      "owner_id": "lane-bender",
+      "canonical_name": "Ziggy James",
+      "name_variants": []
+    },
+    {
+      "owner_id": "luis-garcia",
+      "canonical_name": "Vic Nash",
+      "name_variants": []
+    },
+    {
+      "owner_id": "mark-greenspan",
+      "canonical_name": "Rex Quill",
+      "name_variants": []
+    },
+    {
+      "owner_id": "matthew-stewart",
+      "canonical_name": "Pip Underwood",
+      "name_variants": []
+    },
+    {
+      "owner_id": "mike-wright",
+      "canonical_name": "Vic Baker",
+      "name_variants": []
+    },
+    {
+      "owner_id": "nick-harley",
+      "canonical_name": "Rex Klein",
+      "name_variants": []
+    },
+    {
+      "owner_id": "nathan-forman",
+      "canonical_name": "Gus York",
+      "name_variants": []
+    },
+    {
+      "owner_id": "ryan-cooper",
+      "canonical_name": "Duke Dean",
+      "is_commissioner": true,
+      "name_variants": []
+    },
+    {
+      "owner_id": "sam-falck",
+      "canonical_name": "Kip Parker",
+      "name_variants": []
+    },
+    {
+      "owner_id": "sam-silbert",
+      "canonical_name": "Bo Evans",
+      "name_variants": []
+    },
+    {
+      "owner_id": "steve-leblanc",
+      "canonical_name": "Pip Cobb",
+      "name_variants": []
+    },
+    {
+      "owner_id": "steven-zelsdorff",
+      "canonical_name": "Ned Grant",
+      "name_variants": []
+    }
+  ],
+  "team_seasons": [
+    {
+      "year": 2009,
+      "espn_team_id": 1,
+      "team_name": "Bush Bombers",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 2,
+      "team_name": "Backyard Jacks",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 3,
+      "team_name": "Valley Quakes",
+      "owner_ids": [
+        "Dusty Grant"
+      ],
+      "primary_owner_id": "Dusty Grant"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 4,
+      "team_name": "Union Brushbacks",
+      "owner_ids": [
+        "Ziggy James"
+      ],
+      "primary_owner_id": "Ziggy James"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 5,
+      "team_name": "Downtown Sluggers",
+      "owner_ids": [
+        "Walt Crane"
+      ],
+      "primary_owner_id": "Walt Crane"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 6,
+      "team_name": "Grand Hurricanes",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 7,
+      "team_name": "Front Quakes",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 8,
+      "team_name": "Iron Firebirds",
+      "owner_ids": [
+        "Vic Hart"
+      ],
+      "primary_owner_id": "Vic Hart"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 9,
+      "team_name": "Westside Firebirds",
+      "owner_ids": [
+        "Ned Grant"
+      ],
+      "primary_owner_id": "Ned Grant"
+    },
+    {
+      "year": 2009,
+      "espn_team_id": 10,
+      "team_name": "Backyard Rangers",
+      "owner_ids": [
+        "Vic Banks"
+      ],
+      "primary_owner_id": "Vic Banks"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 1,
+      "team_name": "Westside Brushbacks",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 2,
+      "team_name": "Harbor Vipers",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 3,
+      "team_name": "Westside Wolves",
+      "owner_ids": [
+        "Dusty Grant"
+      ],
+      "primary_owner_id": "Dusty Grant"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 4,
+      "team_name": "North Aces",
+      "owner_ids": [
+        "Rex Klein"
+      ],
+      "primary_owner_id": "Rex Klein"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 5,
+      "team_name": "Railroad Muckdogs",
+      "owner_ids": [
+        "Pip Irwin"
+      ],
+      "primary_owner_id": "Pip Irwin"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 6,
+      "team_name": "Backyard Firebirds",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 7,
+      "team_name": "Keystone Brushbacks",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 8,
+      "team_name": "Junior Kings",
+      "owner_ids": [
+        "Vic Hart"
+      ],
+      "primary_owner_id": "Vic Hart"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 9,
+      "team_name": "Lake Aces",
+      "owner_ids": [
+        "Ned Grant"
+      ],
+      "primary_owner_id": "Ned Grant"
+    },
+    {
+      "year": 2010,
+      "espn_team_id": 10,
+      "team_name": "Park Muckdogs",
+      "owner_ids": [
+        "Vic Banks"
+      ],
+      "primary_owner_id": "Vic Banks"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 1,
+      "team_name": "Eastside Lumberjacks",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 2,
+      "team_name": "Downtown Vipers",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 3,
+      "team_name": "Park Sluggers",
+      "owner_ids": [
+        "Dusty Grant"
+      ],
+      "primary_owner_id": "Dusty Grant"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 4,
+      "team_name": "Old Dingers",
+      "owner_ids": [
+        "Rex Klein"
+      ],
+      "primary_owner_id": "Rex Klein"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 5,
+      "team_name": "Old Nine",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 6,
+      "team_name": "Eastside Nine",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 7,
+      "team_name": "Junior Express",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 8,
+      "team_name": "North Sluggers",
+      "owner_ids": [
+        "Vic Nash"
+      ],
+      "primary_owner_id": "Vic Nash"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 9,
+      "team_name": "Valley Muckdogs",
+      "owner_ids": [
+        "Ned Grant"
+      ],
+      "primary_owner_id": "Ned Grant"
+    },
+    {
+      "year": 2011,
+      "espn_team_id": 10,
+      "team_name": "Keystone Lumberjacks",
+      "owner_ids": [
+        "Vic Banks"
+      ],
+      "primary_owner_id": "Vic Banks"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 1,
+      "team_name": "Park Clippers",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 2,
+      "team_name": "Grand Dingers",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 3,
+      "team_name": "Main Thunder",
+      "owner_ids": [
+        "Dusty Grant"
+      ],
+      "primary_owner_id": "Dusty Grant"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 4,
+      "team_name": "Backyard Rangers",
+      "owner_ids": [
+        "Ike Baker"
+      ],
+      "primary_owner_id": "Ike Baker"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 5,
+      "team_name": "Downtown Grays",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 6,
+      "team_name": "Railroad Grays",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 7,
+      "team_name": "Triple Sluggers",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 8,
+      "team_name": "Lake Vipers",
+      "owner_ids": [
+        "Vic Nash"
+      ],
+      "primary_owner_id": "Vic Nash"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 9,
+      "team_name": "Harbor Clippers",
+      "owner_ids": [
+        "Rex Quill"
+      ],
+      "primary_owner_id": "Rex Quill"
+    },
+    {
+      "year": 2012,
+      "espn_team_id": 10,
+      "team_name": "Queens Wolves",
+      "owner_ids": [
+        "Otis Nash"
+      ],
+      "primary_owner_id": "Otis Nash"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 1,
+      "team_name": "Harbor Aces",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 2,
+      "team_name": "North Outlaws",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 3,
+      "team_name": "Main Bandits",
+      "owner_ids": [
+        "Gus Lamb"
+      ],
+      "primary_owner_id": "Gus Lamb"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 4,
+      "team_name": "Railroad Outlaws",
+      "owner_ids": [
+        "Pip Underwood"
+      ],
+      "primary_owner_id": "Pip Underwood"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 5,
+      "team_name": "Old Wolves",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 6,
+      "team_name": "Park Ironmen",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 7,
+      "team_name": "Lake Outlaws",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 8,
+      "team_name": "Canal Pioneers",
+      "owner_ids": [
+        "Vic Nash"
+      ],
+      "primary_owner_id": "Vic Nash"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 9,
+      "team_name": "Triple Sluggers",
+      "owner_ids": [
+        "Rex Quill"
+      ],
+      "primary_owner_id": "Rex Quill"
+    },
+    {
+      "year": 2013,
+      "espn_team_id": 10,
+      "team_name": "Backyard Jacks",
+      "owner_ids": [
+        "Otis Nash"
+      ],
+      "primary_owner_id": "Otis Nash"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 1,
+      "team_name": "Canal Wolves",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 2,
+      "team_name": "Main Rangers",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 3,
+      "team_name": "Grand Wolves",
+      "owner_ids": [
+        "Gus Lamb"
+      ],
+      "primary_owner_id": "Gus Lamb"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 4,
+      "team_name": "Downtown Express",
+      "owner_ids": [
+        "Pip Underwood"
+      ],
+      "primary_owner_id": "Pip Underwood"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 5,
+      "team_name": "Park Clippers",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 6,
+      "team_name": "Queens Nine",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 7,
+      "team_name": "North Vipers",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 8,
+      "team_name": "Grand Bandits",
+      "owner_ids": [
+        "Vic Nash"
+      ],
+      "primary_owner_id": "Vic Nash"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 9,
+      "team_name": "Grand Jacks",
+      "owner_ids": [
+        "Rex Quill"
+      ],
+      "primary_owner_id": "Rex Quill"
+    },
+    {
+      "year": 2014,
+      "espn_team_id": 10,
+      "team_name": "Grand Thunder",
+      "owner_ids": [
+        "Otis Nash"
+      ],
+      "primary_owner_id": "Otis Nash"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 1,
+      "team_name": "Keystone Jacks",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 2,
+      "team_name": "Canal Lumberjacks",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 3,
+      "team_name": "Bush Vipers",
+      "owner_ids": [
+        "Gus Lamb"
+      ],
+      "primary_owner_id": "Gus Lamb"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 4,
+      "team_name": "Junior Outlaws",
+      "owner_ids": [
+        "Pip Underwood"
+      ],
+      "primary_owner_id": "Pip Underwood"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 5,
+      "team_name": "Lake Clippers",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 6,
+      "team_name": "Downtown Express",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 7,
+      "team_name": "Union Hurricanes",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 8,
+      "team_name": "Lake Ironmen",
+      "owner_ids": [
+        "Homer Evans"
+      ],
+      "primary_owner_id": "Homer Evans"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 9,
+      "team_name": "Keystone Rangers",
+      "owner_ids": [
+        "Rex Quill"
+      ],
+      "primary_owner_id": "Rex Quill"
+    },
+    {
+      "year": 2015,
+      "espn_team_id": 10,
+      "team_name": "Canal Thunder",
+      "owner_ids": [
+        "Otis Nash"
+      ],
+      "primary_owner_id": "Otis Nash"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 1,
+      "team_name": "Downtown Grays",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 2,
+      "team_name": "North Clippers",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 3,
+      "team_name": "Front Express",
+      "owner_ids": [
+        "Gus Lamb"
+      ],
+      "primary_owner_id": "Gus Lamb"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 4,
+      "team_name": "Old Bandits",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 5,
+      "team_name": "Eastside Bandits",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 6,
+      "team_name": "South Bandits",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 7,
+      "team_name": "Iron Bandits",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 8,
+      "team_name": "Grand Hurricanes",
+      "owner_ids": [
+        "Homer Evans"
+      ],
+      "primary_owner_id": "Homer Evans"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 9,
+      "team_name": "Bush Muckdogs",
+      "owner_ids": [
+        "Rex Quill"
+      ],
+      "primary_owner_id": "Rex Quill"
+    },
+    {
+      "year": 2016,
+      "espn_team_id": 10,
+      "team_name": "Grand Dingers",
+      "owner_ids": [
+        "Bo Quill"
+      ],
+      "primary_owner_id": "Bo Quill"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 1,
+      "team_name": "Old Wolves",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 2,
+      "team_name": "Lake Express",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 3,
+      "team_name": "Grand Jacks",
+      "owner_ids": [
+        "Eddie Hart"
+      ],
+      "primary_owner_id": "Eddie Hart"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 4,
+      "team_name": "Main Brushbacks",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 5,
+      "team_name": "Lake Kings",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 6,
+      "team_name": "Junior Sluggers",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 7,
+      "team_name": "Valley Quakes",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 8,
+      "team_name": "Junior Outlaws",
+      "owner_ids": [
+        "Homer Evans"
+      ],
+      "primary_owner_id": "Homer Evans"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 9,
+      "team_name": "South Jacks",
+      "owner_ids": [
+        "Rex Quill"
+      ],
+      "primary_owner_id": "Rex Quill"
+    },
+    {
+      "year": 2017,
+      "espn_team_id": 10,
+      "team_name": "Railroad Sluggers",
+      "owner_ids": [
+        "Bo Quill"
+      ],
+      "primary_owner_id": "Bo Quill"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 1,
+      "team_name": "Grand Rangers",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 2,
+      "team_name": "Iron Firebirds",
+      "owner_ids": [
+        "Dusty Zane"
+      ],
+      "primary_owner_id": "Dusty Zane"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 3,
+      "team_name": "Backyard Hurricanes",
+      "owner_ids": [
+        "Eddie Hart"
+      ],
+      "primary_owner_id": "Eddie Hart"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 4,
+      "team_name": "Lake Express",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 5,
+      "team_name": "Canal Firebirds",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 6,
+      "team_name": "Westside Lumberjacks",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 7,
+      "team_name": "Iron Hurricanes",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 8,
+      "team_name": "Lake Vipers",
+      "owner_ids": [
+        "Homer Evans"
+      ],
+      "primary_owner_id": "Homer Evans"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 9,
+      "team_name": "Bush Vipers",
+      "owner_ids": [
+        "Rex Quill"
+      ],
+      "primary_owner_id": "Rex Quill"
+    },
+    {
+      "year": 2018,
+      "espn_team_id": 10,
+      "team_name": "Main Rangers",
+      "owner_ids": [
+        "Bo Quill"
+      ],
+      "primary_owner_id": "Bo Quill"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 1,
+      "team_name": "Keystone Brushbacks",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 2,
+      "team_name": "Railroad Sluggers",
+      "owner_ids": [
+        "Gus York"
+      ],
+      "primary_owner_id": "Gus York"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 3,
+      "team_name": "Backyard Lumberjacks",
+      "owner_ids": [
+        "Eddie Hart"
+      ],
+      "primary_owner_id": "Eddie Hart"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 4,
+      "team_name": "Eastside Brushbacks",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 5,
+      "team_name": "Keystone Rangers",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 6,
+      "team_name": "Junior Clippers",
+      "owner_ids": [
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 7,
+      "team_name": "Valley Bombers",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 8,
+      "team_name": "Keystone Bandits",
+      "owner_ids": [
+        "Kip James"
+      ],
+      "primary_owner_id": "Kip James"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 9,
+      "team_name": "Valley Vipers",
+      "owner_ids": [
+        "Rex Quill"
+      ],
+      "primary_owner_id": "Rex Quill"
+    },
+    {
+      "year": 2019,
+      "espn_team_id": 10,
+      "team_name": "Park Bombers",
+      "owner_ids": [
+        "Bo Quill"
+      ],
+      "primary_owner_id": "Bo Quill"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 1,
+      "team_name": "Downtown Aces",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 2,
+      "team_name": "Westside Dingers",
+      "owner_ids": [
+        "Gus York"
+      ],
+      "primary_owner_id": "Gus York"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 3,
+      "team_name": "Union Lumberjacks",
+      "owner_ids": [
+        "Hank Zane"
+      ],
+      "primary_owner_id": "Hank Zane"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 4,
+      "team_name": "Iron Jacks",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 5,
+      "team_name": "Queens Dingers",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 6,
+      "team_name": "Westside Thunder",
+      "owner_ids": [
+        "Bo Quill",
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans",
+      "_note": "First season team 6 is genuinely co-owned by two different people (anthony-paradiso joins sam-silbert) rather than a dual-account artifact. See anthony-paradiso's owner _note."
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 7,
+      "team_name": "Junior Quakes",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 8,
+      "team_name": "Eastside Wolves",
+      "owner_ids": [
+        "Kip James"
+      ],
+      "primary_owner_id": "Kip James"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 9,
+      "team_name": "Old Rangers",
+      "owner_ids": [
+        "Chip Otto"
+      ],
+      "primary_owner_id": "Chip Otto"
+    },
+    {
+      "year": 2020,
+      "espn_team_id": 10,
+      "team_name": "Lake Bombers",
+      "owner_ids": [
+        "Vic Baker"
+      ],
+      "primary_owner_id": "Vic Baker"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 1,
+      "team_name": "Valley Vipers",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 2,
+      "team_name": "Canal Lumberjacks",
+      "owner_ids": [
+        "Gus York"
+      ],
+      "primary_owner_id": "Gus York"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 3,
+      "team_name": "Harbor Clippers",
+      "owner_ids": [
+        "Hank Zane"
+      ],
+      "primary_owner_id": "Hank Zane"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 4,
+      "team_name": "Union Brushbacks",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 5,
+      "team_name": "Front Vipers",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 6,
+      "team_name": "Eastside Firebirds",
+      "owner_ids": [
+        "Bo Quill",
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 7,
+      "team_name": "Park Clippers",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 8,
+      "team_name": "Park Muckdogs",
+      "owner_ids": [
+        "Kip James"
+      ],
+      "primary_owner_id": "Kip James"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 9,
+      "team_name": "Grand Nine",
+      "owner_ids": [
+        "Chip Otto"
+      ],
+      "primary_owner_id": "Chip Otto"
+    },
+    {
+      "year": 2021,
+      "espn_team_id": 10,
+      "team_name": "Canal Thunder",
+      "owner_ids": [
+        "Vic Baker"
+      ],
+      "primary_owner_id": "Vic Baker"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 1,
+      "team_name": "Union Bandits",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 2,
+      "team_name": "Keystone Bandits",
+      "owner_ids": [
+        "Gus York"
+      ],
+      "primary_owner_id": "Gus York"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 3,
+      "team_name": "Old Nine",
+      "owner_ids": [
+        "Hank Zane"
+      ],
+      "primary_owner_id": "Hank Zane"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 4,
+      "team_name": "Railroad Clippers",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 5,
+      "team_name": "Westside Rangers",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 6,
+      "team_name": "Bush Grays",
+      "owner_ids": [
+        "Bo Quill",
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 7,
+      "team_name": "Railroad Ironmen",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 8,
+      "team_name": "Junior Kings",
+      "owner_ids": [
+        "Kip James"
+      ],
+      "primary_owner_id": "Kip James"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 9,
+      "team_name": "Triple Grays",
+      "owner_ids": [
+        "Chip Otto"
+      ],
+      "primary_owner_id": "Chip Otto"
+    },
+    {
+      "year": 2022,
+      "espn_team_id": 10,
+      "team_name": "Railroad Outlaws",
+      "owner_ids": [
+        "Vic Baker"
+      ],
+      "primary_owner_id": "Vic Baker"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 1,
+      "team_name": "Valley Express",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 2,
+      "team_name": "Main Firebirds",
+      "owner_ids": [
+        "Gus York"
+      ],
+      "primary_owner_id": "Gus York"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 3,
+      "team_name": "Union Bandits",
+      "owner_ids": [
+        "Pip Cobb"
+      ],
+      "primary_owner_id": "Pip Cobb"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 4,
+      "team_name": "Old Dingers",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 5,
+      "team_name": "Triple Sluggers",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 6,
+      "team_name": "Main Wolves",
+      "owner_ids": [
+        "Bo Quill",
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 7,
+      "team_name": "Bush Vipers",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 8,
+      "team_name": "Iron Nine",
+      "owner_ids": [
+        "Kip James"
+      ],
+      "primary_owner_id": "Kip James"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 9,
+      "team_name": "Downtown Sluggers",
+      "owner_ids": [
+        "Chip Otto"
+      ],
+      "primary_owner_id": "Chip Otto"
+    },
+    {
+      "year": 2023,
+      "espn_team_id": 10,
+      "team_name": "Harbor Ironmen",
+      "owner_ids": [
+        "Walt Cobb"
+      ],
+      "primary_owner_id": "Walt Cobb"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 1,
+      "team_name": "North Bombers",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 2,
+      "team_name": "Valley Sluggers",
+      "owner_ids": [
+        "Gus York"
+      ],
+      "primary_owner_id": "Gus York"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 3,
+      "team_name": "Canal Jacks",
+      "owner_ids": [
+        "Pip Cobb"
+      ],
+      "primary_owner_id": "Pip Cobb"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 4,
+      "team_name": "Keystone Dingers",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 5,
+      "team_name": "Park Sluggers",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 6,
+      "team_name": "Westside Lumberjacks",
+      "owner_ids": [
+        "Bo Quill",
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 7,
+      "team_name": "Iron Hurricanes",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 8,
+      "team_name": "Grand Pioneers",
+      "owner_ids": [
+        "Kip James"
+      ],
+      "primary_owner_id": "Kip James"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 9,
+      "team_name": "Triple Outlaws",
+      "owner_ids": [
+        "Chip Otto"
+      ],
+      "primary_owner_id": "Chip Otto"
+    },
+    {
+      "year": 2024,
+      "espn_team_id": 10,
+      "team_name": "Front Kings",
+      "owner_ids": [
+        "Walt Cobb"
+      ],
+      "primary_owner_id": "Walt Cobb"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 1,
+      "team_name": "Lake Clippers",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 2,
+      "team_name": "Iron Jacks",
+      "owner_ids": [
+        "Gus York"
+      ],
+      "primary_owner_id": "Gus York"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 3,
+      "team_name": "Union Hurricanes",
+      "owner_ids": [
+        "Pip Cobb"
+      ],
+      "primary_owner_id": "Pip Cobb"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 4,
+      "team_name": "Main Jacks",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 5,
+      "team_name": "Bush Ironmen",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 6,
+      "team_name": "Park Ironmen",
+      "owner_ids": [
+        "Bo Quill",
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 7,
+      "team_name": "Triple Aces",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 8,
+      "team_name": "Queens Firebirds",
+      "owner_ids": [
+        "Kip James"
+      ],
+      "primary_owner_id": "Kip James"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 9,
+      "team_name": "North Muckdogs",
+      "owner_ids": [
+        "Chip Otto"
+      ],
+      "primary_owner_id": "Chip Otto"
+    },
+    {
+      "year": 2025,
+      "espn_team_id": 10,
+      "team_name": "Old Bandits",
+      "owner_ids": [
+        "Walt Cobb"
+      ],
+      "primary_owner_id": "Walt Cobb"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 1,
+      "team_name": "Old Jacks",
+      "owner_ids": [
+        "Duke Dean"
+      ],
+      "primary_owner_id": "Duke Dean"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 2,
+      "team_name": "Old Thunder",
+      "owner_ids": [
+        "Gus York"
+      ],
+      "primary_owner_id": "Gus York"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 3,
+      "team_name": "Lake Clippers",
+      "owner_ids": [
+        "Pip Cobb"
+      ],
+      "primary_owner_id": "Pip Cobb"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 4,
+      "team_name": "Iron Jacks",
+      "owner_ids": [
+        "Scout Foster"
+      ],
+      "primary_owner_id": "Scout Foster"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 5,
+      "team_name": "Backyard Lumberjacks",
+      "owner_ids": [
+        "Quinn Parker"
+      ],
+      "primary_owner_id": "Quinn Parker"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 6,
+      "team_name": "Old Lumberjacks",
+      "owner_ids": [
+        "Bo Quill",
+        "Bo Evans"
+      ],
+      "primary_owner_id": "Bo Evans"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 7,
+      "team_name": "Triple Clippers",
+      "owner_ids": [
+        "Kip Parker"
+      ],
+      "primary_owner_id": "Kip Parker"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 8,
+      "team_name": "Valley Outlaws",
+      "owner_ids": [
+        "Kip James"
+      ],
+      "primary_owner_id": "Kip James"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 9,
+      "team_name": "Canal Firebirds",
+      "owner_ids": [
+        "Chip Otto"
+      ],
+      "primary_owner_id": "Chip Otto"
+    },
+    {
+      "year": 2026,
+      "espn_team_id": 10,
+      "team_name": "Iron Wolves",
+      "owner_ids": [
+        "Walt Cobb"
+      ],
+      "primary_owner_id": "Walt Cobb"
+    }
+  ]
+}

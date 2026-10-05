@@ -1,0 +1,4 @@
+{
+  "_readme": "Hand-resolved (our player_id) -> MLB Stats API personId pairs, for scripts/detect_real_trades.py's name-search crosswalk (see context/features/phase-8-jersey-trade-detection-spec.md). Two reasons an entry belongs here: (1) MLB's /v1/people/search?names= returned zero matches (name spelled differently between ESPN and MLB, e.g. accents/suffixes) or (2) it returned more than one plausible match (a common name shared by multiple real MLB players) and automatic disambiguation by position/active-status still left it ambiguous. Each entry: { \"player_id\": <our players.json id>, \"player_name\": \"...\", \"mlb_person_id\": <statsapi personId>, \"note\": \"why the automatic search needed help\" }. Starts empty -- detect_real_trades.py logs any player it can't resolve automatically rather than guessing, and an entry only gets added here after a human confirms the right personId.",
+  "overrides": []
+}

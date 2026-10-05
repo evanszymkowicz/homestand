@@ -1,0 +1,305 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@font-face {
+  font-family: "Geist Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/Geist-Variable.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/GeistMono-Variable.woff2") format("woff2-variations");
+}
+
+/*
+ * Design tokens:
+ * Light values in :root (also the no-JS default), dark overrides selected by
+ * [data-theme] — the ThemeToggle always sets one (the index.html bootstrap
+ * script does before first paint). The media query is the no-JS fallback only
+ * (attribute absent + OS dark); keep its contents identical to the
+ * [data-theme="dark"] block.
+ */
+:root {
+  --color-bg: #eef1ee;
+  --color-surface: #ffffff;
+  --color-surface-2: #e4e8e3;
+  --color-border: #c9d0c6;
+  --color-ink: #17231a;
+  --color-ink-dim: #52604f;
+  --color-ink-faint: #5d665a; /* was #7c8878 (3.72:1 on --color-surface, fails WCAG AA); now 5.98:1 */
+  --color-accent: #1f6f4a;
+  --color-accent-ink: #ffffff;
+  --color-accent-soft: #d9ede1;
+  --color-gold: #7a5f18;
+  --color-gold-soft: #f2e9cf;
+  --color-silver: #5c6470;
+  --color-silver-soft: #e5e8ec;
+  --color-bronze: #8c5a28;
+  --color-bronze-soft: #f0e2d2;
+  --color-red: #a53c3a;
+  --color-red-soft: #f6e0de;
+
+  /* Diverging pair for polarity scales around a meaningful zero/midpoint —
+     the head-to-head grid's win%-vs-.500 tint, and the matchup points-per-day
+     grid's above/below-zero cell shading.
+     It can't collide with --color-accent or get reused where two things are just
+     different, not opposite.
+  */
+  --color-diverge-pos: #e34948;
+  --color-diverge-pos-soft: #fbe0df;
+  --color-diverge-neg: #2a78d6;
+  --color-diverge-neg-soft: #dde9fa;
+
+  /* Activity-drawer event categories. */
+  --color-trade: #b8860b;
+  --color-trade-soft: #f5ecd0;
+  --color-fa: #2a78d6;
+  --color-fa-soft: #dde9fa;
+  --color-matchup-win: #1f6f4a;
+  --color-matchup-win-soft: #d9ede1;
+  --color-matchup-loss: #a53c3a;
+  --color-matchup-loss-soft: #f6e0de;
+  --color-achievement: #7a5f18;
+  --color-achievement-soft: #f2e9cf;
+  --color-il: #5c6470;
+  --color-il-soft: #e5e8ec;
+
+  color-scheme: light dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #122019;
+  --color-surface: #1a2b21;
+  --color-surface-2: #21352a;
+  --color-border: #2e4a3a;
+  --color-ink: #e9f0e6;
+  --color-ink-dim: #a9c0b0;
+  --color-ink-faint: #85a08f;
+  --color-accent: #6fd9a0;
+  --color-accent-ink: #0b1a10;
+  --color-accent-soft: #1e3d2c;
+  --color-gold: #e8c35a;
+  --color-gold-soft: #3a3118;
+  --color-silver: #b9c2cd;
+  --color-silver-soft: #253039;
+  --color-bronze: #d99a5b;
+  --color-bronze-soft: #3a2c1e;
+  --color-red: #d98481;
+  --color-red-soft: #422824;
+  --color-diverge-pos: #e66767;
+  --color-diverge-pos-soft: #452623;
+  --color-diverge-neg: #3987e5;
+  --color-diverge-neg-soft: #1e3247;
+
+  --color-trade: #e8c35a;
+  --color-trade-soft: #3a3118;
+  --color-fa: #3987e5;
+  --color-fa-soft: #1e3247;
+  --color-matchup-win: #6fd9a0;
+  --color-matchup-win-soft: #1e3d2c;
+  --color-matchup-loss: #d98481;
+  --color-matchup-loss-soft: #422824;
+  --color-achievement: #e8c35a;
+  --color-achievement-soft: #3a3118;
+  --color-il: #b9c2cd;
+  --color-il-soft: #253039;
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg: #122019;
+    --color-surface: #1a2b21;
+    --color-surface-2: #21352a;
+    --color-border: #2e4a3a;
+    --color-ink: #e9f0e6;
+    --color-ink-dim: #a9c0b0;
+    --color-ink-faint: #85a08f;
+    --color-accent: #6fd9a0;
+    --color-accent-ink: #0b1a10;
+    --color-accent-soft: #1e3d2c;
+    --color-gold: #e8c35a;
+    --color-gold-soft: #3a3118;
+    --color-silver: #b9c2cd;
+    --color-silver-soft: #253039;
+    --color-bronze: #d99a5b;
+    --color-bronze-soft: #3a2c1e;
+    --color-red: #d98481;
+    --color-red-soft: #422824;
+    --color-diverge-pos: #e66767;
+    --color-diverge-pos-soft: #452623;
+    --color-diverge-neg: #3987e5;
+    --color-diverge-neg-soft: #1e3247;
+
+    --color-trade: #e8c35a;
+    --color-trade-soft: #3a3118;
+    --color-fa: #3987e5;
+    --color-fa-soft: #1e3247;
+    --color-matchup-win: #6fd9a0;
+    --color-matchup-win-soft: #1e3d2c;
+    --color-matchup-loss: #d98481;
+    --color-matchup-loss-soft: #422824;
+    --color-achievement: #e8c35a;
+    --color-achievement-soft: #3a3118;
+    --color-il: #b9c2cd;
+    --color-il-soft: #253039;
+
+    color-scheme: dark;
+  }
+}
+
+@theme {
+  /* Micro-label size shared by StatCard labels, SortHeader/th column labels, and
+     the champion badge's caption text — collapses what had drifted into a dozen
+     near-identical one-off arbitrary values (0.62rem-0.68rem) into one token so
+     new "eyebrow" text doesn't invent yet another size. */
+  --text-eyebrow: 0.68rem;
+  /* SectionHeading's leaderboard/section title size, above eyebrow labels, below
+     a page h1. */
+  --text-heading: 1.05rem;
+  /* TrophyCard's honor-value line — the large centered number/team name,
+     sized between text-2xl and text-3xl. */
+  --text-trophy: 1.55rem;
+
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-ink: var(--color-ink);
+  --color-ink-dim: var(--color-ink-dim);
+  --color-ink-faint: var(--color-ink-faint);
+  --color-accent: var(--color-accent);
+  --color-accent-ink: var(--color-accent-ink);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-gold: var(--color-gold);
+  --color-gold-soft: var(--color-gold-soft);
+  --color-silver: var(--color-silver);
+  --color-silver-soft: var(--color-silver-soft);
+  --color-bronze: var(--color-bronze);
+  --color-bronze-soft: var(--color-bronze-soft);
+  --color-red: var(--color-red);
+  --color-red-soft: var(--color-red-soft);
+  --color-diverge-pos: var(--color-diverge-pos);
+  --color-diverge-pos-soft: var(--color-diverge-pos-soft);
+  --color-diverge-neg: var(--color-diverge-neg);
+  --color-diverge-neg-soft: var(--color-diverge-neg-soft);
+  --color-trade: var(--color-trade);
+  --color-trade-soft: var(--color-trade-soft);
+  --color-fa: var(--color-fa);
+  --color-fa-soft: var(--color-fa-soft);
+  --color-matchup-win: var(--color-matchup-win);
+  --color-matchup-win-soft: var(--color-matchup-win-soft);
+  --color-matchup-loss: var(--color-matchup-loss);
+  --color-matchup-loss-soft: var(--color-matchup-loss-soft);
+  --color-achievement: var(--color-achievement);
+  --color-achievement-soft: var(--color-achievement-soft);
+  --color-il: var(--color-il);
+  --color-il-soft: var(--color-il-soft);
+
+  --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Box scores, stat cards, tables — anything already using tabular-nums
+   renders in the mono stack for that official scorecard feel. */
+.tabular-nums {
+  font-family: var(--font-mono);
+}
+
+/* Branded keyboard-focus ring — nothing removes the browser default outline
+   elsewhere, but an intentional one stays visible/on-brand against
+   --color-surface in both themes instead of relying on the OS default. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Thin, brand-colored scrollbar for containers that overflow — sideways
+   pill/card rows and row-capped tables alike; the default OS scrollbar reads
+   as an accident, not a control. */
+.scrollbar-accent {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) transparent;
+}
+.scrollbar-accent::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.scrollbar-accent::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-accent::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 9999px;
+}
+
+/* Marquee for TickerText — slides a truncated name left to reveal the end,
+   pauses, slides back, pauses, and loops (only running while hovered/focused
+   or pinned). Class-driven so prefers-reduced-motion can override the inline
+   --ticker-* vars' animation below. */
+@keyframes ticker-scroll {
+  0%,
+  15% {
+    transform: translateX(0);
+  }
+  45%,
+  60% {
+    transform: translateX(calc(-1 * var(--ticker-distance, 0px)));
+  }
+  90%,
+  100% {
+    transform: translateX(0);
+  }
+}
+.ticker-scrolling {
+  animation: ticker-scroll var(--ticker-duration, 3s) linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* TickerText renders a static wrapped value instead of the marquee under
+     this preference; this only backstops the animation if it ever appears. */
+  .ticker-scrolling {
+    animation: none;
+  }
+}
+
+/* Activity drawer's frosted-glass panel — page content shows through, so the
+   rgba color is palette-specific rather than derived from --color-surface. */
+.activity-drawer {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+:root[data-theme="dark"] .activity-drawer {
+  background: rgba(26, 43, 33, 0.82);
+}
+
+/* Owner-initials chip — hue varies per owner via --owner-hue (set inline from
+   lib/ownerColors.ts); lightness/chroma stay theme-controlled so every hue
+   keeps its contrast in both palettes. */
+.owner-chip {
+  background: oklch(0.9 0.07 var(--owner-hue));
+  color: oklch(0.32 0.13 var(--owner-hue));
+}
+:root[data-theme="dark"] .owner-chip {
+  background: oklch(0.32 0.08 var(--owner-hue));
+  color: oklch(0.88 0.09 var(--owner-hue));
+}

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Pre-commit backstop for the data rules in context/ai-interaction.md. Works
+# regardless of which editor (agent or human) made the changes. Runs the
+# harness-neutral cores in scripts/hooks/:
+#   1. Blocks modify/delete/rename of existing files under data/raw/ or
+#      data/audit/ — the write-once ESPN archive. New files are fine
+#      (that's how extraction output lands).
+#   2. Blocks staged files containing espn_s2/SWID-shaped credentials
+#      (config.json is gitignored by design and skipped by the core itself).
+# Enable once per clone:  git config core.hooksPath .githooks
+set -uo pipefail
+cd "$(git rev-parse --show-toplevel)"
+
+fail=0
+
+# --- 1. Raw-archive immutability ---
+while IFS=$'\t' read -r status f1 f2; do
+  [[ -z "${status:-}" ]] && continue
+  file="${f2:-$f1}" # renames report old<TAB>new — judge the destination
+  case "$file" in
+    data/raw/* | data/audit/*)
+      case "$status" in
+        A* | \?\?) ;; # additions are fine
+        *)
+          echo "pre-commit: BLOCKED — '$file' ($status) modifies the write-once raw archive." >&2
+          echo "  data/raw/ and data/audit/ are verbatim ESPN API responses; re-run the" >&2
+          echo "  extraction script instead of editing (context/ai-interaction.md, Data Rules)." >&2
+          fail=1
+          ;;
+      esac
+      ;;
+  esac
+done <<< "$(git diff --cached --name-status)"
+
+# --- 2. Credential hygiene (blocks on findings; ruff output is advisory) ---
+while IFS= read -r file; do
+  [[ -z "$file" || ! -f "$file" ]] && continue
+  node scripts/hooks/check-changed-file.mjs --strict "$PWD/$file" || fail=1
+done <<< "$(git diff --cached --name-only --diff-filter=ACMR)"
+
+exit "$fail"

@@ -1,0 +1,4 @@
+{
+  "_readme": "Starts empty per context/features/phase-2-normalization-spec.md. Grows only when scripts/validate.py catches an ESPN player-ID inconsistency (the same real player showing up under two different IDs across seasons, or similar). Each override entry should record which player_ids it merges and why, e.g. { \"player_id\": 12345, \"canonical_player_id\": 12300, \"_note\": \"...\" }.",
+  "overrides": []
+}
