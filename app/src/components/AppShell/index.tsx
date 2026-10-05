@@ -30,7 +30,7 @@ export function AppShell() {
             <div className="flex items-center gap-3">
               <BaseballDiamond className="h-8 w-8 text-hs-red" />
               <div>
-                <h1 className="font-brand text-5xl leading-[0.85] sm:text-6xl">Homestand</h1>
+                <h1 className="wordmark-piped font-brand text-5xl leading-[0.85] sm:text-6xl">Homestand</h1>
                 <p className="mt-1 text-[0.65rem] font-bold tracking-[0.2em] text-ink-faint uppercase">
                   League Record Book
                 </p>
