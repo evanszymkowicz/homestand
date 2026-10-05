@@ -52,7 +52,7 @@ export function AppShell() {
         <footer className="mt-10 pt-4 text-center text-xs text-ink-faint">
           &copy; {new Date().getFullYear()}{" "}
           <a href="https://ews-tech.pages.dev/" target="_blank" rel="noopener noreferrer" className="hover:text-ink">
-            Homestand
+            Evan Szymkowicz
           </a>
         </footer>
       </div>
