@@ -31,24 +31,41 @@
  * [data-theme="dark"] block.
  */
 :root {
-  --color-bg: #eef1ee;
-  --color-surface: #ffffff;
-  --color-surface-2: #e4e8e3;
-  --color-border: #c9d0c6;
-  --color-ink: #17231a;
-  --color-ink-dim: #52604f;
-  --color-ink-faint: #5d665a; /* was #7c8878 (3.72:1 on --color-surface, fails WCAG AA); now 5.98:1 */
-  --color-accent: #1f6f4a;
-  --color-accent-ink: #ffffff;
-  --color-accent-soft: #d9ede1;
+  /* Baseball scorebook palette — light mode is canonical (scorebooks are paper). */
+  --hs-paper: #f7f5ed;
+  --hs-paper-dark: #e8e4d6;
+  --hs-paper-darker: #ddd8c7;
+  --hs-ink: #2a2520;
+  --hs-ink-dim: #4a443f;
+  --hs-ink-faint: #6b655d;
+  --hs-rule: #d4cfc2;
+  --hs-red: #b91c1c;
+  --hs-red-soft: #f5d5d5;
+  --hs-blue: #1e40af;
+  --hs-blue-soft: #dbe4f6;
+  --hs-pencil: #6b7280;
+  --hs-pencil-soft: #e5e7eb;
+  --hs-highlight: #facc15;
+  --hs-highlight-soft: #fef08a;
+
+  --color-bg: var(--hs-paper);
+  --color-surface: var(--hs-paper-dark);
+  --color-surface-2: var(--hs-paper-darker);
+  --color-border: var(--hs-rule);
+  --color-ink: var(--hs-ink);
+  --color-ink-dim: var(--hs-ink-dim);
+  --color-ink-faint: var(--hs-ink-faint);
+  --color-accent: var(--hs-blue);
+  --color-accent-ink: var(--hs-paper);
+  --color-accent-soft: var(--hs-blue-soft);
   --color-gold: #7a5f18;
   --color-gold-soft: #f2e9cf;
   --color-silver: #5c6470;
   --color-silver-soft: #e5e8ec;
   --color-bronze: #8c5a28;
   --color-bronze-soft: #f0e2d2;
-  --color-red: #a53c3a;
-  --color-red-soft: #f6e0de;
+  --color-red: var(--hs-red);
+  --color-red-soft: var(--hs-red-soft);
 
   /* Diverging pair for polarity scales around a meaningful zero/midpoint —
      the head-to-head grid's win%-vs-.500 tint, and the matchup points-per-day
@@ -56,24 +73,24 @@
      It can't collide with --color-accent or get reused where two things are just
      different, not opposite.
   */
-  --color-diverge-pos: #e34948;
-  --color-diverge-pos-soft: #fbe0df;
-  --color-diverge-neg: #2a78d6;
-  --color-diverge-neg-soft: #dde9fa;
+  --color-diverge-pos: var(--hs-red);
+  --color-diverge-pos-soft: var(--hs-red-soft);
+  --color-diverge-neg: var(--hs-blue);
+  --color-diverge-neg-soft: var(--hs-blue-soft);
 
   /* Activity-drawer event categories. */
-  --color-trade: #b8860b;
-  --color-trade-soft: #f5ecd0;
-  --color-fa: #2a78d6;
-  --color-fa-soft: #dde9fa;
-  --color-matchup-win: #1f6f4a;
-  --color-matchup-win-soft: #d9ede1;
-  --color-matchup-loss: #a53c3a;
-  --color-matchup-loss-soft: #f6e0de;
+  --color-trade: #92400e;
+  --color-trade-soft: #fde68a;
+  --color-fa: var(--hs-pencil);
+  --color-fa-soft: var(--hs-pencil-soft);
+  --color-matchup-win: var(--hs-blue);
+  --color-matchup-win-soft: var(--hs-blue-soft);
+  --color-matchup-loss: var(--hs-red);
+  --color-matchup-loss-soft: var(--hs-red-soft);
   --color-achievement: #7a5f18;
   --color-achievement-soft: #f2e9cf;
-  --color-il: #5c6470;
-  --color-il-soft: #e5e8ec;
+  --color-il: var(--hs-pencil);
+  --color-il-soft: var(--hs-pencil-soft);
 
   color-scheme: light dark;
 }
@@ -83,82 +100,84 @@
 }
 
 :root[data-theme="dark"] {
-  --color-bg: #122019;
-  --color-surface: #1a2b21;
-  --color-surface-2: #21352a;
-  --color-border: #2e4a3a;
-  --color-ink: #e9f0e6;
-  --color-ink-dim: #a9c0b0;
-  --color-ink-faint: #85a08f;
-  --color-accent: #6fd9a0;
-  --color-accent-ink: #0b1a10;
-  --color-accent-soft: #1e3d2c;
+  /* Scorebook after-hours: paper darkened, ink lightened, rulings subtle.
+     Red/blue accents stay readable on dark paper. */
+  --color-bg: #1c1915;
+  --color-surface: #2a2520;
+  --color-surface-2: #38322b;
+  --color-border: #4a433b;
+  --color-ink: var(--hs-paper);
+  --color-ink-dim: #d4cfc2;
+  --color-ink-faint: #a8a194;
+  --color-accent: #5c8bd6;
+  --color-accent-ink: #0f172a;
+  --color-accent-soft: #1e3a5f;
   --color-gold: #e8c35a;
   --color-gold-soft: #3a3118;
   --color-silver: #b9c2cd;
   --color-silver-soft: #253039;
   --color-bronze: #d99a5b;
   --color-bronze-soft: #3a2c1e;
-  --color-red: #d98481;
-  --color-red-soft: #422824;
-  --color-diverge-pos: #e66767;
-  --color-diverge-pos-soft: #452623;
-  --color-diverge-neg: #3987e5;
-  --color-diverge-neg-soft: #1e3247;
+  --color-red: #f87171;
+  --color-red-soft: #451a1a;
+  --color-diverge-pos: #f87171;
+  --color-diverge-pos-soft: #451a1a;
+  --color-diverge-neg: #60a5fa;
+  --color-diverge-neg-soft: #1e3a5f;
 
-  --color-trade: #e8c35a;
+  --color-trade: #fbbf24;
   --color-trade-soft: #3a3118;
-  --color-fa: #3987e5;
-  --color-fa-soft: #1e3247;
-  --color-matchup-win: #6fd9a0;
-  --color-matchup-win-soft: #1e3d2c;
-  --color-matchup-loss: #d98481;
-  --color-matchup-loss-soft: #422824;
+  --color-fa: #a8a194;
+  --color-fa-soft: #2a2520;
+  --color-matchup-win: #60a5fa;
+  --color-matchup-win-soft: #1e3a5f;
+  --color-matchup-loss: #f87171;
+  --color-matchup-loss-soft: #451a1a;
   --color-achievement: #e8c35a;
   --color-achievement-soft: #3a3118;
-  --color-il: #b9c2cd;
-  --color-il-soft: #253039;
+  --color-il: #a8a194;
+  --color-il-soft: #2a2520;
 
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --color-bg: #122019;
-    --color-surface: #1a2b21;
-    --color-surface-2: #21352a;
-    --color-border: #2e4a3a;
-    --color-ink: #e9f0e6;
-    --color-ink-dim: #a9c0b0;
-    --color-ink-faint: #85a08f;
-    --color-accent: #6fd9a0;
-    --color-accent-ink: #0b1a10;
-    --color-accent-soft: #1e3d2c;
+    --color-bg: #1c1915;
+    --color-surface: #2a2520;
+    --color-surface-2: #38322b;
+    --color-border: #4a433b;
+    --color-ink: var(--hs-paper);
+    --color-ink-dim: #d4cfc2;
+    --color-ink-faint: #a8a194;
+    --color-accent: #5c8bd6;
+    --color-accent-ink: #0f172a;
+    --color-accent-soft: #1e3a5f;
     --color-gold: #e8c35a;
     --color-gold-soft: #3a3118;
     --color-silver: #b9c2cd;
     --color-silver-soft: #253039;
     --color-bronze: #d99a5b;
     --color-bronze-soft: #3a2c1e;
-    --color-red: #d98481;
-    --color-red-soft: #422824;
-    --color-diverge-pos: #e66767;
-    --color-diverge-pos-soft: #452623;
-    --color-diverge-neg: #3987e5;
-    --color-diverge-neg-soft: #1e3247;
+    --color-red: #f87171;
+    --color-red-soft: #451a1a;
+    --color-diverge-pos: #f87171;
+    --color-diverge-pos-soft: #451a1a;
+    --color-diverge-neg: #60a5fa;
+    --color-diverge-neg-soft: #1e3a5f;
 
-    --color-trade: #e8c35a;
+    --color-trade: #fbbf24;
     --color-trade-soft: #3a3118;
-    --color-fa: #3987e5;
-    --color-fa-soft: #1e3247;
-    --color-matchup-win: #6fd9a0;
-    --color-matchup-win-soft: #1e3d2c;
-    --color-matchup-loss: #d98481;
-    --color-matchup-loss-soft: #422824;
+    --color-fa: #a8a194;
+    --color-fa-soft: #2a2520;
+    --color-matchup-win: #60a5fa;
+    --color-matchup-win-soft: #1e3a5f;
+    --color-matchup-loss: #f87171;
+    --color-matchup-loss-soft: #451a1a;
     --color-achievement: #e8c35a;
     --color-achievement-soft: #3a3118;
-    --color-il: #b9c2cd;
-    --color-il-soft: #253039;
+    --color-il: #a8a194;
+    --color-il-soft: #2a2520;
 
     color-scheme: dark;
   }
@@ -219,6 +238,22 @@
      text, never an outlined SVG or raster, so screen readers and text scaling
      keep working. */
   --font-brand: "Lobster", "Geist Sans", ui-serif, Georgia, serif;
+
+  /* Scorebook palette exposed directly for components that want the literal
+     paper/ink/rule/red/blue/highlight/pencil tokens. */
+  --color-hs-paper: var(--hs-paper);
+  --color-hs-paper-dark: var(--hs-paper-dark);
+  --color-hs-paper-darker: var(--hs-paper-darker);
+  --color-hs-ink: var(--hs-ink);
+  --color-hs-rule: var(--hs-rule);
+  --color-hs-red: var(--hs-red);
+  --color-hs-red-soft: var(--hs-red-soft);
+  --color-hs-blue: var(--hs-blue);
+  --color-hs-blue-soft: var(--hs-blue-soft);
+  --color-hs-pencil: var(--hs-pencil);
+  --color-hs-pencil-soft: var(--hs-pencil-soft);
+  --color-hs-highlight: var(--hs-highlight);
+  --color-hs-highlight-soft: var(--hs-highlight-soft);
 }
 
 body {
@@ -293,12 +328,12 @@ body {
 /* Activity drawer's frosted-glass panel — page content shows through, so the
    rgba color is palette-specific rather than derived from --color-surface. */
 .activity-drawer {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(247, 245, 237, 0.92);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 :root[data-theme="dark"] .activity-drawer {
-  background: rgba(26, 43, 33, 0.82);
+  background: rgba(42, 37, 32, 0.92);
 }
 
 /* Owner-initials chip — hue varies per owner via --owner-hue (set inline from
