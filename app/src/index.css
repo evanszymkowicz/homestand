@@ -31,22 +31,24 @@
  * [data-theme="dark"] block.
  */
 :root {
-  /* Baseball scorebook palette — light mode is canonical (scorebooks are paper). */
-  --hs-paper: #f7f5ed;
-  --hs-paper-dark: #e8e4d6;
-  --hs-paper-darker: #ddd8c7;
-  --hs-ink: #2a2520;
-  --hs-ink-dim: #4a443f;
-  --hs-ink-faint: #6b655d;
+  /* Baseball scorebook palette — light mode is canonical (scorebooks are paper).
+     Warm paper, vivid cardinal red, saturated ballpoint blue, graphite pencil. */
+  --hs-paper: #f8f5ec;
+  --hs-paper-dark: #ede8d8;
+  --hs-paper-darker: #e2dcc8;
+  --hs-ink: #2b2420;
+  --hs-ink-dim: #514940;
+  --hs-ink-faint: #7a7269;
   --hs-rule: #d4cfc2;
-  --hs-red: #b91c1c;
-  --hs-red-soft: #f5d5d5;
-  --hs-blue: #1e40af;
-  --hs-blue-soft: #dbe4f6;
-  --hs-pencil: #6b7280;
-  --hs-pencil-soft: #e5e7eb;
-  --hs-highlight: #facc15;
-  --hs-highlight-soft: #fef08a;
+  --hs-red: #c41e3a;
+  --hs-red-soft: #f8d7dc;
+  --hs-blue: #1d4ed8;
+  --hs-blue-soft: #dbeafe;
+  --hs-pencil: #78716c;
+  --hs-pencil-soft: #e7e5e4;
+  --hs-highlight: #fbbf24;
+  --hs-highlight-soft: #fef3c7;
+  --hs-stitch: #dc2626;
 
   --color-bg: var(--hs-paper);
   --color-surface: var(--hs-paper-dark);
@@ -254,6 +256,7 @@
   --color-hs-pencil-soft: var(--hs-pencil-soft);
   --color-hs-highlight: var(--hs-highlight);
   --color-hs-highlight-soft: var(--hs-highlight-soft);
+  --color-hs-stitch: var(--hs-stitch);
 }
 
 body {
@@ -261,6 +264,123 @@ body {
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+/* Scorebook page texture: faint dot grid like scorekeeping paper. */
+.scorebook-texture {
+  background-color: var(--color-bg);
+  background-image: radial-gradient(circle, rgba(43, 36, 32, 0.045) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Red margin rule — the vertical line running down the left of a scorebook
+   page, like a ledger or scorekeeping pad. */
+.scorebook-margin {
+  position: relative;
+}
+.scorebook-margin::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--hs-red);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Scorebook card: thick ink border, crisp corners, subtle lift.
+   The red corner marks evoke hand-scored boxes. */
+.scorebook-card {
+  position: relative;
+  border: 2px solid var(--color-ink);
+  border-radius: 4px;
+  background: var(--color-surface);
+  box-shadow: 3px 3px 0 rgba(43, 36, 32, 0.08);
+}
+.scorebook-card::before,
+.scorebook-card::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--hs-red);
+  border-style: solid;
+  pointer-events: none;
+}
+.scorebook-card::before {
+  top: -2px;
+  left: -2px;
+  border-width: 2px 0 0 2px;
+}
+.scorebook-card::after {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Scorebook stat number: the big figure in a scorebox — mono, bold, crisp. */
+.scorebook-stat {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Scorebook table: ruled rows, tight columns, header treated like a scorecard
+   column label. Applied to tables via a wrapper or directly on <table>. */
+.scorebook-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.scorebook-table thead th {
+  border-bottom: 2px solid var(--color-ink);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  background: var(--color-bg);
+}
+.scorebook-table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+}
+.scorebook-table tbody tr:hover {
+  background: var(--color-surface-2);
+}
+.scorebook-table td {
+  padding: 0.625rem 0.75rem;
+  vertical-align: middle;
+}
+.scorebook-table td:last-child,
+.scorebook-table th:last-child,
+.scorebook-table .numeric {
+  text-align: right;
+}
+
+/* Global scorebook table polish: every table inside the app gets a strong ink
+   rule under its header and between body rows, so the whole app reads like a
+   scored ledger without touching every component. */
+.scorebook-texture table {
+  border-collapse: collapse;
+}
+.scorebook-texture table thead th {
+  border-bottom: 2px solid var(--color-ink);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+.scorebook-texture table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+}
+.scorebook-texture table tbody tr:last-child {
+  border-bottom: none;
 }
 
 /* Box scores, stat cards, tables — anything already using tabular-nums
@@ -334,6 +454,17 @@ body {
 }
 :root[data-theme="dark"] .activity-drawer {
   background: rgba(42, 37, 32, 0.92);
+}
+
+/* Dark-mode paper texture uses light dots on dark paper. */
+:root[data-theme="dark"] .scorebook-texture {
+  background-image: radial-gradient(circle, rgba(248, 245, 236, 0.06) 1px, transparent 1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .scorebook-texture {
+    background-image: radial-gradient(circle, rgba(248, 245, 236, 0.06) 1px, transparent 1px);
+  }
 }
 
 /* Owner-initials chip — hue varies per owner via --owner-hue (set inline from

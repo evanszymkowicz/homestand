@@ -22,35 +22,40 @@ interface TrophyCardProps {
   hollow?: boolean;
 }
 
-// Every honor's label shares the same dimmed ink — unified trophy-case look.
-const LABEL_COLOR = "text-ink-dim";
-
-const toneClasses: Record<TrophyTone, { border: string; bg: string; tint: string }> = {
-  gold: { border: "border-gold", bg: "bg-gold-soft", tint: "bg-gold/15" },
-  accent: { border: "border-accent", bg: "bg-accent-soft", tint: "bg-accent/15" },
-  red: { border: "border-red", bg: "bg-red-soft", tint: "bg-red/15" },
+const toneTokens: Record<TrophyTone, { border: string; bg: string; ink: string }> = {
+  gold: { border: "var(--color-gold)", bg: "var(--color-gold-soft)", ink: "var(--color-gold)" },
+  accent: { border: "var(--color-accent)", bg: "var(--color-accent-soft)", ink: "var(--color-accent)" },
+  red: { border: "var(--color-red)", bg: "var(--color-red-soft)", ink: "var(--color-red)" },
 };
 
-/** Centered trophy-case-style stat card: eyebrow label over a large value over
- * a ticker detail line, on a soft tinted panel per honor. Distinct from
- * StatCard (left-aligned, left-edge accent) so the season page's three honors
- * read as trophies rather than more stats. */
+/** Centered trophy-case-style stat card styled as a scored scorebox.
+ * Each honor gets its own ink color on the border and a soft panel fill. */
 export function TrophyCard({ label, value, detail, tone, to, dashed = false, hollow = false }: TrophyCardProps) {
-  const { border, bg, tint } = toneClasses[tone];
+  const tokens = toneTokens[tone];
   const content = (
     <>
-      <div className={`text-eyebrow font-bold tracking-wide uppercase ${LABEL_COLOR}`}>{label}</div>
-      <div className="mt-1 w-full text-trophy leading-tight font-extrabold tabular-nums break-words">{value}</div>
+      <div className="text-eyebrow font-bold tracking-wide text-ink-faint uppercase">{label}</div>
+      <div className="scorebook-stat mt-1 w-full text-trophy leading-tight break-words">{value}</div>
       {detail && <TickerText className="w-full mt-0.5 text-xs text-ink-dim">{detail}</TickerText>}
     </>
   );
-  const className = `flex flex-col items-center gap-0.5 rounded-xl ${border} ${hollow ? tint : bg} px-4 pt-6 pb-5 text-center shadow-sm${dashed ? " border-dashed" : ""}${to ? " cursor-pointer transition-transform duration-150 hover:-translate-y-0.5" : ""}`;
+
+  const base = `scorebook-card flex flex-col items-center gap-0.5 px-4 pt-6 pb-5 text-center${dashed ? " border-dashed" : ""}${to ? " cursor-pointer transition-transform duration-150 hover:-translate-y-0.5" : ""}`;
+  const style: React.CSSProperties = {
+    borderColor: tokens.border,
+    background: hollow ? `color-mix(in srgb, ${tokens.bg} 35%, var(--color-surface))` : tokens.bg,
+  };
+
   if (to) {
     return (
-      <Link to={to} className={className}>
+      <Link to={to} className={base} style={style}>
         {content}
       </Link>
     );
   }
-  return <div className={className}>{content}</div>;
+  return (
+    <div className={base} style={style}>
+      {content}
+    </div>
+  );
 }

@@ -518,9 +518,10 @@ export function Standings({ season, seasons, teams, owners, matchups }: Standing
                   key={s.year}
                   ref={s.year === season.year ? highlightedYearRef : undefined}
                   to={`/season/${s.year}`}
-                  className={`flex w-42 flex-none flex-col gap-2 rounded-xl border border-dashed bg-surface p-3.5 shadow-sm hover:bg-surface-2 ${
-                    s.year === season.year ? "border-accent" : "border-border"
-                  }`}>
+                  className={`scorebook-card flex w-44 flex-none flex-col gap-2 p-3.5 hover:bg-surface-2 ${
+                    s.year === season.year ? "" : "border-dashed"
+                  }`}
+                  style={{ borderColor: s.year === season.year ? "var(--color-accent)" : undefined }}>
                   <div className="flex items-center gap-1.5 text-sm font-extrabold">
                     {s.year}
                     <span className="rounded-full bg-surface-2 px-1.5 py-0.5 text-[0.62rem] font-semibold text-ink-faint uppercase">
@@ -541,9 +542,8 @@ export function Standings({ season, seasons, teams, owners, matchups }: Standing
                 key={y.year}
                 ref={y.year === season.year ? highlightedYearRef : undefined}
                 to={`/season/${y.year}`}
-                className={`flex w-42 flex-none flex-col gap-2 rounded-xl border bg-surface p-3.5 shadow-sm hover:bg-surface-2 ${
-                  y.year === season.year ? "border-accent" : "border-border"
-                }`}>
+                className={`scorebook-card flex w-44 flex-none flex-col gap-2 p-3.5 hover:bg-surface-2`}
+                style={{ borderColor: y.year === season.year ? "var(--color-accent)" : undefined }}>
                 <div className="text-sm font-extrabold">{y.year}</div>
                 <div className="flex items-center gap-2 text-[0.78rem]">
                   <RankBadge rank={1} />

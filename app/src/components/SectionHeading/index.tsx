@@ -8,15 +8,13 @@ interface SectionHeadingProps {
   className?: string;
 }
 
-/** Section/leaderboard title sitting above a table or card row (e.g. "League
- * Champions", "Career Points Leaderboard"). ink-dim + a left accent bar so it
- * reads as its own headline tier, distinct from the small uppercase-faint
- * labels used for table columns (SortHeader/th) and StatCard labels, without
- * the full-black weight of a page h1. */
+/** Section/leaderboard title styled like a scorecard column header:
+ * an ink underline with a red accent tick, small-caps label feel. */
 export function SectionHeading({ children, as: Tag = "h2", className = "" }: SectionHeadingProps) {
   return (
     <Tag
-      className={`text-heading border-l-[3px] border-accent pl-2.5 leading-tight font-semibold text-ink-dim ${className}`}>
+      className={`text-heading inline-flex items-center gap-2 border-b-2 border-ink pb-1 pr-4 font-bold uppercase tracking-wide text-ink ${className}`}>
+      <span aria-hidden="true" className="inline-block h-2 w-2 bg-hs-red" />
       {children}
     </Tag>
   );

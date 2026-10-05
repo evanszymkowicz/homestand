@@ -15,7 +15,6 @@ interface StatCardProps {
    * MatchupCard's hover:bg-surface-2 block-link treatment. Omitting it keeps
    * every existing non-clickable StatCard usage unchanged. */
   to?: string;
-  valueFont?: "mono" | "sans";
 }
 
 export function StatCard({
@@ -26,7 +25,6 @@ export function StatCard({
   runnersUp,
   labelBelow,
   to,
-  valueFont = "mono",
 }: StatCardProps) {
   const accentColor =
     accent === "positive"
@@ -37,10 +35,9 @@ export function StatCard({
           ? "var(--color-gold)"
           : undefined;
 
-  const valueNum = valueFont === "sans" ? "" : " tabular-nums";
   const valueEl = (className: string) => (
     <div
-      className={`${className}${valueNum} whitespace-nowrap`}
+      className={`${className} scorebook-stat whitespace-nowrap`}
       style={accentColor ? { color: accentColor } : undefined}>
       {value}
     </div>
@@ -73,8 +70,8 @@ export function StatCard({
     </>
   );
 
-  const className = `block rounded-xl border border-border bg-surface p-4 shadow-sm${to ? " hover:bg-surface-2" : ""}`;
-  const style = accentColor ? { borderLeftColor: accentColor, borderLeftWidth: "3px" } : undefined;
+  const className = `scorebook-card block p-4${to ? " hover:bg-surface-2" : ""}`;
+  const style = accentColor ? { borderColor: accentColor } : undefined;
 
   if (to) {
     return (
