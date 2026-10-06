@@ -247,6 +247,13 @@ function IdentityGrid({
                       <div
                         className="flex h-8 items-center justify-center text-[0.68rem] font-semibold tabular-nums"
                         style={divergingBackground(linearStrength(row.share, y.mean, 0.15))}
+                        // tabIndex + aria-label alongside title: a bare title is
+                        // hover-only, so it never fires on touch and never enters
+                        // the accessibility tree. The cell's primary value is
+                        // visible, so this only has to make the qualifier
+                        // reachable, not replace it.
+                        tabIndex={0}
+                        aria-label={`${owner.name} ${y.year}: ${formatPct(row.share)} pitching share, league average ${formatPct(y.mean)}`}
                         title={`${owner.name} ${y.year}: ${formatPct(row.share)} pitching share (league avg ${formatPct(y.mean)})`}>
                         {formatPct(row.share)}
                       </div>
@@ -532,55 +539,122 @@ function IdentityWinScatter({
   // Sort is stable, so equal-rank points keep their original order.
   const painted = [...rows].sort((a, b) => paintRank(a, hoveredKey) - paintRank(b, hoveredKey));
 
+  // This scatter is the one chart in the app with no text alternative: its
+  // encodings are a diverging fill, a size channel and a crown glyph, and the
+  // per-dot detail lived only in a Recharts <Tooltip> reachable by
+  // onMouseEnter on an SVG <circle>. A keyboard or screen-reader user got ten
+  // owners' worth of dots and nothing else. Collapse it to one labelled
+  // summary for AT, hide the marks, and disclose the rows as a real table so
+  // every dot's values are reachable by keyboard. Same approach as
+  // SurplusHistogram in Analytics/Trades.tsx.
+  const axisLabel = metric === "winPct" ? "win %" : "points";
+  const formatMetric = (r: ScatterRow) =>
+    metric === "winPct" ? formatPct(r.winPct) : Math.round(r.points).toLocaleString();
+  const summary = [...rows]
+    .sort((a, b) => a.share - b.share)
+    .map(r => `${r.ownerName} ${r.year}: ${formatPct(r.share)} pitching share, ` + `${formatMetric(r)} ${axisLabel}`)
+    .join("; ");
+
   return (
     <div>
-      <div style={{ height: 400 }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <ScatterChart margin={{ top: 16, right: 16, bottom: 28, left: 4 }} onMouseLeave={() => setHoveredKey(null)}>
-            <CartesianGrid stroke="var(--color-border)" />
-            <XAxis
-              type="number"
-              dataKey="share"
-              domain={[0, maxShare]}
-              tickFormatter={v => formatPct(v)}
-              tick={{ fill: "var(--color-ink-faint)", fontSize: 11 }}
-              axisLine={{ stroke: "var(--color-border)" }}
-              tickLine={{ stroke: "var(--color-border)" }}
-              label={{
-                value: "Pitching share of points",
-                position: "insideBottom",
-                offset: -14,
-                fill: "var(--color-ink-faint)",
-                fontSize: 11,
-              }}
-            />
-            <YAxis
-              type="number"
-              dataKey={metric}
-              domain={metric === "winPct" ? [0, 1] : ["auto", "auto"]}
-              tickFormatter={v => (metric === "winPct" ? formatPct(v) : Math.round(v).toLocaleString())}
-              tick={{ fill: "var(--color-ink-faint)", fontSize: 11 }}
-              axisLine={{ stroke: "var(--color-border)" }}
-              tickLine={{ stroke: "var(--color-border)" }}
-              label={{
-                value: metric === "winPct" ? "Win %" : "Points",
-                angle: -90,
-                position: "insideLeft",
-                fill: "var(--color-ink-faint)",
-                fontSize: 11,
-              }}
-            />
-            <ReferenceLine y={metric === "winPct" ? 0.5 : meanPoints} stroke="var(--color-border)" />
-            <Tooltip content={<IdentityWinTooltip />} cursor={{ stroke: "var(--color-border)" }} />
-            <Scatter
-              data={painted}
-              shape={IdentityWinDot(meanShare, radiusFor, setHoveredKey)}
-              isAnimationActive={false}
-            />
-          </ScatterChart>
-        </ResponsiveContainer>
+      <div
+        role="img"
+        aria-label={`Identity versus team success. ${rows.length} owner-season points, plotted by pitching share of points against ${axisLabel}. ${summary}`}>
+        <div aria-hidden="true" style={{ height: 400 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <ScatterChart margin={{ top: 16, right: 16, bottom: 28, left: 4 }} onMouseLeave={() => setHoveredKey(null)}>
+              <CartesianGrid stroke="var(--color-border)" />
+              <XAxis
+                type="number"
+                dataKey="share"
+                domain={[0, maxShare]}
+                tickFormatter={v => formatPct(v)}
+                tick={{ fill: "var(--color-ink-faint)", fontSize: 11 }}
+                axisLine={{ stroke: "var(--color-border)" }}
+                tickLine={{ stroke: "var(--color-border)" }}
+                label={{
+                  value: "Pitching share of points",
+                  position: "insideBottom",
+                  offset: -14,
+                  fill: "var(--color-ink-faint)",
+                  fontSize: 11,
+                }}
+              />
+              <YAxis
+                type="number"
+                dataKey={metric}
+                domain={metric === "winPct" ? [0, 1] : ["auto", "auto"]}
+                tickFormatter={v => (metric === "winPct" ? formatPct(v) : Math.round(v).toLocaleString())}
+                tick={{ fill: "var(--color-ink-faint)", fontSize: 11 }}
+                axisLine={{ stroke: "var(--color-border)" }}
+                tickLine={{ stroke: "var(--color-border)" }}
+                label={{
+                  value: metric === "winPct" ? "Win %" : "Points",
+                  angle: -90,
+                  position: "insideLeft",
+                  fill: "var(--color-ink-faint)",
+                  fontSize: 11,
+                }}
+              />
+              <ReferenceLine y={metric === "winPct" ? 0.5 : meanPoints} stroke="var(--color-border)" />
+              <Tooltip content={<IdentityWinTooltip />} cursor={{ stroke: "var(--color-border)" }} />
+              <Scatter
+                data={painted}
+                shape={IdentityWinDot(meanShare, radiusFor, setHoveredKey)}
+                isAnimationActive={false}
+              />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
       </div>
       <DotSizeLegend radiusFor={radiusFor} season={season} meanPoints={meanPoints} />
+      <details className="mt-3">
+        <summary className="cursor-pointer text-xs font-semibold text-ink-dim">
+          Show the {rows.length} plotted points as a table
+        </summary>
+        <div className="mt-2 overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <caption className="sr-only">
+              Identity versus team success — every plotted owner-season point, with pitching share of points and{" "}
+              {axisLabel}.
+            </caption>
+            <thead>
+              <tr className="border-b border-border text-eyebrow text-ink-faint uppercase">
+                <th scope="col" className="py-1 pr-3 font-semibold">
+                  Owner
+                </th>
+                <th scope="col" className="py-1 pr-3 font-semibold">
+                  Season
+                </th>
+                <th scope="col" className="py-1 pr-3 text-right font-semibold">
+                  Pitching share
+                </th>
+                <th scope="col" className="py-1 pr-3 text-right font-semibold capitalize">
+                  {axisLabel}
+                </th>
+                <th scope="col" className="py-1 text-right font-semibold">
+                  Points
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...rows]
+                .sort((a, b) => a.share - b.share)
+                .map(r => (
+                  <tr key={`${r.ownerId}-${r.year}`} className="border-t border-border">
+                    <th scope="row" className="py-1 pr-3 font-normal">
+                      {r.ownerName}
+                    </th>
+                    <td className="py-1 pr-3 tabular-nums">{r.year}</td>
+                    <td className="py-1 pr-3 text-right tabular-nums">{formatPct(r.share)}</td>
+                    <td className="py-1 pr-3 text-right tabular-nums">{formatMetric(r)}</td>
+                    <td className="py-1 text-right tabular-nums">{Math.round(r.points).toLocaleString()}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
     </div>
   );
 }
@@ -671,6 +745,8 @@ function FormStripsGrid({ yearData, owners }: { yearData: FormStripYear; owners:
                         <div
                           className="flex h-8 items-center justify-center text-[0.62rem] font-semibold tabular-nums"
                           style={divergingBackground(linearStrength(entry.z, 0, 2.5))}
+                          tabIndex={0}
+                          aria-label={`${owner.name} week ${w}: ${formatPoints(entry.score)} points, season average ${formatPoints(row.mean)}`}
                           title={`${owner.name} Wk ${w}: ${formatPoints(entry.score)} pts (season avg ${formatPoints(row.mean)})`}>
                           {entry.z >= 0 ? "+" : ""}
                           {entry.z.toFixed(1)}
@@ -790,6 +866,8 @@ function BenchPointsGrid({ yearData, owners }: { yearData: BenchWeekYear; owners
                         style={divergingBackground(
                           linearStrength(row.benchPoints, yearData.mean, Math.max(yearData.mean, 1))
                         )}
+                        tabIndex={0}
+                        aria-label={`${owner.name} week ${w}: ${formatPoints(row.benchPoints)} bench points, season average ${formatPoints(yearData.mean)}`}
                         title={`${owner.name} Wk ${w}: ${formatPoints(row.benchPoints)} bench pts (season avg ${formatPoints(yearData.mean)})`}>
                         {formatPoints(row.benchPoints)}
                       </div>

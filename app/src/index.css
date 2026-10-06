@@ -38,13 +38,26 @@
   --hs-paper-darker: #e2dcc8;
   --hs-ink: #2b2420;
   --hs-ink-dim: #514940;
-  --hs-ink-faint: #7a7269;
+  /* Darkened from #7a7269 for WCAG 2.1 AA (1.4.3). The old value measured
+     4.34:1 on --color-bg, 3.86 on --color-surface and 3.45 on --color-surface-2
+     -- all under the 4.5:1 that normal text needs, and this token carries the
+     primary nav links, inactive tabs, every table's column headers and the
+     StatCard eyebrows, at 9.6-14px with no large-text exemption. This is
+     6.03 / 5.36 / 4.79 across those three surfaces. */
+  --hs-ink-faint: #645c52;
   --hs-rule: #d4cfc2;
-  --hs-red: #c41e3a;
+  /* Darkened from #c41e3a for WCAG 2.1 AA (1.4.3): 4.26:1 on --color-surface-2,
+     under 4.5 at body sizes. Backs --color-red, --color-diverge-pos and
+     --color-matchup-loss, all of which carry text. Still a button background
+     in places (white on this reads 6.22:1). Dark mode overrides it below. */
+  --hs-red: #bc1e36;
   --hs-red-soft: #f8d7dc;
   --hs-blue: #1d4ed8;
   --hs-blue-soft: #dbeafe;
-  --hs-pencil: #78716c;
+  /* Darkened from #78716c for WCAG 2.1 AA (1.4.3): was 4.40 / 3.91 / 3.50 across
+     bg/surface/surface-2. This drives --color-fa and --color-il, which label
+     real content in the activity drawer. Now 6.01 / 5.34 / 4.77. */
+  --hs-pencil: #655c52;
   --hs-pencil-soft: #e7e5e4;
   --hs-highlight: #fbbf24;
   --hs-highlight-soft: #fef3c7;
@@ -60,11 +73,14 @@
   --color-accent: var(--hs-blue);
   --color-accent-ink: var(--hs-paper);
   --color-accent-soft: var(--hs-blue-soft);
-  --color-gold: #7a5f18;
+  /* Medal tones darkened from #7a5f18 / #5c6470 / #8c5a28 to clear WCAG AA
+     (1.4.3) on all three light surfaces -- they previously sat at 4.40 / 4.36 /
+     4.24 on --color-surface-2. Dark mode's own values already passed. */
+  --color-gold: #6d5415;
   --color-gold-soft: #f2e9cf;
-  --color-silver: #5c6470;
+  --color-silver: #525963;
   --color-silver-soft: #e5e8ec;
-  --color-bronze: #8c5a28;
+  --color-bronze: #7d4f21;
   --color-bronze-soft: #f0e2d2;
   --color-red: var(--hs-red);
   --color-red-soft: var(--hs-red-soft);
@@ -104,6 +120,15 @@
 :root[data-theme="dark"] {
   /* Scorebook after-hours: paper darkened, ink lightened, rulings subtle.
      Red/blue accents stay readable on dark paper. */
+  /* These two overrides are the WCAG 2.1 AA (1.4.3) fixes; the media-query
+     fallback below must keep identical values. */
+  --hs-red: #f87171; /* was #c41e3a: 3.00:1 on --color-bg, 2.60 on --color-surface.
+     --color-red was already overridden, but components use text-hs-red
+     directly, so it read the un-overridden value. --hs-red is not decorative:
+     it renders auth error text on Login, ResetPassword, OnboardingSession,
+     ImportDetail and VerifyEmail. Now 6.33 / 5.49 / 4.58. */
+  --hs-pencil: #a8a194; /* mirrors --color-ink-faint; drives --color-fa/--color-il
+     in this theme. 6.83 / 5.92 / 4.94. */
   --color-bg: #1c1915;
   --color-surface: #2a2520;
   --color-surface-2: #38322b;
@@ -111,7 +136,8 @@
   --color-ink: var(--hs-paper);
   --color-ink-dim: #d4cfc2;
   --color-ink-faint: #a8a194;
-  --color-accent: #5c8bd6;
+  --color-accent: #7aa6ea; /* was #5c8bd6: 4.42:1 on --color-surface, 3.69 on
+     --color-surface-2, under 4.5 at 12px semibold. Now 7.06 / 6.12 / 5.10. */
   --color-accent-ink: #0f172a;
   --color-accent-soft: #1e3a5f;
   --color-gold: #e8c35a;
@@ -145,6 +171,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
+    /* No-JS fallback for OS dark. Keep identical to :root[data-theme="dark"]
+       above, including the WCAG 2.1 AA (1.4.3) overrides below. */
+    --hs-red: #f87171;
+    --hs-pencil: #a8a194;
     --color-bg: #1c1915;
     --color-surface: #2a2520;
     --color-surface-2: #38322b;
@@ -152,7 +182,7 @@
     --color-ink: var(--hs-paper);
     --color-ink-dim: #d4cfc2;
     --color-ink-faint: #a8a194;
-    --color-accent: #5c8bd6;
+    --color-accent: #7aa6ea;
     --color-accent-ink: #0f172a;
     --color-accent-soft: #1e3a5f;
     --color-gold: #e8c35a;

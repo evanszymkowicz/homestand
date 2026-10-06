@@ -9,13 +9,18 @@ import {
   computeOwnerTransactionActivityForOwner,
   type OwnerSeasonActivity,
 } from "../../lib/transactionActivity";
-import type { Owner, Season, Team, Transaction } from "../../types";
+import type { Owner, Season, Team, Trade, Transaction } from "../../types";
 
 interface TransactionActivityProps {
   ownerId: string;
   owners: Owner[];
   teams: Team[];
   transactions: Transaction[];
+  /** Reconstructed deals from trades.json — the trade-count source of truth.
+   *  The ledger retains item_type === "TRADE" for only a small minority of
+   *  executed deals, so counting trades from transactions.json alone reported 0
+   *  for an owner the Trades route counted 5. */
+  trades: Trade[];
   seasons: Season[];
 }
 
@@ -48,18 +53,27 @@ function SummaryStat({ label, value, accent }: { label: string; value: number; a
  * in 2019" note rather than a grid of zeros, which would read as "made no
  * moves". Renders nothing at all only when the ledger itself is empty.
  */
-export function TransactionActivity({ ownerId, owners, teams, transactions, seasons }: TransactionActivityProps) {
+export function TransactionActivity({
+  ownerId,
+  owners,
+  teams,
+  transactions,
+  trades,
+  seasons,
+}: TransactionActivityProps) {
   const activity = useMemo(
-    () => computeOwnerTransactionActivityForOwner(ownerId, transactions),
-    [ownerId, transactions]
+    () => computeOwnerTransactionActivityForOwner(ownerId, transactions, trades),
+    [ownerId, transactions, trades]
   );
   // The league-wide busiest owner-season doesn't depend on which owner is being
   // viewed, so it's keyed on the ledger + owner list alone and survives owner
   // switches (this used to walk the ledger once per owner).
   const busiest = useMemo(
     () =>
-      transactions.length === 0 ? null : busiestOwnerSeason(computeOwnerTransactionActivity(transactions, owners)),
-    [transactions, owners]
+      transactions.length === 0
+        ? null
+        : busiestOwnerSeason(computeOwnerTransactionActivity(transactions, owners, trades)),
+    [transactions, owners, trades]
   );
   const isWizard = busiest != null && busiest.ownerId === ownerId;
 

@@ -210,6 +210,13 @@ export default function MatchupRoute() {
         <div className="flex flex-wrap items-center gap-2">
           <SectionHeading as="h3">Box Score</SectionHeading>
           <CoverageBadge seasons={seasons} domain="stat_lines" />
+          {/* The badge describes the stat-line and slot columns this matchup's
+              season does NOT have (both correctly gated off below), not the
+              points and bench it does show. On a pre-2019 matchup that read as
+              "since 2019" over an entirely 2015 table with no explanation. */}
+          {!statLinesCovered && (
+            <span className="text-xs text-ink-faint">Points and bench shown; stat lines and slots start in 2019.</span>
+          )}
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {matchup.away && awayTeamName && (

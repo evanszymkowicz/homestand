@@ -4,6 +4,7 @@ import { jsonResponse, validateSession } from "../../../lib/auth";
 import { buildUrl, redactSwid, requestView } from "../../../../lib/espn/espnClient";
 import { parseEspnSession } from "../../../../lib/espnSession";
 import { enforceRateLimit, probeKey, type RateLimiter } from "../../../lib/rateLimit";
+import { enforceHorizon, horizonRules } from "../../../lib/rateLimitHorizon";
 
 interface ProbeBody {
   /** A whole `Cookie:` header from espn.com -- the one-paste path. */
@@ -31,6 +32,12 @@ export const onRequestPost: PagesFunction<Env> = async context => {
   // bounds both the credential oracle and how hard we lean on ESPN.
   const limited = await enforceRateLimit(env.PROBE_LIMITER as unknown as RateLimiter, [probeKey(request, account.id)]);
   if (limited) return limited;
+
+  // A daily budget matters more here than a per-minute one: each probe is a real
+  // request to ESPN from this service's IP, so this bounds how hard we lean on
+  // ESPN as well as how hard one account can lean on the oracle.
+  const overHorizon = await enforceHorizon(env.DB, horizonRules("probe", { acct: account.id }));
+  if (overHorizon) return overHorizon;
 
   const body = (await request.json()) as ProbeBody;
   // One paste beats hunting two cookies, so a `Cookie:` header wins if present.

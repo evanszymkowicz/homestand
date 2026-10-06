@@ -1,7 +1,7 @@
 import type { FormStripYear } from "./divergingViews";
 import { longestRun, regularSeasonResultsByTeam } from "./stats";
 import { computeOwnerTransactionActivityForOwner } from "./transactionActivity";
-import type { Matchup, PlayerTeamSeasonPoints, Season, Team, Transaction } from "../types";
+import type { Matchup, PlayerTeamSeasonPoints, Season, Team, Trade, Transaction } from "../types";
 
 export interface OwnerMilestone {
   label: string;
@@ -22,6 +22,8 @@ export interface MilestoneInput {
   seasons: Season[];
   /** The full 2019+ ledger; busiest season is derived from it. */
   transactions: Transaction[];
+  /** Reconstructed deals — see transactionActivity.accumulate. */
+  trades?: Trade[];
   teamSeasonPoints: PlayerTeamSeasonPoints[];
 }
 
@@ -128,7 +130,7 @@ export function computeOwnerMilestones(
     streaksByOwner: Map<string, { wins: number; losses: number; winsYear: number | null; lossesYear: number | null }>;
   }
 ): OwnerMilestones {
-  const { ownerId, teams, seasons, transactions, teamSeasonPoints, formStrips, streaksByOwner } = input;
+  const { ownerId, teams, seasons, transactions, trades, teamSeasonPoints, formStrips, streaksByOwner } = input;
 
   const ownerTeams = teams.filter(t => t.owner_ids.includes(ownerId)).sort((a, b) => a.year - b.year);
   if (ownerTeams.length === 0) return { ownerId, milestones: [] };
@@ -218,7 +220,7 @@ export function computeOwnerMilestones(
   }
 
   // --- Busiest season (2019+ ledger, matching the activity table) --------
-  const activity = computeOwnerTransactionActivityForOwner(ownerId, transactions);
+  const activity = computeOwnerTransactionActivityForOwner(ownerId, transactions, trades ?? []);
   let busiestYear = 0;
   let busiestMoves = -1;
   for (const [year, counts] of activity.bySeason) {

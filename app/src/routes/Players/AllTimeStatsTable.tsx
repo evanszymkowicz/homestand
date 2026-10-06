@@ -5,6 +5,7 @@ import { FilterBar } from "../../components/FilterBar";
 import { FilterSelect } from "../../components/FilterSelect";
 import { Headshot } from "../../components/Headshot";
 import { OwnerLink } from "../../components/OwnerLink";
+import { PortalTooltip } from "../../components/PortalTooltip";
 import { SortHeader } from "../../components/SortHeader";
 import { useSortableRows, type SortDirection } from "../../hooks/useSortableRows";
 import { formatPoints } from "../../lib/format";
@@ -249,10 +250,16 @@ export function AllTimeStatsTable({ rows, owners, mlbTeams }: AllTimeStatsTableP
                           <span className="font-semibold">{row.playerName}</span>
                         </Link>
                       </td>
-                      <td
-                        className="px-3 py-2 text-center font-semibold tabular-nums"
-                        title={allTimePointsTooltip(row) ?? undefined}>
-                        {formatPoints(row.cardPoints)}
+                      <td className="px-3 py-2 text-center font-semibold tabular-nums">
+                        {/* PortalTooltip rather than a native `title`: a title
+                            attribute is hover-only, so it never fires on touch,
+                            never enters the accessibility tree, and the <td>
+                            is not focusable. The rostered-of-total caveat is
+                            the most important qualifier in this column, so it
+                            has to be reachable by keyboard. */}
+                        <PortalTooltip content={allTimePointsTooltip(row) ?? "Career total."}>
+                          {formatPoints(row.cardPoints)}
+                        </PortalTooltip>
                       </td>
                       <td className="px-3 py-2 text-center text-ink-dim tabular-nums">{row.seasons}</td>
                       <td className="px-3 py-2 text-left text-ink-dim">

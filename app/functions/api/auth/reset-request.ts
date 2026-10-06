@@ -2,6 +2,7 @@ import type { PagesFunction } from "@cloudflare/workers-types";
 import { generateSessionToken, jsonResponse } from "../../lib/auth";
 import { sendEmail } from "../../lib/email";
 import { enforceRateLimit, resetKey, type RateLimiter } from "../../lib/rateLimit";
+import { enforceHorizon, horizonRules } from "../../lib/rateLimitHorizon";
 
 interface ResetBody {
   email?: string;
@@ -18,6 +19,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // exists, which the rest of this handler is careful to preserve.
   const limited = await enforceRateLimit(env.RESET_LIMITER as unknown as RateLimiter, [resetKey(email)]);
   if (limited) return limited;
+
+  // The binding's window is 60s, so it alone still permits ~300 emails an hour to
+  // one inbox. This is the layer that makes the promise in the spec's security
+  // register true. Charged before the lookup, so it applies to unknown addresses
+  // too, and a 429 here reveals nothing about whether the account exists.
+  const overHorizon = await enforceHorizon(env.DB, horizonRules("reset", { email }));
+  if (overHorizon) return overHorizon;
 
   const account = await env.DB.prepare("SELECT id,verified FROM accounts WHERE email = ? AND demo = 0")
     .bind(email)

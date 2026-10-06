@@ -1,6 +1,6 @@
 # Homestand: Invite-Only ESPN League Import Service
 
-**Status:** Approved, S0-ready — revised 2026-10-04
+**Status:** S0–S5 implemented. **Three items remain before public launch** — see §Remaining Work Before Launch for their scope and acceptance criteria. Revised 2026-10-06.
 **Decisions locked:** Separate fork repo · Invite-only email signup · **Email/invite-tier subscription model in the first milestone (no Stripe, no payment form)** · **ESPN auth via pasted session cookie only — automated password login is impossible (ESPN captcha, no fantasy OAuth); see § ESPN credential flow** · **Server-side crawl (no extension shipped; auth is a one-paste cookie header)** · Backend crawl script using stored session · **Demo tenant is a deterministic anonymized copy of the real league archive (no mock-league generator)** · Cloudflare storage provisioning · Baseball scorebook visual identity
 
 ## Fork Timing
@@ -393,6 +393,127 @@ inside a phase, not a spec question.
   of minimum user work, and a **bookmarklet was still rejected**: it asks users to install something
   that silently posts their live session cookies to us, which is a pattern that erodes trust and
   draws a security review, and it is unreliable across page CSPs. One copy beats two cookie hunts.
+
+## Remaining Work Before Launch
+
+S0–S5 are implemented. Three items are open, all of them production-readiness gaps
+rather than new product surface. Each entry states what exists today, what is
+missing, and how you know it is done — `context/future-items.md` remains the
+short list; this section is the scoping detail.
+
+### R1 — Automated crawl-to-scoped-data path
+
+**The gap.** The crawl works end-to-end but only when a human runs it. There is no
+trigger, no queue, and no scheduler. `app/package.json`'s `crawl` script shells out
+to `scripts/run_import.mjs`, which reads the import row and encrypted credentials
+out of **local** D1 (`--local` in `d1Query`) and runs `scripts/crawl_from_env.py`
+against the **local** R2 bucket (`--local` in `_upload`). Every `--local` flag is
+correct for development and fatal in production: a production run would write to a
+throwaway SQLite file and a local bucket, leaving the real D1 row stuck at
+`pending` and the data proxy returning 404 forever. That failure is silent — the
+crawl reports success.
+
+**What exists already (do not rebuild these):**
+- `scripts/run_import.mjs` — argv-array spawns only, UUID validation, refuses to
+  read credentials itself and shell-exports them into the Python worker's env.
+- `scripts/crawl_from_env.py` — the real pipeline: decrypt → crawl →
+  `derive_owner_map.py` → `normalize.py` → `validate.py` → R2 under
+  `processed/{importId}/` → mark `completed`, with `failed` + reason on error and
+  in-flight protection.
+- Per-tenant paths (`data/tenants/{importId}/`) already isolate the raw and manual
+  layers, so the repo's hand-curated record-book answers never leak into a tenant.
+
+**Scope:**
+1. Make the worker target real resources — replace every `--local` with an explicit
+   target switch (env var or flag), defaulting to local for dev.
+2. Decide the trigger. Cheapest viable: a `workflow_dispatch` CI job that decrypts
+   and runs the crawl, per §Capacity Budget's 2,000 Actions min/mo. The spec's
+   Durable-Object queue remains an option for automatic triggering.
+3. Set `imports.status = 'running'` when the crawl starts, so `ImportDetail.tsx`'s
+   existing poll distinguishes queued from running (it already handles both).
+4. Emit the import-status emails (§Email Provider) on completion and failure.
+5. Global capacity check at the door — §Capacity Budget caps R2 at ~70 active
+   leagues; refuse honestly rather than silently overwriting a tenant's prefix.
+
+**Acceptance:** a production import created through the UI reaches `completed` with
+no human running a command, and its collections are readable through the data proxy.
+A deliberate failure surfaces a reason on `ImportDetail` rather than an endless
+spinner.
+
+**Note:** `_set_status` currently shells `wrangler d1 execute --local` and appends the
+detail as a SQL comment. Both need reworking for production — the comment trick
+cannot carry a reason the UI can read.
+
+### R2 — Transactional email provider
+
+**The gap.** `functions/lib/email.ts` is a log-line stub. Every caller treats
+`sendEmail` as best-effort, so today **no verification or reset email ever
+delivers** — which means no real account can complete signup. This is a
+launch blocker, not a polish item.
+
+Also incomplete: `api/admin/invites` creates the token but does not send it, so the
+invite must currently be delivered out of band. The spec's §Email Provider lists
+invite among the required templates.
+
+**Scope:**
+1. Swap `sendEmail`'s body for a Resend call, **keeping the signature**. Do not
+   change the call sites — they correctly treat it as non-blocking, and making
+   email a hard dependency of signup would let a provider outage break auth.
+2. Keep the existing rule: **never log the message body**. Verification and reset
+   bodies carry single-use account-takeover tokens and Workers logs ship to Logpush.
+   The current comment explains why; keep it.
+3. Add invite sending to `api/admin/invites`.
+4. Import started / completed / failed notifications (required by §Email Provider,
+   needed by R1).
+5. Local dev: Mailpit per §Email Provider.
+
+**Note:** the `reset-request` response-time oracle is deliberately unfixed and
+`future-items.md` says to fix it *when Resend lands* — a real network call widens
+the timing gap between the unknown-address and real-account paths. Land them
+together.
+
+### R3 — Eviction Cron Trigger
+
+**The gap.** `api/admin/evict` is an HTTP endpoint standing in for a scheduled
+trigger. It is correct and safe to call by hand — it skips in-flight crawls and
+reports a count — but nothing calls it, so nothing expires.
+
+**Scope:** wire a real scheduled sweep. Its guards (skip `pending`/`running`
+imports, distinct counts for "deleted none" vs "deleted all") are already in place
+and must survive the move.
+
+**Note:** this is the same missing-scheduled-handler problem the opportunistic prune
+in `rateLimitHorizon.ts` works around. If you land R3, point the counter prune at
+it rather than leaving both mechanisms.
+
+**Acceptance:** a free-tier account past its TTL is removed, with its R2 prefix
+deleted, without anyone calling an endpoint by hand.
+
+### Rate limiting (closed)
+
+Not a launch item, recorded here because the layering is easy to misread.
+
+1. **Native `ratelimits` binding** — 10s/60s windows on `login`, `reset-request`,
+   `probe`. Fails closed. Ceilings are inherited from the API: counters are per
+   Cloudflare location and eventually consistent.
+2. **D1 horizon counters** (`functions/lib/rateLimitHorizon.ts`) — 10min/hour/day
+   windows, which the binding cannot express. That layer is what closes the
+   multi-hour ceilings (~300 reset emails/hour to one victim; ~60 password
+   guesses/hour at one account). Applied to `login`, `reset-request`, `probe`, and
+   `signup`. Limits are reasoned guesses pending real traffic.
+3. **WAF rule** — not available; see below.
+
+### Deliberately not in scope
+
+- **WAF rate limiting rule** — impossible today: the account has no zone and the
+  app is on `homestand.pages.dev`, which Cloudflare operates and cannot carry a
+  zone-level rule. Needs a custom domain on a real zone plus Pro, and is
+  defense-in-depth over the D1 horizon limiter rather than a gap. Detail in
+  `future-items.md`.
+- **Password hashing upgrade** — PBKDF2 at 100k iterations is below OWASP's
+  current 600k floor, but Web Crypto is native in Workers while argon2 needs a WASM
+  binding. Deliberate, documented at `functions/lib/auth.ts:133`. Revisit only if
+  the user base justifies it.
 
 ## Upstream Sync Strategy
 

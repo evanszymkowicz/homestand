@@ -21,6 +21,7 @@ import type {
   PlayerTeamSeasonPoints,
   Season,
   Team,
+  Trade,
   Transaction,
 } from "../../types";
 import { OwnerKeeperHistory } from "./OwnerKeeperHistory";
@@ -40,6 +41,7 @@ interface OwnerPageProps {
   seasonPoints: PlayerSeasonPoints[];
   seasons: Season[];
   transactions: Transaction[];
+  trades: Trade[];
   /** Per-(year, team, player) production rows — the "distinct players
    * rostered" milestone's source, ~2MB instead of the box-score archive. */
   teamSeasonPoints: PlayerTeamSeasonPoints[];
@@ -61,6 +63,7 @@ export function OwnerPage({
   seasonPoints,
   seasons,
   transactions,
+  trades,
   teamSeasonPoints,
 }: OwnerPageProps) {
   // Career record and points are built from already-decided games, so an
@@ -102,11 +105,12 @@ export function OwnerPage({
         teams,
         seasons,
         transactions,
+        trades,
         teamSeasonPoints,
         formStrips,
         streaksByOwner,
       }),
-    [owner.owner_id, teams, seasons, transactions, teamSeasonPoints, formStrips, streaksByOwner]
+    [owner.owner_id, teams, seasons, transactions, trades, teamSeasonPoints, formStrips, streaksByOwner]
   );
 
   return (
@@ -137,17 +141,29 @@ export function OwnerPage({
           <StatCard
             label="Career Record"
             value={formatRecord(standing.wins, standing.losses, standing.ties)}
-            detail={`${standing.seasons} season${standing.seasons === 1 ? "" : "s"}`}
+            // Qualified, not bare "All-Time": these cards sum teams[].overall,
+            // which data/README.md defines as regular season only (ESPN's
+            // record.overall excludes playoffs). The H2H table lower on this
+            // page is built from matchups.json on a "combined" scope, regular
+            // PLUS playoffs, so the two records genuinely differ — for Henry
+            // Loop, 83-75 here vs 92-86 there. Unlabelled, the page looked
+            // self-contradictory.
+            detail={`${standing.seasons} season${standing.seasons === 1 ? "" : "s"} · regular season`}
             labelBelow
           />
-          <StatCard label="Win%" value={formatWinPct(standing.winPct)} detail="All-Time" labelBelow />
+          <StatCard label="Win%" value={formatWinPct(standing.winPct)} detail="All-Time · regular season" labelBelow />
           <StatCard
             label="Points For"
             value={formatPoints(points.pointsFor)}
-            detail={`${formatPoints(points.pointsForPerGame)} per matchup`}
+            detail={`${formatPoints(points.pointsForPerGame)} per matchup · regular season`}
             labelBelow
           />
-          <StatCard label="Points Against" value={formatPoints(points.pointsAgainst)} detail="All-Time" labelBelow />
+          <StatCard
+            label="Points Against"
+            value={formatPoints(points.pointsAgainst)}
+            detail="All-Time · regular season"
+            labelBelow
+          />
         </div>
       ) : (
         <p className="mt-4 text-ink-dim">No career data on record yet.</p>
@@ -165,6 +181,7 @@ export function OwnerPage({
         owners={owners}
         teams={teams}
         transactions={transactions}
+        trades={trades}
         seasons={seasons}
       />
 

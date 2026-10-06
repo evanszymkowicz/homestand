@@ -1,6 +1,7 @@
 import type { PagesFunction } from "@cloudflare/workers-types";
 import { createSession, decoyPasswordHash, jsonResponse, setSessionCookie, verifyPassword } from "../../lib/auth";
-import { enforceRateLimit, loginKey, type RateLimiter } from "../../lib/rateLimit";
+import { enforceRateLimit, loginKey, clientIp, type RateLimiter } from "../../lib/rateLimit";
+import { enforceHorizon, horizonRules } from "../../lib/rateLimitHorizon";
 
 interface LoginBody {
   email?: string;
@@ -21,6 +22,12 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // account gets an unlimited run at it.
   const limited = await enforceRateLimit(env.LOGIN_LIMITER as unknown as RateLimiter, loginKey(request, email));
   if (limited) return limited;
+
+  // Second layer, for the ceiling the per-minute binding cannot express. Charged
+  // before the PBKDF2 call, which is the expensive part: a run that is already
+  // over its hourly or daily budget should not also cost 27ms of CPU per attempt.
+  const overHorizon = await enforceHorizon(env.DB, horizonRules("login", { acct: email, ip: clientIp(request) }));
+  if (overHorizon) return overHorizon;
 
   const row = await env.DB.prepare("SELECT id, password_hash, verified FROM accounts WHERE email = ? AND demo = 0")
     .bind(email)

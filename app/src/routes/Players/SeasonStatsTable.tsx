@@ -182,6 +182,13 @@ export function SeasonStatsTable({ rows, owners, mlbTeams, year }: SeasonStatsTa
         </FilterSelect>
       </FilterBar>
 
+      {/* buildSeasonStatRows emits one row per (player, team) stint, so a
+          mid-season trade gives the same player two rows and an owner-scoped
+          filter can show one name several times. Correct per
+          player_team_season_points.json's documented purpose, but it reads as
+          duplicate data without a word of explanation. */}
+      <p className="mt-2 text-[0.66rem] text-ink-faint">Traded players appear once per team they scored for.</p>
+
       {filtered.length === 0 ? (
         <p className="text-sm text-ink-dim">No players match these filters.</p>
       ) : (

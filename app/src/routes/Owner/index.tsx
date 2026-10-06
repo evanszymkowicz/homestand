@@ -22,6 +22,7 @@ import {
   loadPlayerTeamSeasonPoints,
   loadSeasons,
   loadTeams,
+  loadTrades,
   loadTransactions,
 } from "../../lib/data";
 import { formatRecord, formatWinPct } from "../../lib/format";
@@ -36,6 +37,7 @@ import type {
   PlayerTeamSeasonPoints,
   Season,
   Team,
+  Trade,
   Transaction,
 } from "../../types";
 import { OwnerPage } from "./OwnerPage";
@@ -51,6 +53,7 @@ interface OwnerRouteData {
   seasonPoints: PlayerSeasonPoints[];
   seasons: Season[];
   transactions: Transaction[];
+  trades: Trade[];
   teamSeasonPoints: PlayerTeamSeasonPoints[];
 }
 
@@ -59,19 +62,36 @@ interface OwnerRouteData {
  * box-score archive the milestone used to fetch, and its rows equal box_scores'
  * distinct (year, team, player) triples for every season including 2018. */
 async function loadOwnerRouteData(): Promise<OwnerRouteData> {
-  const [owners, teams, matchups, draftPicks, keepers, players, seasonPoints, seasons, teamSeasonPoints, transactions] =
-    await Promise.all([
-      loadOwners(),
-      loadTeams(),
-      loadMatchups(),
-      loadDraftPicks(),
-      loadKeepers(),
-      loadPlayers(),
-      loadPlayerSeasonPoints(),
-      loadSeasons(),
-      loadPlayerTeamSeasonPoints(),
-      loadTransactions(),
-    ]);
+  const [
+    owners,
+    teams,
+    matchups,
+    draftPicks,
+    keepers,
+    players,
+    seasonPoints,
+    seasons,
+    teamSeasonPoints,
+    transactions,
+    trades,
+  ] = await Promise.all([
+    loadOwners(),
+    loadTeams(),
+    loadMatchups(),
+    loadDraftPicks(),
+    loadKeepers(),
+    loadPlayers(),
+    loadPlayerSeasonPoints(),
+    loadSeasons(),
+    loadPlayerTeamSeasonPoints(),
+    loadTransactions(),
+    // trades.json (~13KB) is the trade-count source of truth. The ledger only
+    // retains item_type === "TRADE" for a small minority of executed deals,
+    // so deriving the owner's trade count from transactions.json alone
+    // understated it — this owner page and the Trades route were counting
+    // different things.
+    loadTrades(),
+  ]);
   return {
     owners,
     teams,
@@ -83,6 +103,7 @@ async function loadOwnerRouteData(): Promise<OwnerRouteData> {
     seasons,
     teamSeasonPoints,
     transactions,
+    trades,
   };
 }
 
@@ -211,6 +232,7 @@ export default function OwnerRoute() {
   const seasons = useAsyncList(state, d => d.seasons);
   const teamSeasonPoints = useAsyncList(state, d => d.teamSeasonPoints);
   const transactions = useAsyncList(state, d => d.transactions);
+  const trades = useAsyncList(state, d => d.trades);
   const ownerName = ownerId ? owners.find(o => o.owner_id === ownerId)?.canonical_name : undefined;
   useDocumentTitle(ownerName || "Owners");
 
@@ -253,6 +275,7 @@ export default function OwnerRoute() {
       seasonPoints={seasonPoints}
       seasons={seasons}
       transactions={transactions}
+      trades={trades}
       teamSeasonPoints={teamSeasonPoints}
     />
   );

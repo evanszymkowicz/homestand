@@ -30,9 +30,15 @@ export function AppShell() {
     <div className="scorebook-texture min-h-screen text-ink">
       <div className="scorebook-margin mx-auto max-w-5xl px-4 pb-20 pt-6 sm:px-6">
         <header className="mb-5 border-b-2 border-ink pb-4">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <BaseballDiamond className="h-8 w-8 text-hs-red" />
+          {/* flex-wrap + min-w-0: the wordmark/tagline block has a 254px min-content
+              and the controls column 235px, so a non-wrapping row forced 505px
+              of content into a 358px column at 390px wide. That made
+              document.scrollWidth 521 on every route, so the league <select> and
+              "New import" were clipped off-screen. The right column now drops
+              below the wordmark instead. */}
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="flex min-w-0 items-center gap-3">
+              <BaseballDiamond className="h-8 w-8 flex-none text-hs-red" />
               <div>
                 <h1 className="wordmark-piped font-brand text-5xl leading-[0.85] sm:text-6xl">Homestand</h1>
                 <p className="mt-1 text-[0.6rem] font-bold tracking-[0.15em] text-ink-faint uppercase">
@@ -68,7 +74,7 @@ export function AppShell() {
                   {imports.length > 0 && (
                     <select
                       aria-label="League import"
-                      className="rounded border border-border bg-surface px-2 py-1 text-sm"
+                      className="max-w-[10rem] truncate rounded border border-border bg-surface px-2 py-1 text-sm"
                       value={currentImportId ?? ""}
                       onChange={e => selectImport(e.target.value)}>
                       {/* currentImportId is null until an import completes; show

@@ -51,8 +51,10 @@ echo "== secret-bearing file force-added =="
 echo '{"espn_s2":"ANOTHERtokenAAAABBBBCCCC1234"}' > app/.dev.vars.bak
 cp app/.dev.vars app/dev.vars.force
 run "force-added .dev.vars blocks"               1 $G --strict "$SCRATCH/app/dev.vars.force"
+# A config.json copied under another name still carries the live cookies, so
+# blocking it is the correct outcome — the value scan is name-independent.
 cp config.json config.force.json
-run "force-added config copy under another name passes (value scan only)" 0 $G --strict "$SCRATCH/config.force.json"
+run "config copy under another name also blocks"  1 $G --strict "$SCRATCH/config.force.json"
 
 echo "== placeholder values must NOT trip the guard =="
 cat > config.json <<'JSON'
@@ -66,9 +68,17 @@ echo "no real secrets here, just docs" > docs.md
 run "placeholder-only config allows clean file" 0 $G --strict "$SCRATCH/docs.md"
 
 echo "== staged sweep (--staged) =="
+# Restore the REAL secrets first: the placeholder-only block above overwrote both
+# config.json and app/.dev.vars, so a leak of the admin key would be undetectable
+# here. (The first run of this script got that wrong and failed for this reason.)
 cat > config.json <<'JSON'
 {"league_id": 6121, "espn_s2": "ABCdefREALtoken1234567890XYZ%3D%3D", "swid": "{03JFJHW-FWFWF-044G-realvalue}"}
 JSON
+cat > app/.dev.vars <<'VARS'
+TURNSTILE_SECRET_KEY=0x1secretturnstilekey
+ADMIN_API_KEY=live-admin-key-9f2a7c
+CREDENTIALS_ENCRYPTION_KEY=deadbeefcafebabe0123456789abcdef
+VARS
 echo 'oops: live-admin-key-9f2a7c got pasted here' > oops.md
 git add oops.md >/dev/null 2>&1
 run "--staged catches a leak among staged files" 1 $G --strict --staged

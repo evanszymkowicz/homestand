@@ -558,13 +558,19 @@ function TradeGradeModal({ grade, index, owners, fullCoverageYears, triggerRef, 
                     formatter={(value, name) => [`${formatPoints(Number(value))} pts`, `${name}`]}
                   />
                   <Legend verticalAlign="top" height={24} />
+                  {/* Both series resolve to the same colour in light mode
+                      (--color-accent and --color-diverge-neg are both
+                      var(--hs-blue)), so the solid/dashed split and the two dot
+                      shapes are what actually distinguish them (WCAG 1.4.1). */}
                   <Line
                     type="monotone"
                     dataKey="sideA"
                     name={ownerRef(owners, grade.ownerA).name}
                     stroke="var(--color-accent)"
                     strokeWidth={2}
+                    strokeDasharray="none"
                     dot={false}
+                    activeDot={{ r: 4 }}
                   />
                   <Line
                     type="monotone"
@@ -572,7 +578,9 @@ function TradeGradeModal({ grade, index, owners, fullCoverageYears, triggerRef, 
                     name={ownerRef(owners, grade.ownerB).name}
                     stroke="var(--color-diverge-neg)"
                     strokeWidth={2}
-                    dot={false}
+                    strokeDasharray="6 3"
+                    dot={{ r: 3 }}
+                    activeDot={{ r: 5 }}
                   />
                 </LineChart>
               </ResponsiveContainer>

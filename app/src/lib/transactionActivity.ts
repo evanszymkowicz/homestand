@@ -1,5 +1,5 @@
 import { isBindingTransaction } from "./transactions";
-import type { Owner, Transaction } from "../types";
+import type { Owner, Trade, Transaction } from "../types";
 
 export interface OwnerSeasonActivity {
   adds: number;
@@ -38,8 +38,20 @@ function emptyOwnerActivity(ownerId: string): OwnerTransactionActivity {
  *
  * `owner_id` is null on some rows; those are unattributable and dropped rather
  * than bucketed under a synthetic owner.
+ *
+ * `trades` is the reconstructed deal list from trades.json, and it — NOT the
+ * ledger — is the source of truth for the trade count. ESPN prunes the
+ * TRADE_PROPOSAL rows and keeps only a small minority of executed deals'
+ * item_type === "TRADE" rows in transactions.json; data/README.md records that
+ * only 2 of 11 executed 2019-2025 trades survive there. Counting the ledger
+ * alone credited the owner page with 0 trades where the Trades tab showed 5 for
+ * the same owner. Adds and drops stay on the ledger, which is complete for
+ * them.
+ *
+ * Pass `[]` for trades only if the caller genuinely has no deal data; the trade
+ * count then falls back to the lossy ledger clustering below.
  */
-function accumulate(transactions: Transaction[]): Map<string, OwnerTransactionActivity> {
+function accumulate(transactions: Transaction[], trades: Trade[]): Map<string, OwnerTransactionActivity> {
   const byOwner = new Map<string, OwnerTransactionActivity>();
 
   const ownerAcc = (ownerId: string): OwnerTransactionActivity => {
@@ -80,27 +92,49 @@ function accumulate(transactions: Transaction[]): Map<string, OwnerTransactionAc
     }
   }
 
-  // Pass 2: one trade per executed deal. Cluster by the proposal the rows
-  // answer (the same key trades.ts uses), then credit each participating owner
-  // once for that deal.
-  const deals = new Map<string, { year: number; ownerIds: Set<string> }>();
-  for (const tx of transactions) {
-    if (tx.owner_id === null) continue;
-    if (!isBindingTransaction(tx)) continue;
-    if (!tx.items.some(item => item.item_type === "TRADE")) continue;
-    const key = `${tx.year}:${tx.related_transaction_id ?? tx.transaction_id}`;
-    const deal = deals.get(key) ?? { year: tx.year, ownerIds: new Set<string>() };
-    deal.ownerIds.add(tx.owner_id);
-    deals.set(key, deal);
-  }
-  for (const deal of deals.values()) {
-    for (const ownerId of deal.ownerIds) {
-      const owner = ownerAcc(ownerId);
-      const season = seasonAcc(owner, deal.year);
-      season.trades += 1;
-      owner.totalTrades += 1;
-      season.total += 1;
-      owner.totalTransactions += 1;
+  // Pass 2: one trade per executed deal.
+  //
+  // Preferred path: trades.json's reconstructed deals, which carry both
+  // participants explicitly and survive ESPN's pruning. Each owner in a deal is
+  // credited once for that deal's season.
+  if (trades.length > 0) {
+    for (const trade of trades) {
+      // A proposed-but-unexecuted deal is not a completed trade.
+      if (trade.executed_date === null) continue;
+      const participants = new Set([trade.team_a_owner_id, trade.team_b_owner_id]);
+      for (const ownerId of participants) {
+        if (ownerId === null) continue;
+        const owner = ownerAcc(ownerId);
+        const season = seasonAcc(owner, trade.year);
+        season.trades += 1;
+        owner.totalTrades += 1;
+        season.total += 1;
+        owner.totalTransactions += 1;
+      }
+    }
+  } else {
+    // Fallback for callers with no deal data: cluster the ledger rows by the
+    // proposal they answer, the same key trades.ts uses. Lossy by construction
+    // (see the doc comment) but better than reporting nothing.
+    const deals = new Map<string, { year: number; ownerIds: Set<string> }>();
+    for (const tx of transactions) {
+      if (tx.owner_id === null) continue;
+      if (!isBindingTransaction(tx)) continue;
+      if (!tx.items.some(item => item.item_type === "TRADE")) continue;
+      const key = `${tx.year}:${tx.related_transaction_id ?? tx.transaction_id}`;
+      const deal = deals.get(key) ?? { year: tx.year, ownerIds: new Set<string>() };
+      deal.ownerIds.add(tx.owner_id);
+      deals.set(key, deal);
+    }
+    for (const deal of deals.values()) {
+      for (const ownerId of deal.ownerIds) {
+        const owner = ownerAcc(ownerId);
+        const season = seasonAcc(owner, deal.year);
+        season.trades += 1;
+        owner.totalTrades += 1;
+        season.total += 1;
+        owner.totalTransactions += 1;
+      }
     }
   }
 
@@ -119,9 +153,10 @@ function accumulate(transactions: Transaction[]): Map<string, OwnerTransactionAc
  */
 export function computeOwnerTransactionActivity(
   transactions: Transaction[],
-  owners: Owner[]
+  owners: Owner[],
+  trades: Trade[] = []
 ): OwnerTransactionActivity[] {
-  const byOwner = accumulate(transactions);
+  const byOwner = accumulate(transactions, trades);
   for (const owner of owners) {
     if (!byOwner.has(owner.owner_id)) byOwner.set(owner.owner_id, emptyOwnerActivity(owner.owner_id));
   }
@@ -134,9 +169,10 @@ export function computeOwnerTransactionActivity(
  * no ledger rows, so callers can render the section unconditionally. */
 export function computeOwnerTransactionActivityForOwner(
   ownerId: string,
-  transactions: Transaction[]
+  transactions: Transaction[],
+  trades: Trade[] = []
 ): OwnerTransactionActivity {
-  return accumulate(transactions).get(ownerId) ?? emptyOwnerActivity(ownerId);
+  return accumulate(transactions, trades).get(ownerId) ?? emptyOwnerActivity(ownerId);
 }
 
 /**

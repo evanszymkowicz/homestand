@@ -16,6 +16,12 @@ import type { Matchup, Owner, Team } from "../../types";
 
 type MeetingSortKey = "date" | "round" | "aScore" | "bScore" | "result";
 
+/** Owner's record / per meeting. Names ending in s take a bare apostrophe, so a
+ *  league full of owners doesn't produce "Chitters's" and "James's". */
+function possessive(name: string): string {
+  return name.endsWith("s") ? `${name}'` : `${name}'s`;
+}
+
 function meetingSortValue(meeting: Meeting, key: MeetingSortKey): number | string {
   switch (key) {
     case "date":
@@ -148,19 +154,19 @@ function PairDetailBody({
         <StatCard
           label="Regular Season"
           value={`${formatRecord(summary.regular.wins, summary.regular.losses, summary.regular.ties)} (${formatWinPct(winPct(summary.regular))})`}
-          detail={`${a.name}'s record`}
+          detail={`${possessive(a.name)} record`}
         />
         <StatCard
           label="Playoffs"
           value={`${formatRecord(summary.playoffs.wins, summary.playoffs.losses, summary.playoffs.ties)} (${formatWinPct(winPct(summary.playoffs))})`}
-          detail={`${a.name}'s record`}
+          detail={`${possessive(a.name)} record`}
         />
         <StatCard label={`${a.name} PF`} value={formatPoints(summary.pointsForA)} detail="All meetings" />
         <StatCard label={`${b.name} PF`} value={formatPoints(summary.pointsForB)} detail="All meetings" />
         <StatCard
           label="Avg Margin"
           value={formatDifferential(summary.averageMargin)}
-          detail={`${a.name} per meeting`}
+          detail={`${possessive(a.name)} per meeting`}
         />
       </div>
 

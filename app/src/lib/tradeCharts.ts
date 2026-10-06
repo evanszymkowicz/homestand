@@ -49,7 +49,9 @@ export function computeWeeklyHeadToHead(
 }
 
 export interface TradeRadarMetric {
-  /** Stable key for React lists and the sr-only data table. */
+  /** Stable key for React lists. NOTE: no data table consumes this yet --
+   * RadarComparison renders the chart only, so the two radar axes it plots have
+   * no tabular equivalent anywhere in the app. Render one, or drop this claim. */
   key: string;
   /** Axis label shown on the chart. */
   label: string;

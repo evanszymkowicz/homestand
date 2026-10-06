@@ -100,7 +100,10 @@ export function SortHeader<K extends string>({
       onMouseEnter={tooltip ? () => setTooltipRect(buttonRef.current?.getBoundingClientRect() ?? null) : undefined}
       onMouseLeave={tooltip ? () => setTooltipRect(null) : undefined}
       className={`text-eyebrow ${stickyClass} bg-surface px-3 py-2 font-semibold tracking-wide text-ink-faint uppercase ${alignClass} ${className}`}>
-      {/* h-6 keeps the tap target at WCAG 2.5.8's 24px minimum. */}
+      {/* h-6 + min-w-6 keeps the tap target at WCAG 2.5.8's 24x24 CSS px minimum.
+          Height alone was not enough: as an inline-flex button the width collapsed
+          to the label, so single-letter columns (L, W, R) were 7-12px wide and
+          unhittable on touch. */}
       <button
         ref={buttonRef}
         type="button"
@@ -116,7 +119,7 @@ export function SortHeader<K extends string>({
               }
             : undefined
         }
-        className={`inline-flex h-6 items-center justify-center gap-0.5 hover:text-ink ${active ? "text-ink" : ""}`}>
+        className={`inline-flex h-6 min-w-6 items-center justify-center gap-0.5 hover:text-ink ${active ? "text-ink" : ""}`}>
         {label}
       </button>
       {tooltipNode}

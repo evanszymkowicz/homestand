@@ -570,12 +570,18 @@ function RadarComparison({ sideA, sideB, teamAName, teamBName }: RadarComparison
             <PolarGrid />
             <PolarAngleAxis dataKey="label" tick={{ fontSize: 11, fill: "var(--color-ink-faint)" }} />
             <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
+            {/* strokeDasharray is not decoration: in light mode --color-accent and
+              --color-diverge-neg BOTH resolve to var(--hs-blue), so the two
+              series were the same colour and the legend swatches gave a
+              reader no way to tell them apart (WCAG 1.4.1 Use of Color). The
+              dash pattern is the non-colour channel that survives both themes. */}
             <Radar
               name={teamAName || "Team A"}
               dataKey="sideA"
               stroke="var(--color-accent)"
               fill="var(--color-accent)"
               fillOpacity={0.3}
+              strokeDasharray="none"
             />
             <Radar
               name={teamBName || "Team B"}
@@ -583,6 +589,8 @@ function RadarComparison({ sideA, sideB, teamAName, teamBName }: RadarComparison
               stroke="var(--color-diverge-neg)"
               fill="var(--color-diverge-neg)"
               fillOpacity={0.2}
+              strokeDasharray="6 3"
+              strokeWidth={2}
             />
             <Legend verticalAlign="bottom" height={24} iconType="circle" />
             <Tooltip

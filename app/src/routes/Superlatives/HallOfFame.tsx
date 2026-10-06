@@ -70,6 +70,16 @@ export function HallOfFame({ owners, seasons, keepers, seasonPoints }: HallOfFam
         <p className="mb-3 text-xs text-ink-faint">
           Box scores aggregate by week, so entries are shown the week they happened in.
         </p>
+        {/* CoverageBadge reads "since 2019" because summarizeCoverage counts
+            only stat_lines === "full" seasons, but these two boards are built
+            from statLineYears, which deliberately includes 2018 (its box scores
+            carry real counting totals). So the badge understated the span by a
+            season and the no-hitter cell was blank for a reason the page never
+            explained. Spelled out here rather than changing CoverageBadge --
+            its other call sites are correct. */}
+        <p className="mb-3 text-xs text-ink-faint">
+          2018 shutouts and blown saves are included; no-hitter detection needs 2019+ stat lines.
+        </p>
         {state.status === "loading" && <p className="text-ink-dim">Loading box scores…</p>}
         {state.status === "error" && <p className="text-ink-dim">Couldn't load box scores. Try refreshing the page.</p>}
         {state.status === "success" && <PitchingFeatsTable boxScoresByYear={state.data} owners={owners} />}

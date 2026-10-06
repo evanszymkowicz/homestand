@@ -134,7 +134,7 @@ export function Login() {
               {loading ? "Loading…" : "Log in"}
             </button>
 
-            <div className="text-right">
+            <div className="text-center">
               <button
                 type="button"
                 className="text-xs underline"
