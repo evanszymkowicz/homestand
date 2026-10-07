@@ -32,7 +32,7 @@ if (target !== "local" && target !== "remote") {
   console.error("--target must be local or remote");
   process.exit(1);
 }
-const localFlag = target === "local" ? ["--local"] : [];
+const targetFlag = target === "local" ? ["--local"] : ["--remote"];
 if (!values.importId && !values.pending) {
   console.error("--importId <id> or --pending is required");
   process.exit(1);
@@ -47,7 +47,7 @@ if (values.importId && !/^[0-9a-fA-F-]{1,64}$/.test(values.importId)) {
 function d1Query(sql) {
   const out = execFileSync(
     "npx",
-    ["wrangler", "d1", "execute", "homestand-db", ...localFlag, "--command", sql],
+    ["wrangler", "d1", "execute", "homestand-db", ...targetFlag, "--command", sql],
     { cwd: appDir, encoding: "utf-8" }
   );
   const jsonStart = out.indexOf("[");

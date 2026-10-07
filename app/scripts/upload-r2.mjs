@@ -22,7 +22,7 @@ const appRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const src = path.join(appRoot, "..", "data", "processed");
 const BUCKET = "homestand-raw-archive";
 const DEMO_IMPORT_ID = "demo-import";
-const LOCAL_FLAG = process.argv.includes("--remote") ? [] : ["--local"];
+const REMOTE_FLAG = process.argv.includes("--remote") ? ["--remote"] : ["--local"];
 
 if (!existsSync(src)) {
   console.error(`upload-r2: source not found at ${src} — run sync-data first`);
@@ -42,7 +42,7 @@ for (const file of files) {
   const key = `processed/${DEMO_IMPORT_ID}/${path.relative(src, file).split(path.sep).join("/")}`;
   // argv array, never a shell string -- keys come from the filesystem but the
   // command must not be able to expand anything.
-  execFileSync("npx", ["wrangler", "r2", "object", "put", `${BUCKET}/${key}`, "--file", file, ...LOCAL_FLAG], {
+  execFileSync("npx", ["wrangler", "r2", "object", "put", `${BUCKET}/${key}`, "--file", file, ...REMOTE_FLAG], {
     cwd: appRoot,
     stdio: ["ignore", "ignore", "inherit"],
   });
@@ -58,7 +58,7 @@ for (const name of ["retired-owners.json", "jersey-history-overrides.json", "pos
   if (!existsSync(file)) continue;
   execFileSync(
     "npx",
-    ["wrangler", "r2", "object", "put", `${BUCKET}/processed/${DEMO_IMPORT_ID}/${name}`, "--file", file, ...LOCAL_FLAG],
+    ["wrangler", "r2", "object", "put", `${BUCKET}/processed/${DEMO_IMPORT_ID}/${name}`, "--file", file, ...REMOTE_FLAG],
     {
       cwd: appRoot,
       stdio: ["ignore", "ignore", "inherit"],

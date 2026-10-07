@@ -53,7 +53,7 @@ APP_DIR = ROOT / "app"
 TARGET = os.environ.get("ESPN_TARGET", "local")
 if TARGET not in ("local", "remote"):
     sys.exit(f"ESPN_TARGET must be 'local' or 'remote', got {TARGET!r}")
-LOCAL_FLAG = ["--local"] if TARGET == "local" else []
+TARGET_FLAG = ["--local"] if TARGET == "local" else ["--remote"]
 
 
 def _set_status(import_id: str, status: str, detail: str | None = None) -> None:
@@ -65,7 +65,7 @@ def _set_status(import_id: str, status: str, detail: str | None = None) -> None:
         sql += f" -- {safe}"
     try:
         subprocess.run(
-            ["npx", "wrangler", "d1", "execute", "homestand-db", *LOCAL_FLAG, "--command", sql],
+            ["npx", "wrangler", "d1", "execute", "homestand-db", *TARGET_FLAG, "--command", sql],
             cwd=str(APP_DIR),
             check=True,
             capture_output=True,
@@ -83,7 +83,7 @@ def _upload(src_dir: Path, key_prefix: str) -> int:
                 "npx", "wrangler", "r2", "object", "put",
                 f"{R2_BUCKET}/{key_prefix}/{rel}",
                 "--file", str(path),
-                *LOCAL_FLAG,
+                *TARGET_FLAG,
             ],
             cwd=str(APP_DIR),
             check=True,
@@ -112,7 +112,7 @@ def _upload_proxy_served_manual(manual_dir: Path, key_prefix: str) -> int:
                 "npx", "wrangler", "r2", "object", "put",
                 f"{R2_BUCKET}/{key_prefix}/{name}",
                 "--file", str(path),
-                *LOCAL_FLAG,
+                *TARGET_FLAG,
             ],
             cwd=str(APP_DIR),
             check=True,
