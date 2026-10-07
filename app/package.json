@@ -8,6 +8,8 @@
     "dev": "npm run dev:vite & wrangler pages dev --proxy 5173",
     "dev:vite": "vite --strictPort --port 5173",
     "build": "node scripts/sync-data.mjs && node scripts/upload-r2.mjs && tsc -b && vite build && node scripts/strip-public-data.mjs",
+    "upload-r2:remote": "node scripts/upload-r2.mjs --remote",
+    "deploy": "npm run build && npm run upload-r2:remote && wrangler pages deploy dist",
     "lint": "oxlint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

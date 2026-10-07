@@ -46,6 +46,20 @@ export function secretEquals(candidate: string | null, expected: string | undefi
   return timingSafeEqual(pa, pb);
 }
 
+/** Blocks cross-origin GETs to the data proxy and other cookie-authenticated
+ * endpoints. Same-origin requests do not send an `Origin` header for GET, so
+ * absence is allowed; a present Origin must match the request's own origin.
+ *
+*/
+export function requireSameOrigin(request: Request): Response | null {
+  const origin = request.headers.get("Origin");
+  if (!origin) return null;
+  if (origin !== new URL(request.url).origin) {
+    return jsonResponse({ error: "cross-origin request rejected" }, 403);
+  }
+  return null;
+}
+
 /** Extracts and checks an `Authorization: Bearer ...` header. Fails closed when
  * the expected key is unset, so a missing secret disables the endpoint rather
  * than opening it. */

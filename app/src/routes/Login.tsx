@@ -78,7 +78,11 @@ export function Login() {
       <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-4 py-12 text-center">
         <div className="scorebook-card p-6">
           <h1 className="wordmark-piped font-brand text-5xl">Homestand</h1>
-          <p className="mt-2 text-sm text-ink-dim">Premium fantasy baseball analytics.</p>
+          <p className="mt-2 text-sm font-bold uppercase tracking-widest text-ink-dim">
+            Gain the edge<span className="text-hs-red">.</span> Build your team
+            <span className="text-hs-red">.</span> Stay ahead of the competition
+            <span className="text-hs-red">.</span>
+          </p>
 
           {/* -mb-[2px] pulls the active tab's rule onto the container's, so the
               two never stack into a 3px double line (same trick as AppShell). */}

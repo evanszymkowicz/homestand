@@ -29,8 +29,6 @@ export function AppShell() {
             </div>
 
             <div className="flex items-center gap-3">
-              <ActivityButton onClick={() => setActivityOpen(true)} />
-              <ThemeToggle />
               {account && (
                 <>
                   <span className="hidden text-sm font-bold sm:inline">
@@ -41,6 +39,8 @@ export function AppShell() {
                   </button>
                 </>
               )}
+              <ActivityButton onClick={() => setActivityOpen(true)} />
+              <ThemeToggle />
             </div>
           </div>
 

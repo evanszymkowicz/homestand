@@ -1,15 +1,18 @@
 import type { PagesFunction } from "@cloudflare/workers-types";
-import { jsonResponse, validateSession } from "../../../lib/auth";
+import { jsonResponse, requireSameOrigin, validateSession } from "../../../lib/auth";
 import { resolveCollection } from "../../../../lib/collections";
 
 /** Authenticated, per-account read of one processed collection.
  *
- * Checks in order: a live session, that the import belongs to that session's
- * account, that it finished, and that it has not passed its retention expiry.
- * The bytes come from R2 -- the build strips dist/data -- so this is the only
- * way in and there is no unauthenticated back door.
+ * Checks in order: same-origin request, a live session, that the import belongs
+ * to that session's account, that it finished, and that it has not passed its
+ * retention expiry. The bytes come from R2 -- the build strips dist/data -- so
+ * this is the only way in and there is no unauthenticated back door.
  */
 export const onRequestGet: PagesFunction<Env> = async ({ request, env, params }) => {
+  const originCheck = requireSameOrigin(request);
+  if (originCheck) return originCheck;
+
   const account = await validateSession(request, env.DB);
   if (!account) return jsonResponse({ error: "unauthenticated" }, 401);
 
