@@ -3,9 +3,7 @@ import { jsonResponse, requireAdmin } from "../../lib/auth";
 
 const FREE_TIER_TTL_DAYS = 30;
 
-/** Evicts idle free-tier accounts. Intended to be driven by a Cron Trigger, not
- * hit by hand; it is an HTTP endpoint only because Pages has no scheduled
- * handler wired up yet.
+/** Evicts idle free-tier accounts. Driven hourly by the `cron/` Worker, which
  *
  * Two guards, because a blanket `tier = 'free' AND created_at < cutoff` is a
  * foot-gun: it would destroy an account mid-crawl, and it reports the same

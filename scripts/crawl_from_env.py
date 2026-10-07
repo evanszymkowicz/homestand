@@ -47,6 +47,14 @@ from derive_owner_map import PROXY_SERVED_MANUAL_FILES  # noqa: E402
 R2_BUCKET = "homestand-raw-archive"
 APP_DIR = ROOT / "app"
 
+# ESPN_TARGET=local (default) keeps every D1/R2 call on the throwaway local
+# emulator. ESPN_TARGET=remote talks to the real database and bucket -- which is
+# the only thing that makes a production run mean anything.
+TARGET = os.environ.get("ESPN_TARGET", "local")
+if TARGET not in ("local", "remote"):
+    sys.exit(f"ESPN_TARGET must be 'local' or 'remote', got {TARGET!r}")
+LOCAL_FLAG = ["--local"] if TARGET == "local" else []
+
 
 def _set_status(import_id: str, status: str, detail: str | None = None) -> None:
     """Best-effort D1 update. Never raises -- a status write that fails must not
@@ -57,7 +65,7 @@ def _set_status(import_id: str, status: str, detail: str | None = None) -> None:
         sql += f" -- {safe}"
     try:
         subprocess.run(
-            ["npx", "wrangler", "d1", "execute", "homestand-db", "--local", "--command", sql],
+            ["npx", "wrangler", "d1", "execute", "homestand-db", *LOCAL_FLAG, "--command", sql],
             cwd=str(APP_DIR),
             check=True,
             capture_output=True,
@@ -75,7 +83,7 @@ def _upload(src_dir: Path, key_prefix: str) -> int:
                 "npx", "wrangler", "r2", "object", "put",
                 f"{R2_BUCKET}/{key_prefix}/{rel}",
                 "--file", str(path),
-                "--local",
+                *LOCAL_FLAG,
             ],
             cwd=str(APP_DIR),
             check=True,
@@ -104,7 +112,7 @@ def _upload_proxy_served_manual(manual_dir: Path, key_prefix: str) -> int:
                 "npx", "wrangler", "r2", "object", "put",
                 f"{R2_BUCKET}/{key_prefix}/{name}",
                 "--file", str(path),
-                "--local",
+                *LOCAL_FLAG,
             ],
             cwd=str(APP_DIR),
             check=True,

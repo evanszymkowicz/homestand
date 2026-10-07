@@ -1,9 +1,9 @@
 -- Long-horizon rate limiting.
 --
--- The native `ratelimits` binding in wrangler.jsonc covers the per-minute burst
--- and costs no D1 write, but its period may only be 10 or 60 seconds. That leaves
--- exactly the two ceilings worth closing on an auth surface: an unbounded hourly
--- run at one account's password, and ~300 reset emails an hour to one victim.
+-- This is now the only rate limiter on the auth surface. It was written alongside
+-- Cloudflare's native `ratelimits` binding, which covered a per-minute burst with
+-- no D1 write, but a Pages config cannot declare that binding, so it was removed
+-- and this table took over every window from 10 minutes to a day.
 --
 -- One row per (bucket, fixed window). `bucket` is the plain target string
 -- ("login", "ip", "203.0.113.7") rather than a hash: an unsalted digest of an
@@ -26,6 +26,5 @@ CREATE TABLE IF NOT EXISTS rate_limit_counters (
   PRIMARY KEY (bucket, window_start)
 ) WITHOUT ROWID;
 
--- Supports the opportunistic prune in rateLimitHorizon.ts, which deletes on
--- window_start alone.
+-- Supports the prune in cron/index.ts, which deletes on window_start alone.
 CREATE INDEX IF NOT EXISTS idx_rate_limit_counters_window ON rate_limit_counters(window_start);

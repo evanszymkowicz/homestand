@@ -3,13 +3,14 @@
   "name": "homestand",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
   "vars": {
     "APP_NAME": "Homestand",
   },
   // TURNSTILE_SECRET_KEY, ADMIN_API_KEY and CREDENTIALS_ENCRYPTION_KEY are
   // secrets, not vars -- declaring them here as empty strings invites someone
   // to fill one in and commit it. They ship with `wrangler secret put <NAME>`
-  // and live in .dev.vars locally. The handlers all fail closed when unset.
+  // and live in .env locally. The handlers all fail closed when unset.
   "d1_databases": [
     {
       "binding": "DB",
@@ -22,31 +23,6 @@
     {
       "binding": "RAW_ARCHIVE",
       "bucket_name": "homestand-raw-archive",
-    },
-  ],
-  // Rate limits for the three endpoints that are either unauthenticated or
-  // carry credentials: login (a 100k-iteration PBKDF2 per attempt, so both a
-  // CPU-burn lever and an unthrottled password oracle), reset-request (writes a
-  // D1 row per call), and probe (a full ESPN session oracle). Signup is already
-  // gated by Turnstile.
-  //
-  // Period must be 10 or 60 seconds -- that is the API, not a preference. See
-  // app/functions/lib/rateLimit.ts for the per-key scheme and its ceilings.
-  "ratelimits": [
-    {
-      "name": "LOGIN_LIMITER",
-      "namespace_id": "1001",
-      "simple": { "limit": 20, "period": 60 },
-    },
-    {
-      "name": "RESET_LIMITER",
-      "namespace_id": "1002",
-      "simple": { "limit": 5, "period": 60 },
-    },
-    {
-      "name": "PROBE_LIMITER",
-      "namespace_id": "1003",
-      "simple": { "limit": 10, "period": 60 },
     },
   ],
 }

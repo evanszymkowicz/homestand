@@ -55,7 +55,7 @@ automatically before `dev`, `test`, and `build`.
 
 ```sh
 npm run dev          # vite
-npm run build        # sync-data + tsc -b + vite build
+npm run build        # sync-data + upload-r2 (local) + tsc -b + vite build + strip-public-data
 npm test             # sync-data + vitest run
 npm run lint         # oxlint
 npm run format       # prettier --write .

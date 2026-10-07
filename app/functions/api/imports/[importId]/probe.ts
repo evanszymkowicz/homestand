@@ -3,7 +3,7 @@ import { jsonResponse, validateSession } from "../../../lib/auth";
 
 import { buildUrl, redactSwid, requestView } from "../../../../lib/espn/espnClient";
 import { parseEspnSession } from "../../../../lib/espnSession";
-import { enforceRateLimit, probeKey, type RateLimiter } from "../../../lib/rateLimit";
+
 import { enforceHorizon, horizonRules } from "../../../lib/rateLimitHorizon";
 
 interface ProbeBody {
@@ -30,8 +30,6 @@ export const onRequestPost: PagesFunction<Env> = async context => {
 
   // Each probe costs a paid call against the caller's own ESPN session, so this
   // bounds both the credential oracle and how hard we lean on ESPN.
-  const limited = await enforceRateLimit(env.PROBE_LIMITER as unknown as RateLimiter, [probeKey(request, account.id)]);
-  if (limited) return limited;
 
   // A daily budget matters more here than a per-minute one: each probe is a real
   // request to ESPN from this service's IP, so this bounds how hard we lean on

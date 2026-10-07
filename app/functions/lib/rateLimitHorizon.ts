@@ -1,3 +1,19 @@
+const IP_HEADER = "CF-Connecting-IP";
+/** Cloudflare always sets this; the fallback only fires in local `wrangler pages
+ * dev`, where the header is synthetic anyway. Using "unknown" rather than
+ * refusing keeps local testing usable. */
+const FALLBACK_CLIENT = "unknown";
+
+/** The client's IP, used as one of the keys.
+ *
+ * Cloudflare's own docs discourage keying on IP because NAT and mobile
+ * carriers share addresses between unrelated users -- so this is deliberately
+ * never the *only* key. It bounds one host's brute force; the account key is
+ * what actually protects a single victim. */
+export function clientIp(request: Request): string {
+  return request.headers.get(IP_HEADER) ?? FALLBACK_CLIENT;
+}
+
 export interface CounterDB {
   prepare(sql: string): {
     bind(...values: unknown[]): {
@@ -91,8 +107,14 @@ export interface HorizonRule extends HorizonLimit {
   value: string;
 }
 
+/** The window size is part of the bucket, not just the target.
+ *
+ * Without it, the hourly and daily rows for one account collide whenever a day
+ * boundary is also an hour boundary — which is every midnight UTC, since both
+ * windows floor to the same timestamp. They then share one row, so the hourly
+ * rule reads the daily counter and denies ~an hour early. */
 function bucketOf(rule: HorizonRule): string {
-  return `${rule.action}:${rule.kind}:${rule.value}`;
+  return `${rule.action}:${rule.kind}:${rule.value}:${rule.windowMs}`;
 }
 
 /** Floors `nowMs` to the start of its window, in epoch seconds. */
@@ -103,14 +125,6 @@ function windowStart(nowMs: number, windowMs: number): number {
 const BUMP = `INSERT INTO rate_limit_counters (bucket, window_start, hits) VALUES (?, ?, 1)
 ON CONFLICT (bucket, window_start) DO UPDATE SET hits = hits + 1
 RETURNING hits`;
-
-const PRUNE = "DELETE FROM rate_limit_counters WHERE window_start < ?";
-
-/** Rows older than this are unreachable by any policy, so the prune can drop them. */
-const PRUNE_AFTER_SECONDS = 2 * 24 * 60 * 60;
-
-/** Probability of running the prune on any given request. */
-const PRUNE_PROBABILITY = 0.02;
 
 function unavailable(): Response {
   return new Response(JSON.stringify({ error: "rate limiting is unavailable" }), {
@@ -126,13 +140,17 @@ function tooMany(retryAfterSeconds: number): Response {
   });
 }
 
-export async function enforceHorizon(db: CounterDB | undefined, rules: HorizonRule[]): Promise<Response | null> {
+/** `nowMs` is only overridden by tests, which otherwise depend on where in the
+ * hour and day the suite happens to run. */
+export async function enforceHorizon(
+  db: CounterDB | undefined,
+  rules: HorizonRule[],
+  nowMs = Date.now()
+): Promise<Response | null> {
   // No rules means no policy covers this call, which is not a failure -- the
   // caller simply had nothing to charge. A missing database *is* a failure.
   if (rules.length === 0) return null;
   if (!db) return unavailable();
-
-  const nowMs = Date.now();
 
   try {
     let retryAfterSeconds = 0;
@@ -147,14 +165,6 @@ export async function enforceHorizon(db: CounterDB | undefined, rules: HorizonRu
         const secondsUntilReset = Math.max(1, start + windowSec - Math.floor(nowMs / 1000));
         retryAfterSeconds = Math.max(retryAfterSeconds, secondsUntilReset);
       }
-    }
-
-    if (Math.random() < PRUNE_PROBABILITY) {
-      // Awaited rather than fire-and-forget
-      await db
-        .prepare(PRUNE)
-        .bind(Math.floor(nowMs / 1000) - PRUNE_AFTER_SECONDS)
-        .run();
     }
 
     return retryAfterSeconds > 0 ? tooMany(retryAfterSeconds) : null;

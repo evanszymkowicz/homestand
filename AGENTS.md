@@ -4,19 +4,25 @@ Guidance for AI agents working in this repository. Harness- and model-agnostic.
 
 ## Project
 
-Homestand. An invite-only service that imports an ESPN fantasy baseball league's history and
+Homestand. A private, approval-gated service that imports an ESPN fantasy baseball league's
+history and
 serves it as an interactive dashboard.
 
 ## Status
 
-S1/S2 landed; S5 scoping landed. Invite-only auth with D1 sessions, encrypted ESPN
-credential storage, the manual session-cookie fallback, the tenant-scoped data proxy, and the
-landing page are in place. The automated crawl-to-scoped-data path is not finished. Read before
-starting work:
+S1/S2 landed; S5 scoping landed. Auth is email + password with email verification and an
+admin approval gate (`./approve.sh <email>`), plus one-click demo access; D1 sessions,
+encrypted ESPN credential storage, the manual session-cookie fallback, the tenant-scoped data
+proxy, and the landing page are in place. Gmail SMTP sends verification and reset mail
+(`GMAIL_USER` / `GMAIL_APP_PASSWORD`). `cron/` runs the eviction sweep hourly. The crawl
+runner takes `--target remote` for production runs and `--pending` to sweep queued imports;
+who triggers it (some machine running that command on a schedule) is still open. Read
+before starting work:
 
 - `context/features/homestand-league-import-spec.md` — the canonical architecture and phased plan.
-- `context/future-items.md` — known-open work, including one item that **blocks public
-  reachability** (`login` / `reset-request` / `probe` are unthrottled).
+- `context/future-items.md` — known-open work, including the one item that **blocks public
+  reachability** (nothing runs the production crawl, so a real signup gets an empty
+  dashboard). Rate limiting is closed.
 - `context/ai-interaction.md` — how to work in this repo: data rules, verification expectations.
 - `context/coding-standards.md` — Python and TypeScript/React conventions.
 - `data/README.md` — the processed data dictionary. Read before consuming any JSON.
@@ -60,4 +66,4 @@ Commands are listed in `CHEATSHEET.md`. Two traps worth keeping in context:
 - **Data layer:** Python, `espn-api` package plus raw `requests` against ESPN's v3 API.
 - **App:** Vite + React + TypeScript + React Router; Recharts for charts; Vitest for tests.
 - **Data storage:** versioned JSON under `data/`, produced by Python and consumed by the app.
-- **Hosting:** Cloudflare Pages; D1 and R2 planned for per-account imports.
+- **Hosting:** Cloudflare Pages; D1 and R2 hold per-account imports today.

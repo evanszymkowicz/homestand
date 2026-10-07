@@ -1,0 +1,22 @@
+{
+  "$schema": "../app/node_modules/wrangler/config-schema.json",
+  "name": "homestand-cron",
+  "main": "index.ts",
+  "compatibility_date": "2026-10-01",
+  // Hourly sweep; the endpoint itself no-ops most hours.
+  "triggers": {
+    "crons": [
+      "17 * * * *"
+    ]
+  },
+  "vars": {
+    "HOMESTAND_ORIGIN": "https://homestand.pages.dev"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "homestand-db",
+      "database_id": "689406df-4953-48b1-8b36-66c871a64fab",
+    },
+  ]
+}

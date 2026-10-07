@@ -1,13 +1,11 @@
 import type { PagesFunction } from "@cloudflare/workers-types";
 import { generateSessionToken, hashPassword, jsonResponse, verifyTurnstile } from "../../lib/auth";
-import { clientIp } from "../../lib/rateLimit";
-import { enforceHorizon, horizonRules } from "../../lib/rateLimitHorizon";
+import { clientIp, enforceHorizon, horizonRules } from "../../lib/rateLimitHorizon";
 import { sendEmail } from "../../lib/email";
 
 interface SignupBody {
   email?: string;
   password?: string;
-  inviteToken?: string;
   turnstileToken?: string;
 }
 
@@ -19,7 +17,6 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const body = (await request.json()) as SignupBody;
   const email = body.email?.trim().toLowerCase();
   const password = body.password;
-  const inviteToken = body.inviteToken?.trim();
   const turnstileToken = body.turnstileToken?.trim();
 
   if (!email || !isValidEmail(email)) {
@@ -28,38 +25,14 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   if (!password || password.length < 8) {
     return jsonResponse({ error: "password must be at least 8 characters" }, 400);
   }
-  if (!inviteToken) {
-    return jsonResponse({ error: "invite token is required" }, 400);
-  }
 
-  // Turnstile below is a client-side challenge: it can be solved, it cannot be
-  // exhausted, so it is a gate rather than a limit. This is the account-creation
-  // door, so it gets a real hourly ceiling. Charged before the Turnstile
-  // verification so an over-budget attempt does not also cost a network call.
-  //
-  // The per-address rule is not a lockout risk: signup also requires an invite
-  // token bound to that address, so exhausting an address's quota cannot deny
-  // anyone an account they were entitled to.
+  // Turnstile below is a client-side challenge: it can be solved, it cannot be exhausted
   const overHorizon = await enforceHorizon(env.DB, horizonRules("signup", { ip: clientIp(request), email }));
   if (overHorizon) return overHorizon;
 
   const turnstileOk = await verifyTurnstile(turnstileToken ?? "", env.TURNSTILE_SECRET_KEY ?? "");
   if (!turnstileOk) {
     return jsonResponse({ error: "turnstile challenge failed" }, 400);
-  }
-
-  const invite = await env.DB.prepare(
-    `SELECT token FROM invites
-       WHERE token = ?
-         AND (email IS NULL OR LOWER(email) = LOWER(?))
-         AND used_by_account_id IS NULL
-         AND expires_at > datetime('now')`
-  )
-    .bind(inviteToken, email)
-    .first<{ token: string }>();
-
-  if (!invite) {
-    return jsonResponse({ error: "invalid or expired invite token" }, 400);
   }
 
   const existing = await env.DB.prepare("SELECT id FROM accounts WHERE email = ?").bind(email).first<{ id: string }>();
@@ -73,12 +46,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   // ponytail: email verification is required before first login. Do not set verified=1 here.
   await env.DB.prepare(
-    "INSERT INTO accounts (id, email, password_hash, display_name, verified, tier, demo) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    "INSERT INTO accounts (id, email, password_hash, display_name, verified, tier, demo, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
   )
-    .bind(accountId, email, passwordHash, displayName, 0, "free", 0)
+    .bind(accountId, email, passwordHash, displayName, 0, "free", 0, 0)
     .run();
 
-  await env.DB.prepare("UPDATE invites SET used_by_account_id = ? WHERE token = ?").bind(accountId, inviteToken).run();
 
   const verifyToken = await generateSessionToken();
   const verifyExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
@@ -92,6 +64,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   verifyUrl.pathname = `/verify`;
   verifyUrl.search = `?token=${encodeURIComponent(verifyToken)}`;
   await sendEmail(
+    env,
     email,
     "Verify your Homestand email",
     `Open this link to verify your email: ${verifyUrl.toString()}\n\nIf you didn’t sign up, ignore this.`

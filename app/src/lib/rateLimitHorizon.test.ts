@@ -24,6 +24,8 @@ interface StubOptions {
   offset?: number;
   /** Throw on the charge, simulating a D1 error. */
   failOnCharge?: boolean;
+  /** Fixed clock for window flooring. */
+  now?: number;
 }
 
 const acctRules = (value = "a@b.com"): HorizonRule[] => horizonRules("login", { acct: value, ip: "1.2.3.4" });
@@ -46,23 +48,23 @@ function windowStartFor(nowMs: number, windowMs: number): number {
  */
 function counterDb(
   rules: HorizonRule[],
-  { offset = 1, failOnCharge = false }: Omit<StubOptions, "hits"> = {}
+  { offset = 1, failOnCharge = false, now = Date.now() }: StubOptions = {}
 ): CounterDB & { charged: string[] } {
-  const now = Date.now();
   const allowances = new Map<string, number>();
   for (const rule of rules) {
-    allowances.set(`${rule.action}:${rule.kind}:${rule.value}@${windowStartFor(now, rule.windowMs)}`, rule.limit);
+    allowances.set(
+      `${rule.action}:${rule.kind}:${rule.value}:${rule.windowMs}@${windowStartFor(now, rule.windowMs)}`,
+      rule.limit
+    );
   }
   const charged: string[] = [];
   return {
     charged,
-    prepare(sql: string) {
-      const isPrune = sql.includes("DELETE");
+    prepare(_sql: string) {
       return {
         bind: (...values: unknown[]) => ({
           first: async <T>(): Promise<T | null> => {
             if (failOnCharge) throw new Error("D1 unavailable");
-            if (isPrune) return null;
             const [bucket, window] = values as [string, number];
             charged.push(bucket);
             const limit = allowances.get(`${bucket}@${window}`) ?? 1;
@@ -130,7 +132,11 @@ describe("enforceHorizon", () => {
 
   it("advertises the longest wait, not the shortest, since every tripped window must clear", async () => {
     const rules = acctRules();
-    const res = await enforceHorizon(counterDb(rules), rules);
+    // Fixed clock: 10:00 UTC, so the hourly window has 50 minutes left and the
+    // daily one nearly 24 hours. Without this the assertion holds only when the
+    // suite happens to run early in the UTC day.
+    const nowMs = Date.UTC(2026, 0, 2, 10, 0, 0);
+    const res = await enforceHorizon(counterDb(rules, { now: nowMs }), rules, nowMs);
     const retryAfter = Number(res?.headers.get("Retry-After"));
     // Both the hourly and the daily window are spent, and the daily one has
     // barely started. Advertising the hourly reset would invite an immediate
@@ -170,11 +176,13 @@ describe("enforceHorizon", () => {
     const db = counterDb([...first, ...second], { offset: -1 });
     await enforceHorizon(db, first);
     await enforceHorizon(db, second);
+    // Bucket strings carry the window size too, so the two windows of one
+    // address are distinct rows as well as distinct from the other address.
     expect(db.charged).toEqual([
-      "reset:email:a@b.com",
-      "reset:email:a@b.com",
-      "reset:email:c@d.com",
-      "reset:email:c@d.com",
+      "reset:email:a@b.com:3600000",
+      "reset:email:a@b.com:86400000",
+      "reset:email:c@d.com:3600000",
+      "reset:email:c@d.com:86400000",
     ]);
   });
 

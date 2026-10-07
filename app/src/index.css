@@ -46,6 +46,9 @@
      6.03 / 5.36 / 4.79 across those three surfaces. */
   --hs-ink-faint: #645c52;
   --hs-rule: #d4cfc2;
+  /* Shadow tokens, theme-aware. */
+  --hs-shadow-soft: rgba(43, 36, 32, 0.08);
+  --hs-shadow-medium: rgba(43, 36, 32, 0.12);
   /* Darkened from #c41e3a for WCAG 2.1 AA (1.4.3): 4.26:1 on --color-surface-2,
      under 4.5 at body sizes. Backs --color-red, --color-diverge-pos and
      --color-matchup-loss, all of which carry text. Still a button background
@@ -166,6 +169,9 @@
   --color-il: #a8a194;
   --color-il-soft: #2a2520;
 
+  --hs-shadow-soft: rgba(0, 0, 0, 0.35);
+  --hs-shadow-medium: rgba(0, 0, 0, 0.35);
+
   color-scheme: dark;
 }
 
@@ -210,6 +216,9 @@
     --color-achievement-soft: #3a3118;
     --color-il: #a8a194;
     --color-il-soft: #2a2520;
+
+    --hs-shadow-soft: rgba(0, 0, 0, 0.35);
+    --hs-shadow-medium: rgba(0, 0, 0, 0.35);
 
     color-scheme: dark;
   }
@@ -327,7 +336,7 @@ body {
   border: 2px solid var(--color-ink);
   border-radius: 4px;
   background: var(--color-surface);
-  box-shadow: 3px 3px 0 rgba(43, 36, 32, 0.08);
+  box-shadow: 3px 3px 0 var(--hs-shadow-soft);
 }
 .scorebook-card::before,
 .scorebook-card::after {
@@ -348,6 +357,29 @@ body {
   bottom: -2px;
   right: -2px;
   border-width: 0 2px 2px 0;
+}
+
+/* Marketing screenshot frame: same border and corner marks as a scorebook card,
+   but flush -- no padding, no surface fill behind the image. */
+/* Marketing frames: the capture keeps its own aspect and is never scaled to
+   fill, letterboxed or cropped. Frames hug the image; the column only constrains
+   width. */
+.scorebook-card.landing-shot {
+  padding: 0;
+  background: none;
+  width: fit-content;
+  max-width: 100%;
+}
+.scorebook-card.landing-shot img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+/* Frames that pad their own capture should still fill the column width. */
+.scorebook-card.landing-shot.padded {
+  width: 100%;
 }
 
 /* Scorebook stat number: the big figure in a scorebox — mono, bold, crisp. */
@@ -503,16 +535,16 @@ body {
    Dark mode is solid white — no pinstripe fill, no background-clip. */
 .wordmark-piped {
   color: var(--hs-ink);
-  -webkit-text-stroke: 2px var(--hs-red);
+  -webkit-text-stroke: 1px var(--hs-red);
   paint-order: stroke fill;
-  filter: drop-shadow(3px 3px 0 rgba(43, 36, 32, 0.12));
+  filter: drop-shadow(3px 3px 0 var(--hs-shadow-medium));
 }
 
 :root[data-theme="dark"] .wordmark-piped {
   color: #ffffff;
   -webkit-text-stroke: 1px #ffffff;
   paint-order: stroke fill;
-  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(3px 3px 0 var(--hs-shadow-medium));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -520,7 +552,7 @@ body {
     color: #ffffff;
     -webkit-text-stroke: 1px #ffffff;
     paint-order: stroke fill;
-    filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.35));
+    filter: drop-shadow(3px 3px 0 var(--hs-shadow-medium));
   }
 }
 

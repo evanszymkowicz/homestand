@@ -1,7 +1,6 @@
 import type { PagesFunction } from "@cloudflare/workers-types";
 import { generateSessionToken, jsonResponse } from "../../lib/auth";
 import { sendEmail } from "../../lib/email";
-import { enforceRateLimit, resetKey, type RateLimiter } from "../../lib/rateLimit";
 import { enforceHorizon, horizonRules } from "../../lib/rateLimitHorizon";
 
 interface ResetBody {
@@ -13,17 +12,6 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const email = body.email?.trim().toLowerCase();
   if (!email) return jsonResponse({ error: "email is required" }, 400);
 
-  // Keyed on the recipient, not the caller: the abuse is "hammer one victim's
-  // inbox". Charged before the account lookup so it applies to unknown
-  // addresses too -- and a 429 here reveals nothing about whether the account
-  // exists, which the rest of this handler is careful to preserve.
-  const limited = await enforceRateLimit(env.RESET_LIMITER as unknown as RateLimiter, [resetKey(email)]);
-  if (limited) return limited;
-
-  // The binding's window is 60s, so it alone still permits ~300 emails an hour to
-  // one inbox. This is the layer that makes the promise in the spec's security
-  // register true. Charged before the lookup, so it applies to unknown addresses
-  // too, and a 429 here reveals nothing about whether the account exists.
   const overHorizon = await enforceHorizon(env.DB, horizonRules("reset", { email }));
   if (overHorizon) return overHorizon;
 
@@ -48,6 +36,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   url.pathname = "/reset-password";
   url.search = `?token=${encodeURIComponent(token)}`;
   await sendEmail(
+    env,
     email,
     "Reset your Homestand password",
     `Open this link within the next hour to reset your password: ${url.toString()}\n\nIf you did not request this, ignore this.`

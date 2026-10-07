@@ -18,11 +18,11 @@ interface SuperlativesData {
 }
 
 const TABS = [
+  { key: "trivia", label: "Trivia" },
   { key: "streaks", label: "Streaks & Droughts" },
   { key: "lineup", label: "Worst Lineup Decision" },
   { key: "sundaycollapse", label: "Sunday Collapse" },
   { key: "halloffame", label: "Hall of Fame" },
-  { key: "trivia", label: "Trivia" },
 ] as const;
 
 type TabKey = (typeof TABS)[number]["key"];
@@ -65,7 +65,7 @@ export default function Superlatives() {
   const state = useAsync(loadSuperlativesData, []);
   const { currentTab: tab, setTab } = useUrlTab(
     "/superlatives",
-    "streaks",
+    "trivia",
     TABS.map(t => t.key)
   );
   const tabState = useAsync(() => loadSuperlativesTabData(tab), [tab]);

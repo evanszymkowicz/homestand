@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { NAV_ITEMS } from "../../lib/navigation";
 import { ThemeToggle } from "../ThemeToggle";
 import { ActivityButton } from "../ActivityButton";
@@ -7,19 +7,11 @@ import { ActivityDrawer } from "../ActivityDrawer";
 import { BaseballDiamond } from "../BaseballDiamond";
 import { useAuth } from "../../lib/auth/AuthContext";
 
-function formatToday() {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(new Date());
-}
-
 export function AppShell() {
   const [activityOpen, setActivityOpen] = useState(false);
   const closeActivity = useCallback(() => setActivityOpen(false), []);
   const navigate = useNavigate();
-  const { account, imports, currentImportId, selectImport, logout } = useAuth();
+  const { account, logout } = useAuth();
 
   const handleLogout = async () => {
     await logout();
@@ -30,73 +22,25 @@ export function AppShell() {
     <div className="scorebook-texture min-h-screen text-ink">
       <div className="scorebook-margin mx-auto max-w-5xl px-4 pb-20 pt-6 sm:px-6">
         <header className="mb-5 border-b-2 border-ink pb-4">
-          {/* flex-wrap + min-w-0: the wordmark/tagline block has a 254px min-content
-              and the controls column 235px, so a non-wrapping row forced 505px
-              of content into a 358px column at 390px wide. That made
-              document.scrollWidth 521 on every route, so the league <select> and
-              "New import" were clipped off-screen. The right column now drops
-              below the wordmark instead. */}
-          <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex min-w-0 items-center gap-3">
               <BaseballDiamond className="h-8 w-8 flex-none text-hs-red" />
-              <div>
-                <h1 className="wordmark-piped font-brand text-5xl leading-[0.85] sm:text-6xl">Homestand</h1>
-                <p className="mt-1 text-[0.6rem] font-bold tracking-[0.15em] text-ink-faint uppercase">
-                  Gain the edge<span className="text-hs-red">.</span> Build your team
-                  <span className="text-hs-red">.</span> Stay ahead of the competition
-                  <span className="text-hs-red">.</span>
-                </p>
-              </div>
+              <h1 className="wordmark-piped font-brand text-4xl leading-[0.85] sm:text-5xl">Homestand</h1>
             </div>
 
-            <div className="flex flex-col items-end gap-2">
-              <div className="flex items-center gap-1">
-                <ActivityButton onClick={() => setActivityOpen(true)} />
-                <ThemeToggle />
-              </div>
+            <div className="flex items-center gap-3">
+              <ActivityButton onClick={() => setActivityOpen(true)} />
+              <ThemeToggle />
               {account && (
-                <div className="flex items-center gap-2">
+                <>
                   <span className="hidden text-sm font-bold sm:inline">
                     {account.display_name || account.email}
-                    {account.demo ? (
-                      <span className="ml-1.5 rounded bg-hs-highlight-soft px-1.5 py-0.5 text-[0.6rem] text-hs-ink uppercase">
-                        Demo
-                      </span>
-                    ) : null}
                   </span>
                   <button onClick={handleLogout} className="text-xs font-bold text-ink-faint underline hover:text-ink">
                     Log out
                   </button>
-                </div>
+                </>
               )}
-              {account && (
-                <div className="flex items-center gap-2">
-                  {imports.length > 0 && (
-                    <select
-                      aria-label="League import"
-                      className="max-w-[10rem] truncate rounded border border-border bg-surface px-2 py-1 text-sm"
-                      value={currentImportId ?? ""}
-                      onChange={e => selectImport(e.target.value)}>
-                      {/* currentImportId is null until an import completes; show
-                          every import so the list is never silently empty. */}
-                      {imports.map(imp => (
-                        <option key={imp.id} value={imp.id}>
-                          {imp.league_name ?? `League ${imp.league_id ?? "?"}`}
-                          {imp.status === "completed" ? "" : ` (${imp.status})`}
-                        </option>
-                      ))}
-                    </select>
-                  )}
-                  {/* Ungated: an account with zero imports needs a way to
-                      create its first one. */}
-                  <Link to="/import/new" className="text-xs font-bold text-ink-faint underline hover:text-ink">
-                    New import
-                  </Link>
-                </div>
-              )}
-              <div className="hidden text-[0.6rem] font-bold tracking-widest text-ink-faint uppercase sm:block">
-                {formatToday()}
-              </div>
             </div>
           </div>
 
