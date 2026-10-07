@@ -8,6 +8,8 @@ interface __BaseEnv_Env {
 	TURNSTILE_SECRET_KEY: string;
 	ADMIN_API_KEY: string;
 	CREDENTIALS_ENCRYPTION_KEY: string;
+	GMAIL_USER: string;
+	GMAIL_APP_PASSWORD: string;
 	LOGIN_LIMITER: RateLimit;
 	RESET_LIMITER: RateLimit;
 	PROBE_LIMITER: RateLimit;
@@ -20,7 +22,7 @@ type StringifyValues<EnvType extends Record<string, unknown>> = {
 	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
 };
 declare namespace NodeJS {
-	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "APP_NAME" | "TURNSTILE_SECRET_KEY" | "ADMIN_API_KEY" | "CREDENTIALS_ENCRYPTION_KEY">> {}
+	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "APP_NAME" | "TURNSTILE_SECRET_KEY" | "ADMIN_API_KEY" | "CREDENTIALS_ENCRYPTION_KEY" | "GMAIL_USER" | "GMAIL_APP_PASSWORD">> {}
 }
 
 // Begin runtime types

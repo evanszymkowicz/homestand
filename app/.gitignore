@@ -32,7 +32,6 @@ public/data
 
 # Local env / secrets
 .env
-.dev.vars
 _worker.bundle
 
 # Dev-local email outbox — holds verification and password-reset tokens.
