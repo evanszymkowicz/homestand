@@ -37,7 +37,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from lib.crypto import decrypt_value  # type: ignore[import-not-found]
+from lib.crypto import decrypt_value  # type: ignore[import-not-found]  # noqa: E402
 
 # Imported rather than redeclared: derive_owner_map.py is what writes these files,
 # so the list of which ones the proxy needs stays in one place.
@@ -58,11 +58,17 @@ TARGET_FLAG = ["--local"] if TARGET == "local" else ["--remote"]
 
 def _set_status(import_id: str, status: str, detail: str | None = None) -> None:
     """Best-effort D1 update. Never raises -- a status write that fails must not
-    mask the real crawl result."""
-    sql = f"UPDATE imports SET status = '{status}' WHERE id = '{import_id}'"
-    if detail:
-        safe = detail.replace("'", "")[:200]
-        sql += f" -- {safe}"
+    mask the real crawl result.
+
+    `wrangler d1 execute --command` takes raw SQL with no bind-parameter form, so
+    the reason is inlined as a quoted literal. It used to be appended as a SQL
+    comment, which D1 discards -- every failure reached the UI as a bare "failed"
+    and ImportDetail had to guess at a cause. Doubling single quotes is the
+    SQL-standard escape, so a reason containing an apostrophe survives intact
+    instead of losing the character.
+    """
+    reason = "NULL" if detail is None else "'" + detail[:200].replace("'", "''") + "'"
+    sql = f"UPDATE imports SET status = '{status}', failure_reason = {reason} WHERE id = '{import_id}'"
     try:
         subprocess.run(
             ["npx", "wrangler", "d1", "execute", "homestand-db", *TARGET_FLAG, "--command", sql],

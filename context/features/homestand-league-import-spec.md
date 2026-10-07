@@ -297,7 +297,7 @@ The UI should evoke a physical baseball scorebook: off-white paper, pencil/ink r
 | Resource | Free Tier | Capacity |
 |---|---|---|
 | R2 | 10 GB | ~70 raw archives (135 MB/league) |
-| D1 | 5 GB | ~100-300 tenants (with zlib+base64 chunking à la `publish_d1_delta.py`) |
+| D1 | 5 GB | ~100-300 tenants |
 | GitHub Actions | 2,000 min/mo | ~100-200 imports (10-20 min each) |
 | Resend / email provider | Provider limit | Invite + transactional volume |
 | Cloudflare Pages | Unlimited (free tier) | N/A |

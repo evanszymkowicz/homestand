@@ -34,5 +34,11 @@ jobs:
 
       - run: node scripts/run_import.mjs --pending --target remote
         env:
+          # A CI API token authenticates but does not say which account, so
+          # wrangler's inference picked the wrong one and every --remote D1/R2
+          # call failed with API error 7403. app/wrangler.jsonc cannot carry
+          # account_id (wrangler rejects it for Pages projects), so it comes
+          # from the environment here and from local OAuth auth in dev.
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CREDENTIALS_ENCRYPTION_KEY: ${{ secrets.CREDENTIALS_ENCRYPTION_KEY }}

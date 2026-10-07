@@ -63,7 +63,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
   if (!account) return jsonResponse({ error: "unauthenticated" }, 401);
 
   const rows = await env.DB.prepare(
-    "SELECT id, league_id, league_name, status, year_start, year_end, expires_at, created_at FROM imports WHERE account_id = ? ORDER BY created_at DESC"
+    "SELECT id, league_id, league_name, status, failure_reason, year_start, year_end, expires_at, created_at FROM imports WHERE account_id = ? ORDER BY created_at DESC"
   )
     .bind(account.id)
     .all<{
@@ -71,6 +71,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
       league_id: number;
       league_name: string | null;
       status: string;
+      failure_reason: string | null;
       year_start: number;
       year_end: number;
       expires_at: string | null;

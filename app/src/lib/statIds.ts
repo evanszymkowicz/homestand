@@ -1,14 +1,11 @@
 /** ESPN MLB statId -> display label and stat-line field, ported from
- * scripts/lib/stat_ids.py's BATTING_STAT_IDS/PITCHING_STAT_IDS (the verified
- * statId -> box-score field mapping, 31 ids across every season 2009-2025).
- * Labels are short display abbreviations, not the field names -- e.g.
- * "doubles" -> "2B".
+ * scripts/lib/stat_ids.py's BATTING_STAT_IDS/PITCHING_STAT_IDS.
  *
  * `field` is what makes a stat line's points recomputable: the mapped set is
  * the scored union and ESPN scoring is linear per id, so
  * sum(line[field] * that season's points-per-unit) == the line's total points
- * exactly (stat_ids.py's docstring documents the verification; validate.py's
- * reconciliation check depends on it). See pointsSplit.ts. */
+ * exactly. validate.py's reconciliation check depends on it. See pointsSplit.ts.
+ */
 
 import type { BattingLine, PitchingLine } from "../types";
 

@@ -15,6 +15,7 @@ import {
   YAxis,
 } from "recharts";
 import { Board } from "../../components/Board";
+import { EYEBROW } from "../../components/cardStyles";
 import { FilterSelect } from "../../components/FilterSelect";
 import { Headshot } from "../../components/Headshot";
 import { SectionHeading } from "../../components/SectionHeading";
@@ -60,8 +61,6 @@ interface RosterPlayer {
   positionId: number;
   teamPoints: number;
 }
-
-const EYEBROW = "text-eyebrow font-bold tracking-wide text-ink-faint uppercase";
 
 function formatZscore(n: number | null): string {
   if (n === null) return "—";

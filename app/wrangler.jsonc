@@ -1,6 +1,12 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "homestand",
+  // No "account_id" key here: wrangler rejects it outright for Pages projects
+  // ("Configuration file for Pages projects does not support account_id"), which
+  // breaks every `wrangler pages` command. The account comes from
+  // CLOUDFLARE_ACCOUNT_ID in CI and from local OAuth auth in dev instead.
+  // Without an explicit account, --remote calls fail with API error 7403
+  // ("given account is not valid or is not authorized").
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],

@@ -15,6 +15,9 @@ export interface ImportRecord {
   league_id: number | null;
   league_name: string | null;
   status: "pending" | "running" | "completed" | "failed";
+  /** Why the crawl failed, written by the worker's status update. Null unless
+   * status is "failed". */
+  failure_reason: string | null;
   year_start: number | null;
   year_end: number | null;
   expires_at: string | null;

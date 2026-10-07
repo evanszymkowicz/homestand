@@ -2289,8 +2289,7 @@ def check_box_score_day_reconciliation(data: dict[str, Any]) -> list[Failure]:
     return failures
 
 
-# Checks whose check() takes (data, season_notes) -- shared with
-# scripts/db/validate_db.py's dispatch, which must not drift from this.
+# Checks whose check() takes (data, season_notes) rather than just the data.
 NEEDS_SEASON_NOTES = frozenset(
     ("keepers", "player_references", "pf_box_score_reconciliation")
 )

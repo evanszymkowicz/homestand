@@ -8,7 +8,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, params })
   if (!account) return jsonResponse({ error: "unauthenticated" }, 401);
 
   const row = await env.DB.prepare(
-    "SELECT id, league_id, league_name, status, year_start, year_end, created_at FROM imports WHERE id = ? AND account_id = ?"
+    "SELECT id, league_id, league_name, status, failure_reason, year_start, year_end, created_at FROM imports WHERE id = ? AND account_id = ?"
   )
     .bind(params.importId, account.id)
     .first<{
@@ -16,6 +16,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env, params })
       league_id: number | null;
       league_name: string | null;
       status: string;
+      failure_reason: string | null;
       year_start: number | null;
       year_end: number | null;
       created_at: string;

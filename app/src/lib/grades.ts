@@ -10,12 +10,6 @@ export const GRADE_BG: Record<LetterGrade, string> = {
   F: "bg-diverge-neg-soft text-diverge-neg",
 };
 
-/** Numeric rank used to sort the grade column from A+ to F. */
-export const GRADE_RANK: Record<LetterGrade, number> = {
-  "A+": 6,
-  A: 5,
-  B: 4,
-  C: 3,
-  D: 2,
-  F: 1,
-};
+/** Grade order, best first — the `LetterGrade` union's own declaration order,
+ * so sorting is `GRADE_ORDER.indexOf(grade)` rather than a parallel map. */
+export const GRADE_ORDER: LetterGrade[] = ["A+", "A", "B", "C", "D", "F"];

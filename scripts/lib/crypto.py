@@ -6,20 +6,10 @@ plaintext is encrypted with a random 12-byte IV and the result is stored as hex 
 
 from __future__ import annotations
 
-import binascii
 import os
-from typing import Union
 
 # AES-GCM uses a 12-byte (96-bit) nonce by convention
 IV_SIZE = 12
-
-
-def _hex_to_bytes(hex_str: str) -> bytes:
-    return binascii.unhexlify(hex_str)
-
-
-def _bytes_to_hex(data: bytes) -> str:
-    return binascii.hexlify(data).decode("ascii")
 
 
 def decrypt_value(encrypted_blob: str, hex_key: str) -> str:
@@ -29,9 +19,9 @@ def decrypt_value(encrypted_blob: str, hex_key: str) -> str:
     except ValueError as exc:
         raise ValueError("encrypted blob must be IV_hex:ciphertext_hex") from exc
 
-    iv = _hex_to_bytes(iv_hex)
-    ciphertext = _hex_to_bytes(cipher_hex)
-    key = _hex_to_bytes(hex_key)
+    iv = bytes.fromhex(iv_hex)
+    ciphertext = bytes.fromhex(cipher_hex)
+    key = bytes.fromhex(hex_key)
 
     if len(key) != 32:
         raise ValueError(f"key must be 32 bytes (64 hex chars), got {len(key)}")
@@ -45,7 +35,7 @@ def decrypt_value(encrypted_blob: str, hex_key: str) -> str:
 
 def encrypt_value(plaintext: str, hex_key: str) -> str:
     """Encrypt plaintext with AES-256-GCM and return IV_hex:ciphertext_hex."""
-    key = _hex_to_bytes(hex_key)
+    key = bytes.fromhex(hex_key)
     if len(key) != 32:
         raise ValueError(f"key must be 32 bytes (64 hex chars), got {len(key)}")
 
@@ -54,4 +44,4 @@ def encrypt_value(plaintext: str, hex_key: str) -> str:
     aesgcm = AESGCM(key)
     iv = os.urandom(IV_SIZE)
     ciphertext = aesgcm.encrypt(iv, plaintext.encode("utf-8"), None)
-    return f"{_bytes_to_hex(iv)}:{_bytes_to_hex(ciphertext)}"
+    return f"{iv.hex()}:{ciphertext.hex()}"

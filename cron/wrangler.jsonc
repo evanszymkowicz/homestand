@@ -1,6 +1,9 @@
 {
   "$schema": "../app/node_modules/wrangler/config-schema.json",
   "name": "homestand-cron",
+  // Same reason as app/wrangler.jsonc: credential-based account inference is not
+  // something a deploy should depend on.
+  "account_id": "d74de038e03728e3efd6543d0fbca4bc",
   "main": "index.ts",
   "compatibility_date": "2026-10-01",
   // Hourly sweep; the endpoint itself no-ops most hours.

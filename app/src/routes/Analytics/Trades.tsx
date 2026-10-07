@@ -10,7 +10,7 @@ import { summarizeCoverage } from "../../lib/coverage";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useSortableRows } from "../../hooks/useSortableRows";
 import { formatDifferential, formatPoints } from "../../lib/format";
-import { GRADE_BG, GRADE_RANK } from "../../lib/grades";
+import { GRADE_BG, GRADE_ORDER } from "../../lib/grades";
 import { ownerRef } from "../../lib/stats";
 import { pointsDeltaBackground } from "../../lib/diverging";
 import {
@@ -156,7 +156,7 @@ export function Trades({
       case "year":
         return row.year;
       case "grade":
-        return grade ? (GRADE_RANK[grade.letterGrade] ?? 0) : -Infinity;
+        return grade ? GRADE_ORDER.indexOf(grade.letterGrade) : -Infinity;
       case "sideA":
         return sideOwnerName(owners, row.sides[0]);
       case "sideB":

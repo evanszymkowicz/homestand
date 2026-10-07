@@ -62,7 +62,23 @@ if (!encryptionKey) {
 }
 
 let exitCode = 0;
-const ids = values.pending ? d1Query("SELECT id FROM imports WHERE status = 'pending'").results.map(r => r.id) : [values.importId];
+// A run killed mid-crawl (cancelled job, runner eviction, OOM) leaves the row
+// `running` forever, and the account watches a spinner that never resolves.
+// Nothing else ever writes `pending` back, so the sweep has to reclaim those.
+// 6 hours is far past any legitimate crawl (the slowest documented import is
+// 10-20 min) and comfortably inside the free tier's 30-day TTL.
+//
+// ponytail: keyed on created_at, not crawl start, because adding a started_at
+// column buys nothing -- `concurrency: cron` already serializes sweeps, so the
+// only `running` row a sweep can see is one whose crawl died.
+const STALE_RUNNING_MS = 6 * 60 * 60 * 1000;
+const staleSince = new Date(Date.now() - STALE_RUNNING_MS).toISOString().replace("T", " ").slice(0, 19);
+
+const ids = values.pending
+  ? d1Query(
+      `SELECT id FROM imports WHERE status = 'pending' OR (status = 'running' AND created_at < '${staleSince}')`
+    ).results.map(r => r.id)
+  : [values.importId];
 for (const importId of ids) {
   const importRows = d1Query(
     `SELECT account_id, league_id, year_start, year_end FROM imports WHERE id = '${importId}'`

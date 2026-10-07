@@ -20,31 +20,15 @@ if (!existsSync(src)) {
 cpSync(src, dest, { recursive: true });
 console.log(`sync-data: copied ${src} -> ${dest}`);
 
-// retired-owners.json is hand-maintained (not pipeline output, unlike the
-// rest of data/manual/, which only feeds the Python normalize step) --
-// synced individually so the app can read it directly.
-const retiredOwnersSrc = path.join(dataRoot, "manual", "retired-owners.json");
-const retiredOwnersDest = path.join(dest, "retired-owners.json");
-if (existsSync(retiredOwnersSrc)) {
-  cpSync(retiredOwnersSrc, retiredOwnersDest);
-  console.log(`sync-data: copied ${retiredOwnersSrc} -> ${retiredOwnersDest}`);
-}
-
-// jersey-history-overrides.json is likewise hand-maintained (pre-2017 jersey
-// numbers ESPN never reported, backfilled from the MLB Stats API) -- synced
-// individually so the app can read it directly.
-const jerseyOverridesSrc = path.join(dataRoot, "manual", "jersey-history-overrides.json");
-const jerseyOverridesDest = path.join(dest, "jersey-history-overrides.json");
-if (existsSync(jerseyOverridesSrc)) {
-  cpSync(jerseyOverridesSrc, jerseyOverridesDest);
-  console.log(`sync-data: copied ${jerseyOverridesSrc} -> ${jerseyOverridesDest}`);
-}
-
-// position-overrides.json is hand-maintained where ESPN's declared default_position_id doesn't match a season's real primary position.
-// synced individually so the app can read it directly.
-const positionOverridesSrc = path.join(dataRoot, "manual", "position-overrides.json");
-const positionOverridesDest = path.join(dest, "position-overrides.json");
-if (existsSync(positionOverridesSrc)) {
-  cpSync(positionOverridesSrc, positionOverridesDest);
-  console.log(`sync-data: copied ${positionOverridesSrc} -> ${positionOverridesDest}`);
+// These three live in data/manual/ rather than data/processed/ (the bulk copy
+// above), because they are hand-maintained rather than pipeline output:
+// retired-owners.json is the league's departed members, jersey-history-overrides
+// backfills pre-2017 numbers ESPN never reported, and position-overrides fixes
+// player_seasons.json's declared primary position. All three are allowlisted by
+// app/lib/collections.ts, so the proxy serves them alongside the archive.
+for (const name of ["retired-owners.json", "jersey-history-overrides.json", "position-overrides.json"]) {
+  const src = path.join(dataRoot, "manual", name);
+  if (!existsSync(src)) continue;
+  cpSync(src, path.join(dest, name));
+  console.log(`sync-data: copied ${src} -> ${path.join(dest, name)}`);
 }

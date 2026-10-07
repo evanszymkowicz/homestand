@@ -176,17 +176,9 @@ Thumbs.db
 *.swp
 *.swo
 
-# Playwright MCP scratch output (snapshots/console logs from ad hoc dev-server testing)
-.playwright-mcp/
 
-# scripts/sync_live_scoreboard.py's local output -- the workflow writes this under a
-# runner's ephemeral workspace, but local test runs land it here too
-live-scoreboard-out/
 
-# scripts/db/load.py's generated database -- rebuilt fresh every run
-data/wsob.db
-# scripts/db/dump_d1.py's generated publish artifact
-data/wsob.d1.sql
+
 
 # Per-tenant import working dirs (data/tenants/{importId}/{raw,manual,processed}).
 # Crawled ESPN responses and the owner map derived from them are real people's

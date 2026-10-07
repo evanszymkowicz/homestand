@@ -44,7 +44,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
-from lib.espn_client import unwrap_league_object  # type: ignore[import-not-found]
+from lib.espn_client import unwrap_league_object  # type: ignore[import-not-found]  # noqa: E402
 
 # Every hand-maintained file the pipeline reads. All of them encode league-
 # specific facts (this league's retired owners, its MLB jersey corrections, its

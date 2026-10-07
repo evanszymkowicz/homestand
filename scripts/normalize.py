@@ -2595,15 +2595,10 @@ def build_archive(
 ) -> dict[str, Any]:
     """Run the full-archive normalization pipeline without writing anything.
 
-    Returns every processed collection the writers need. on_box_scores(year,
+    Returns every processed collection the writer needs. on_box_scores(year,
     rows), when given, is called once per year as that season's box scores
-    finish building, letting a writer stream them (normalize.py's per-year
-    file write, the DB loader's per-year insert) instead of holding every
+    finish building, letting the caller stream them instead of holding every
     season's lines in memory.
-
-    Both writers -- main()'s JSON output and scripts/db/load.py's SQLite
-    output -- drive this one pass, so the counting math exists in exactly one
-    place and the two outputs cannot drift (db-migration-scoring-spec.md).
     """
     if not RAW_DIR.is_dir() or not any(RAW_DIR.iterdir()):
         sys.exit("data/raw/ is empty or missing. Run scripts/extract.py first.")

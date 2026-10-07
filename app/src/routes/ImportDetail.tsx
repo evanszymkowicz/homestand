@@ -96,14 +96,23 @@ export function ImportDetail() {
         </div>
       </dl>
 
+      {status === "failed" && importRec.failure_reason && (
+        <p className="mt-4 rounded border border-border bg-surface-2 p-3 font-mono text-xs text-ink-dim">
+          {importRec.failure_reason}
+        </p>
+      )}
+
       {status !== "completed" && (
         <div className="mt-6 rounded border border-border bg-surface-2 p-4">
           {/* No automated login exists -- ESPN captcha-gates it -- so a session
               cookie is required to crawl at all, and the only fix for a stale one
-              is a fresh paste. Saying "try again" would be a lie. */}
+              is a fresh paste. Saying "try again" would be a lie.
+              The reason above already names the cause when there was one, so this
+              only advises a re-paste for the failures a fresh cookie actually
+              fixes. */}
           <p className="text-sm text-ink-dim">
             {status === "failed"
-              ? "Your ESPN session cookie has probably expired. Paste a fresh one and we'll re-run the import."
+              ? "If your ESPN session cookie has expired, paste a fresh one and we'll re-run the import."
               : "We need your ESPN session cookie before the crawl can start."}
           </p>
           <Link
