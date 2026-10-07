@@ -96,7 +96,7 @@ function StreakTable({
                   activeKey={sortKey}
                   direction={direction}
                   onSort={toggleSort}
-                  align="center"
+                  align="left"
                 />
               </tr>
             </thead>
@@ -109,7 +109,7 @@ function StreakTable({
                     </Link>
                   </td>
                   <td className="w-1/3 px-3 py-2 text-center tabular-nums">{entry.length}</td>
-                  <td className="w-1/3 px-3 py-2 text-center text-ink-dim">{formatYears(entry.years)}</td>
+                  <td className="w-1/3 px-3 py-2 text-ink-dim">{formatYears(entry.years)}</td>
                 </tr>
               ))}
             </tbody>

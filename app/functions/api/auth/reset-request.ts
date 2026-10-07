@@ -21,6 +21,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   // Always return ok to avoid leaking whether the account exists.
   if (!account || !account.verified) {
+    // Decoy delay so this path costs the same as the D1 write + SMTP send below.
+    await new Promise(resolve => setTimeout(resolve, 350));
     return jsonResponse({ ok: true });
   }
 

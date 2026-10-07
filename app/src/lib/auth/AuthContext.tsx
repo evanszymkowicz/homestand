@@ -17,6 +17,7 @@ export interface ImportRecord {
   status: "pending" | "running" | "completed" | "failed";
   year_start: number | null;
   year_end: number | null;
+  expires_at: string | null;
   created_at: string;
 }
 

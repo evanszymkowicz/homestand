@@ -124,19 +124,6 @@ export function HeatIndex({
                 {entry.positionLabel} · {entry.keeper.year} ·{" "}
                 {entry.points === null ? "no data" : `${formatPoints(entry.points)} pts`}
               </div>
-              <div
-                className={`mt-0.5 text-[0.62rem] font-semibold ${
-                  entry.draftRoi === null
-                    ? "text-ink-faint"
-                    : entry.draftRoi > 0
-                      ? "text-diverge-pos"
-                      : entry.draftRoi < 0
-                        ? "text-diverge-neg"
-                        : "text-ink-dim"
-                }`}
-                title="Draft ROI: actual season percentile minus the expected percentile from original draft position (positive = outperformed the pick).">
-                {entry.draftRoi === null ? "Draft ROI: n/a" : `Draft ROI: ${formatPercentileChange(entry.draftRoi)}`}
-              </div>
               <div className="mt-0.5 text-[0.62rem] text-ink-faint">
                 {entry.originalDraftSlot
                   ? `Drafted Rd ${entry.originalDraftSlot.round} (${entry.originalDraftSlot.year}) by ${

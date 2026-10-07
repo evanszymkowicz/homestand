@@ -196,19 +196,6 @@ export default function Top10ByPosition({ seasonPoints, playerSeasons, year }: T
           );
         })}
       </div>
-
-      <div className="mt-6">
-        <div className="mb-3 flex items-center gap-2">
-          <SectionHeading>Position Scarcity</SectionHeading>
-          <span className="rounded-full bg-surface-2 px-2.5 py-0.5 text-[0.64rem] font-semibold text-ink-faint">
-            Coming soon
-          </span>
-        </div>
-        <div className="rounded-lg border border-border bg-surface p-4 text-sm text-ink-dim">
-          Position scarcity analysis will compare roster slot availability against high-performing players at each
-          position.
-        </div>
-      </div>
     </div>
   );
 }

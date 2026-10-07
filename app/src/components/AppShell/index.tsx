@@ -11,7 +11,13 @@ export function AppShell() {
   const [activityOpen, setActivityOpen] = useState(false);
   const closeActivity = useCallback(() => setActivityOpen(false), []);
   const navigate = useNavigate();
-  const { account, logout } = useAuth();
+  const { account, logout, imports, currentImportId } = useAuth();
+
+  const expiresAt = imports.find(i => i.id === currentImportId)?.expires_at ?? null;
+  const days = expiresAt ? Math.max(0, Math.ceil((Date.parse(expiresAt) - Date.now()) / 86_400_000)) : 0;
+  const expiryLabel = expiresAt
+    ? `Free-tier access expires ${days === 0 ? "today" : `in ${days} day${days === 1 ? "" : "s"}`}.`
+    : null;
 
   const handleLogout = async () => {
     await logout();
@@ -62,6 +68,12 @@ export function AppShell() {
             ))}
           </nav>
         </header>
+
+        {expiryLabel && (
+          <div className="mb-4 rounded border border-hs-red/30 bg-hs-red/10 px-3 py-2 text-center text-xs font-bold text-hs-red">
+            {expiryLabel}
+          </div>
+        )}
 
         <main>
           <Outlet />

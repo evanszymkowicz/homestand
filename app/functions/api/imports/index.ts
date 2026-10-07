@@ -50,7 +50,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   // Return the full row so the client can add it to the import list without
   // refetching.
   const created = await env.DB.prepare(
-    "SELECT id, league_id, league_name, status, year_start, year_end, created_at FROM imports WHERE id = ?"
+    "SELECT id, league_id, league_name, status, year_start, year_end, expires_at, created_at FROM imports WHERE id = ?"
   )
     .bind(id)
     .first<Record<string, unknown>>();
@@ -63,7 +63,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
   if (!account) return jsonResponse({ error: "unauthenticated" }, 401);
 
   const rows = await env.DB.prepare(
-    "SELECT id, league_id, league_name, status, year_start, year_end, created_at FROM imports WHERE account_id = ? ORDER BY created_at DESC"
+    "SELECT id, league_id, league_name, status, year_start, year_end, expires_at, created_at FROM imports WHERE account_id = ? ORDER BY created_at DESC"
   )
     .bind(account.id)
     .all<{
@@ -73,6 +73,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
       status: string;
       year_start: number;
       year_end: number;
+      expires_at: string | null;
       created_at: string;
     }>();
 
