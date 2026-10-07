@@ -15,9 +15,10 @@ admin approval gate (`./approve.sh <email>`), plus one-click demo access; D1 ses
 encrypted ESPN credential storage, the manual session-cookie fallback, the tenant-scoped data
 proxy, and the landing page are in place. Gmail SMTP sends verification and reset mail
 (`GMAIL_USER` / `GMAIL_APP_PASSWORD`). `cron/` runs the eviction sweep hourly. The crawl
-runner takes `--target remote` for production runs and `--pending` to sweep queued imports;
-who triggers it (some machine running that command on a schedule) is still open. Read
-before starting work:
+runner takes `--target remote` for production runs and `--pending` to sweep queued imports,
+and `.github/workflows/cron.yml` sweeps it every 15 minutes — but the repo has no Actions
+secrets, so it has never run. R1 is blocked on two `gh secret set` commands, not on code.
+Read before starting work:
 
 - `context/features/homestand-league-import-spec.md` — the canonical architecture and phased plan.
 - `context/future-items.md` — known-open work, including the one item that **blocks public

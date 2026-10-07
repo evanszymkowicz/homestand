@@ -396,22 +396,18 @@ inside a phase, not a spec question.
 
 ## Remaining Work Before Launch
 
-S0–S5 are implemented. Three items are open, all of them production-readiness gaps
-rather than new product surface. Each entry states what exists today, what is
-missing, and how you know it is done — `context/future-items.md` remains the
-short list; this section is the scoping detail.
+S0–S5 are implemented. R2 and R3 are closed; **R1 is the only remaining launch
+blocker**, and it is blocked on credentials rather than code. Each entry states
+what exists today, what is missing, and how you know it is done —
+`context/future-items.md` remains the short list; this section is the scoping
+detail.
 
 ### R1 — Automated crawl-to-scoped-data path
 
-**The gap.** The crawl works end-to-end but only when a human runs it. There is no
-trigger, no queue, and no scheduler. `app/package.json`'s `crawl` script shells out
-to `scripts/run_import.mjs`, which reads the import row and encrypted credentials
-out of **local** D1 (`--local` in `d1Query`) and runs `scripts/crawl_from_env.py`
-against the **local** R2 bucket (`--local` in `_upload`). Every `--local` flag is
-correct for development and fatal in production: a production run would write to a
-throwaway SQLite file and a local bucket, leaving the real D1 row stuck at
-`pending` and the data proxy returning 404 forever. That failure is silent — the
-crawl reports success.
+**Status 2026-10-07: the mechanism is built and scheduled, but it has never
+executed.** The sweep runs every 15 minutes and fails immediately on missing
+secrets. Everything below marked done is done and verified; what remains is
+credentials and two small features.
 
 **What exists already (do not rebuild these):**
 - `scripts/run_import.mjs` — argv-array spawns only, UUID validation, refuses to
@@ -422,27 +418,52 @@ crawl reports success.
   in-flight protection.
 - Per-tenant paths (`data/tenants/{importId}/`) already isolate the raw and manual
   layers, so the repo's hand-curated record-book answers never leak into a tenant.
+- **Target switch (was scope item 1) — done.** `--target local|remote`, default
+  local, honoured by `run_import.mjs` and `crawl_from_env.py` for every D1 and R2
+  call.
+- **Trigger (was scope item 2) — done.** `.github/workflows/cron.yml` sweeps
+  `--pending --target remote` on `*/15 * * * *` with `concurrency: cron`, plus
+  `workflow_dispatch`. No queue or Durable Object needed at the §Capacity Budget
+  ceiling.
+- **`status = 'running'` (was scope item 3) — done**, written before the crawl
+  starts. The sweep also reclaims `running` rows older than 6 hours, so a runner
+  killed mid-crawl no longer strands an account on a permanent spinner.
+- **Failure reason — done.** Migration `0012_import_failure_reason.sql` adds
+  `imports.failure_reason`; `_set_status` writes it as a quoted literal rather than
+  the SQL comment D1 used to discard. `ImportDetail` renders it.
 
-**Scope:**
-1. Make the worker target real resources — replace every `--local` with an explicit
-   target switch (env var or flag), defaulting to local for dev.
-2. Decide the trigger. Cheapest viable: a `workflow_dispatch` CI job that decrypts
-   and runs the crawl, per §Capacity Budget's 2,000 Actions min/mo. The spec's
-   Durable-Object queue remains an option for automatic triggering.
-3. Set `imports.status = 'running'` when the crawl starts, so `ImportDetail.tsx`'s
-   existing poll distinguishes queued from running (it already handles both).
-4. Emit the import-status emails (§Email Provider) on completion and failure.
-5. Global capacity check at the door — §Capacity Budget caps R2 at ~70 active
+**The blocker — two GitHub Actions secrets, neither of which exists:**
+
+```sh
+gh secret set CREDENTIALS_ENCRYPTION_KEY   # 64-hex, must match the Pages secret
+gh secret set CLOUDFLARE_API_TOKEN          # D1 + R2 + Workers read/write
+```
+
+`CLOUDFLARE_ACCOUNT_ID` is already set as a repo variable. Without an explicit
+account, `--remote` calls fail with API error 7403 — a CI token authenticates but
+does not say which account. It **cannot** be set in `app/wrangler.jsonc`: wrangler
+rejects `account_id` for Pages projects, which breaks every `wrangler pages`
+command including deploy. `cron/wrangler.jsonc` is a Workers project and does carry
+it.
+
+The encryption key is **not recoverable from the repo** — it exists only as a
+write-only Pages secret, and `app/.env` holds the all-zero placeholder.
+
+**Do not verify with the sweep alone.** `espn_credentials` is empty and the only
+row in `imports` is the completed demo, so a sweep with nothing pending is a
+no-op that exits 0 and proves nothing. Create an import through the UI, paste a
+cookie, then `gh workflow run cron.yml`.
+
+**Still open:**
+1. Emit the import-status emails (§Email Provider) on completion and failure.
+   `sendEmail` is only called from `auth/signup` and `auth/reset-request`.
+2. Global capacity check at the door — §Capacity Budget caps R2 at ~70 active
    leagues; refuse honestly rather than silently overwriting a tenant's prefix.
 
 **Acceptance:** a production import created through the UI reaches `completed` with
 no human running a command, and its collections are readable through the data proxy.
 A deliberate failure surfaces a reason on `ImportDetail` rather than an endless
 spinner.
-
-**Note:** `_set_status` currently shells `wrangler d1 execute --local` and appends the
-detail as a SQL comment. Both need reworking for production — the comment trick
-cannot carry a reason the UI can read.
 
 ### R2 — Transactional email provider
 
