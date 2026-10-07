@@ -398,8 +398,13 @@ export function PercentileBySeason({
             ? selectedPosition === SP_POSITION_ID
               ? "Where each season ranked against other starting pitchers in the league that year."
               : `Where each season ranked against other players eligible at ${positionLabel(selectedPosition)} that year. Only seasons this player was eligible are shown. Position eligibility carries over from the prior season.`
-            : "Where each season ranked against every other player in the league that year."}{" "}
-        Rookies will often be eligible at a position that they played in the minor leagues but not the major leagues.
+            : "Where each season ranked against every other player in the league that year."}
+        {scopeToPosition && selectedPosition !== undefined && (
+          <>
+            {" "}
+            Rookies will often be eligible at a position that they played in the minor leagues but not the major leagues.
+          </>
+        )}
       </p>
 
       {ordered.length === 0 ? (
