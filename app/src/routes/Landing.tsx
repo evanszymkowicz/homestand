@@ -4,7 +4,7 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export function Landing() {
   useDocumentTitle("Homestand");
-  const { account, loginDemo } = useAuth();
+  const { loginDemo } = useAuth();
   const navigate = useNavigate();
   const tryDemo = async () => {
     await loginDemo();
@@ -20,8 +20,7 @@ export function Landing() {
             <span className="text-hs-red">.</span> Stay ahead of the competition
             <span className="text-hs-red">.</span>
           </p>
-          {!account && (
-            <div className="mt-8 flex flex-col items-center gap-3">
+          <div className="mt-8 flex flex-col items-center gap-3">
               <button
                 onClick={tryDemo}
                 className="inline-block cursor-pointer rounded-md bg-hs-red px-6 py-3 font-bold text-white shadow-sm hover:opacity-90">
@@ -31,7 +30,6 @@ export function Landing() {
                 Registration
               </Link>
             </div>
-          )}
         </section>
 
         {/* Feature rows: image/copy swap sides each row. One aspect ratio on
