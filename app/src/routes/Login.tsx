@@ -9,7 +9,7 @@ type Tab = "login" | "signup";
 export function Login() {
   useDocumentTitle("Sign in");
   const navigate = useNavigate();
-  const { loginDemo, loading: authLoading } = useAuth();
+  const { loginDemo, refresh, loading: authLoading } = useAuth();
 
   const [tab, setTab] = useState<Tab>("login");
   const [email, setEmail] = useState("");
@@ -21,8 +21,15 @@ export function Login() {
 
   const handleDemo = async () => {
     setError(null);
-    await loginDemo();
-    navigate("/season", { replace: true });
+    setLoading(true);
+    try {
+      await loginDemo();
+      navigate("/season", { replace: true });
+    } catch {
+      setError("demo login failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -37,6 +44,7 @@ export function Login() {
       });
       const data = (await res.json()) as { error?: string };
       if (!res.ok) throw new Error(data.error ?? "login failed");
+      await refresh();
       navigate("/season", { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
@@ -217,7 +225,7 @@ export function Login() {
             onClick={handleDemo}
             disabled={authLoading || loading}
             className="w-full rounded-md border border-hs-red px-4 py-2.5 text-sm font-bold text-hs-red transition hover:bg-hs-red hover:text-white disabled:cursor-not-allowed disabled:opacity-50">
-            {authLoading ? "Loading…" : "Try the demo"}
+            {authLoading || loading ? "Loading…" : "Try the demo"}
           </button>
         </div>
 

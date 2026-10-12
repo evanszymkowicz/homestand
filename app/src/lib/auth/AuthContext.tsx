@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { setImportContext } from "../data";
 
 export interface Account {
@@ -38,6 +38,7 @@ interface AuthState {
   selectImport: (id: string) => void;
   addImport: (imp: ImportRecord) => void;
   loginDemo: () => Promise<void>;
+  refresh: () => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -62,6 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [imports, setImports] = useState<ImportRecord[]>([]);
   const [currentImportId, setCurrentImportId] = useState<string | null>(null);
+  const refreshGen = useRef(0);
 
   /** Drops every trace of the previous account. Without this, logging out and
    * back in as someone else leaks the old account's league names and leaves
@@ -80,8 +82,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const refresh = useCallback(async () => {
+    // Only the newest refresh owns the state. Without this guard, a slow
+    // unauthenticated /api/auth/me from mount can land after a demo/login
+    // refresh and wipe the account, bouncing the user from /season to /login.
+    const gen = ++refreshGen.current;
+    const fresh = () => gen === refreshGen.current;
     try {
       const me = await fetchMe();
+      if (!fresh()) return;
       setAccount(me);
       if (!me) {
         resetTenant();
@@ -90,8 +98,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await fetch("/api/imports", { credentials: "same-origin" });
       if (!res.ok) throw new Error(`imports failed: ${res.status}`);
       const { imports } = (await res.json()) as { imports: ImportRecord[] };
+      if (!fresh()) return;
       applyImports(imports);
     } catch {
+      if (!fresh()) return;
       setAccount(null);
       resetTenant();
     }
@@ -133,8 +143,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<AuthState>(
-    () => ({ account, loading, imports, currentImportId, selectImport, addImport, loginDemo, logout }),
-    [account, loading, imports, currentImportId, selectImport, addImport, loginDemo, logout]
+    () => ({ account, loading, imports, currentImportId, selectImport, addImport, loginDemo, refresh, logout }),
+    [account, loading, imports, currentImportId, selectImport, addImport, loginDemo, refresh, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

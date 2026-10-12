@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../lib/auth/AuthContext";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
@@ -6,9 +7,19 @@ export function Landing() {
   useDocumentTitle("Homestand");
   const { account, loginDemo } = useAuth();
   const navigate = useNavigate();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const tryDemo = async () => {
-    await loginDemo();
-    navigate("/season", { replace: true });
+    setError(null);
+    setBusy(true);
+    try {
+      await loginDemo();
+      navigate("/season", { replace: true });
+    } catch {
+      setError("The demo is unavailable right now — use Registration below.");
+    } finally {
+      setBusy(false);
+    }
   };
   return (
     <div className="scorebook-texture min-h-screen bg-surface text-ink">
@@ -20,18 +31,33 @@ export function Landing() {
             <span className="text-hs-red">.</span> Stay ahead of the competition
             <span className="text-hs-red">.</span>
           </p>
-          {!account && (
-            <div className="mt-8 flex flex-col items-center gap-3">
+          {/* CTAs always render. Hiding them behind `!account` made them vanish
+              for any visitor with a live session cookie, and browsers differ
+              enough (Firefox clears/partitions cookies; Chrome persists) that
+              the same homepage looked different across browsers and flickered
+              while the mount-time /api/auth/me was in flight. */}
+          <div className="mt-8 flex flex-col items-center gap-3">
+            {account ? (
+              <Link
+                to="/season"
+                className="inline-block rounded-md bg-hs-red px-6 py-3 font-bold text-white shadow-sm hover:opacity-90">
+                Open dashboard
+              </Link>
+            ) : (
               <button
                 onClick={tryDemo}
-                className="inline-block cursor-pointer rounded-md bg-hs-red px-6 py-3 font-bold text-white shadow-sm hover:opacity-90">
-                Try the demo
+                disabled={busy}
+                className="inline-block cursor-pointer rounded-md bg-hs-red px-6 py-3 font-bold text-white shadow-sm hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+                {busy ? "Starting demo…" : "Try the demo"}
               </button>
+            )}
+            {!account && (
               <Link to="/login" className="text-sm font-bold text-ink hover:underline">
                 Registration
               </Link>
-            </div>
-          )}
+            )}
+            {error && <p className="text-xs text-ink-dim">{error}</p>}
+          </div>
         </section>
 
         {/* Feature rows: image/copy swap sides each row. One aspect ratio on
