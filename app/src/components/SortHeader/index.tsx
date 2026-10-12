@@ -1,7 +1,6 @@
-import { useEffect, useId, useRef, useState } from "react";
-import type { ReactNode } from "react";
-import { createPortal } from "react-dom";
+import { useRef, useState } from "react";
 import type { SortDirection } from "../../hooks/useSortableRows";
+import { TooltipPortal } from "../TooltipPortal";
 
 interface SortHeaderProps<K extends string> {
   label: string;
@@ -30,7 +29,7 @@ interface SortHeaderProps<K extends string> {
   tooltip?: string;
 }
 
-const TOOLTIP_WIDTH_REM = 21;
+const TOOLTIP_WIDTH_PX = 21 * 16; // 21rem
 
 export function SortHeader<K extends string>({
   label,
@@ -52,34 +51,40 @@ export function SortHeader<K extends string>({
   const stickyClass = pinned ? "sticky top-0 left-0 z-20" : "sticky top-0 z-10";
 
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const tooltipId = useId();
-  // Anchor rect captured on open: the portal panel is position:fixed (a table
-  // card's overflow-hidden would clip a positioned child), so scroll/resize
-  // dismisses rather than re-anchors -- transient by design.
-  const [tooltipRect, setTooltipRect] = useState<DOMRect | null>(null);
+  const [tooltipAnchor, setTooltipAnchor] = useState<DOMRect | null>(null);
 
-  useEffect(() => {
-    if (!tooltipRect) return;
-    const dismiss = () => setTooltipRect(null);
-    window.addEventListener("scroll", dismiss, true);
-    window.addEventListener("resize", dismiss);
-    return () => {
-      window.removeEventListener("scroll", dismiss, true);
-      window.removeEventListener("resize", dismiss);
-    };
-  }, [tooltipRect]);
+  const openTooltip = () => {
+    if (tooltip) setTooltipAnchor(buttonRef.current?.getBoundingClientRect() ?? null);
+  };
+  const closeTooltip = () => setTooltipAnchor(null);
 
-  let tooltipNode: ReactNode = null;
-  if (tooltip && tooltipRect) {
-    // Clamp to the viewport: below ~352px the 21rem panel wouldn't fit, so it
-    // shrinks rather than overflowing the right edge.
-    const width = Math.min(TOOLTIP_WIDTH_REM * 16, window.innerWidth - 16);
-    const left = Math.max(8, Math.min(tooltipRect.left - 14, window.innerWidth - width - 8));
-    tooltipNode = createPortal(
-      <div
-        id={tooltipId}
-        role="tooltip"
-        style={{ position: "fixed", top: tooltipRect.bottom + 8, left, width }}
+  return (
+    <th
+      scope="col"
+      aria-sort={active ? (direction === "asc" ? "ascending" : "descending") : undefined}
+      style={{ left: stickyLeftOffset, top: stickyTop }}
+      onMouseEnter={openTooltip}
+      onMouseLeave={closeTooltip}
+      className={`text-eyebrow ${stickyClass} bg-surface px-3 py-2 font-semibold tracking-wide text-ink-faint uppercase ${alignClass} ${className}`}>
+      <button
+        ref={buttonRef}
+        type="button"
+        onClick={() => onSort(sortKey)}
+        aria-label={ariaLabel ?? label}
+        onFocus={openTooltip}
+        onBlur={closeTooltip}
+        onKeyDown={e => {
+          if (e.key === "Escape") closeTooltip();
+        }}
+        className={`inline-flex h-6 min-w-6 items-center justify-center gap-0.5 hover:text-ink ${active ? "text-ink" : ""}`}>
+        {label}
+      </button>
+      <TooltipPortal
+        anchor={tooltipAnchor}
+        placement="bottom-left"
+        width={Math.min(TOOLTIP_WIDTH_PX, window.innerWidth - 16)}
+        leftOffset={-14}
+        onDismiss={closeTooltip}
         className="z-40 rounded-[10px] border border-border bg-surface-2 px-3.5 py-3 shadow-lg">
         <span
           aria-hidden
@@ -87,42 +92,7 @@ export function SortHeader<K extends string>({
           className="absolute h-[9px] w-[9px] rotate-45 border-l border-t border-border bg-surface-2"
         />
         <p className="whitespace-pre-line text-xs leading-relaxed text-ink-dim">{tooltip}</p>
-      </div>,
-      document.body
-    );
-  }
-
-  return (
-    <th
-      scope="col"
-      aria-sort={active ? (direction === "asc" ? "ascending" : "descending") : undefined}
-      style={{ left: stickyLeftOffset, top: stickyTop }}
-      onMouseEnter={tooltip ? () => setTooltipRect(buttonRef.current?.getBoundingClientRect() ?? null) : undefined}
-      onMouseLeave={tooltip ? () => setTooltipRect(null) : undefined}
-      className={`text-eyebrow ${stickyClass} bg-surface px-3 py-2 font-semibold tracking-wide text-ink-faint uppercase ${alignClass} ${className}`}>
-      {/* h-6 + min-w-6 keeps the tap target at WCAG 2.5.8's 24x24 CSS px minimum.
-          Height alone was not enough: as an inline-flex button the width collapsed
-          to the label, so single-letter columns (L, W, R) were 7-12px wide and
-          unhittable on touch. */}
-      <button
-        ref={buttonRef}
-        type="button"
-        onClick={() => onSort(sortKey)}
-        aria-label={ariaLabel ?? label}
-        aria-describedby={tooltipRect ? tooltipId : undefined}
-        onFocus={tooltip ? () => setTooltipRect(buttonRef.current?.getBoundingClientRect() ?? null) : undefined}
-        onBlur={tooltip ? () => setTooltipRect(null) : undefined}
-        onKeyDown={
-          tooltip
-            ? e => {
-                if (e.key === "Escape") setTooltipRect(null);
-              }
-            : undefined
-        }
-        className={`inline-flex h-6 min-w-6 items-center justify-center gap-0.5 hover:text-ink ${active ? "text-ink" : ""}`}>
-        {label}
-      </button>
-      {tooltipNode}
+      </TooltipPortal>
     </th>
   );
 }

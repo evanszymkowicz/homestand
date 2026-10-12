@@ -1,3 +1,4 @@
+import { topN } from "./array";
 import { getDistinctScoringPeriods, getMatchupSideEntries, getSidePointsByPeriod } from "./boxScore";
 import { BENCH_AND_IR_SLOT_IDS, BENCH_SLOT_ID } from "./lineupSlots";
 import { findTeam } from "./schedule";
@@ -140,8 +141,7 @@ export function getHighestSingleWeekScores(
   owners: Owner[],
   n = 3
 ): TeamWeekScoreEntry[] {
-  const entries = getAllTeamWeekScores(matchups, teams, owners);
-  return [...entries].sort((a, b) => b.team.score - a.team.score).slice(0, n);
+  return topN(getAllTeamWeekScores(matchups, teams, owners), n, e => e.team.score, "desc");
 }
 
 /** Top N lowest single-week scores league-wide (rank 1 first). */
@@ -151,8 +151,7 @@ export function getLowestSingleWeekScores(
   owners: Owner[],
   n = 3
 ): TeamWeekScoreEntry[] {
-  const entries = getAllTeamWeekScores(matchups, teams, owners);
-  return [...entries].sort((a, b) => a.team.score - b.team.score).slice(0, n);
+  return topN(getAllTeamWeekScores(matchups, teams, owners), n, e => e.team.score, "asc");
 }
 
 export interface ResultScoreEntry {
@@ -195,7 +194,7 @@ export function getHighestScoringLosses(
   const losses = decidedSideResults(matchups, teams, owners)
     .filter(r => !r.won)
     .map(r => r.entry);
-  return [...losses].sort((a, b) => b.team.score - a.team.score).slice(0, n);
+  return topN(losses, n, e => e.team.score, "desc");
 }
 
 /** Top N lowest-scoring wins league-wide (rank 1 first). */
@@ -203,7 +202,7 @@ export function getLowestScoringWins(matchups: Matchup[], teams: Team[], owners:
   const wins = decidedSideResults(matchups, teams, owners)
     .filter(r => r.won)
     .map(r => r.entry);
-  return [...wins].sort((a, b) => a.team.score - b.team.score).slice(0, n);
+  return topN(wins, n, e => e.team.score, "asc");
 }
 
 /** The league's one and only tied matchup — a thin named wrapper for
@@ -239,18 +238,14 @@ function toTitleRecordExtreme(team: Team, owners: Owner[]): TitleRecordExtreme {
 /** Top N best regular-season+overall win% among teams that didn't win the title (rank 1 first). */
 export function getBestRecordsToMissTitle(teams: Team[], owners: Owner[], n = 3): TitleRecordExtreme[] {
   const contenders = teams.filter(t => t.final_rank !== 1);
-  return [...contenders]
-    .sort((a, b) => winPct(b.overall) - winPct(a.overall) || b.overall.wins - a.overall.wins)
-    .slice(0, n)
+  return topN(contenders, n, t => [winPct(t.overall), t.overall.wins], "desc")
     .map(t => toTitleRecordExtreme(t, owners));
 }
 
 /** Top N worst overall win% among teams that won the title anyway (rank 1 first). */
 export function getWorstRecordsToWinTitle(teams: Team[], owners: Owner[], n = 3): TitleRecordExtreme[] {
   const champs = teams.filter(t => t.final_rank === 1);
-  return [...champs]
-    .sort((a, b) => winPct(a.overall) - winPct(b.overall) || a.overall.wins - b.overall.wins)
-    .slice(0, n)
+  return topN(champs, n, t => [winPct(t.overall), t.overall.wins], "asc")
     .map(t => toTitleRecordExtreme(t, owners));
 }
 
@@ -278,14 +273,12 @@ function rankedSeedGaps(teams: Team[], owners: Owner[]): SeedRankGapEntry[] {
 
 /** Top N biggest overachievers league-wide (rank 1 first). */
 export function getBiggestOverachievers(teams: Team[], owners: Owner[], n = 3): SeedRankGapEntry[] {
-  const gaps = rankedSeedGaps(teams, owners);
-  return [...gaps].sort((a, b) => b.gap - a.gap).slice(0, n);
+  return topN(rankedSeedGaps(teams, owners), n, g => g.gap, "desc");
 }
 
 /** Top N biggest underachievers league-wide (rank 1 first). */
 export function getBiggestUnderachievers(teams: Team[], owners: Owner[], n = 3): SeedRankGapEntry[] {
-  const gaps = rankedSeedGaps(teams, owners);
-  return [...gaps].sort((a, b) => a.gap - b.gap).slice(0, n);
+  return topN(rankedSeedGaps(teams, owners), n, g => g.gap, "asc");
 }
 
 export interface ChampionshipDroughtEntry {
@@ -532,7 +525,7 @@ export function getWorstLineupDecisions(
       results.push({ ...best, owners: team ? team.owner_ids.map(id => ownerRef(owners, id)) : [] });
     }
   }
-  return results.sort((a, b) => b.gap - a.gap).slice(0, n);
+  return topN(results, n, r => r.gap, "desc");
 }
 
 export interface SundayCollapseEntry {
@@ -597,5 +590,5 @@ export function getBiggestSundayCollapses(
       });
     }
   }
-  return results.sort((a, b) => b.leadBeforeFinalDay - a.leadBeforeFinalDay).slice(0, n);
+  return topN(results, n, r => r.leadBeforeFinalDay, "desc");
 }

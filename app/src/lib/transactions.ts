@@ -1,3 +1,4 @@
+import { topN } from "./array";
 import { DISPLAY_EXCLUDED_POSITION_IDS } from "./positions";
 import type {
   DraftPick,
@@ -157,9 +158,7 @@ export function getWaiverPickups(
     }
   }
 
-  return Array.from(firstAdd.values())
-    .sort((a, b) => b.ownerPoints - a.ownerPoints || a.year - b.year)
-    .slice(0, limit);
+  return topN(Array.from(firstAdd.values()), limit, a => [a.ownerPoints, -a.year], "desc");
 }
 
 export interface OwnerActivity {
@@ -253,7 +252,7 @@ export function getBlindSpots(
     });
   }
 
-  return rows.sort((a, b) => b.points - a.points).slice(0, limit);
+  return topN(rows, limit, r => r.points, "desc");
 }
 
 export interface MatchupTransactionMarkers {
@@ -389,9 +388,7 @@ export function getJourneymen(
     }
   }
 
-  return Array.from(byPlayer.values())
-    .sort((a, b) => b.pickups - a.pickups || a.playerId - b.playerId)
-    .slice(0, limit);
+  return topN(Array.from(byPlayer.values()), limit, j => [j.pickups, -j.playerId], "desc");
 }
 
 export interface VersatilePlayer {
@@ -418,7 +415,7 @@ export function getVersatilePlayers(
   players: { player_id: number; full_name: string; games_played_by_position: Record<string, number> }[],
   { minGames = 10, limit = 25 } = {}
 ): VersatilePlayer[] {
-  return players
+  const versatile = players
     .map(player => {
       const positions = Object.entries(player.games_played_by_position)
         .map(([positionId, games]) => ({ positionId: Number(positionId), games }))
@@ -432,7 +429,6 @@ export function getVersatilePlayers(
         totalGames: positions.reduce((sum, p) => sum + p.games, 0),
       };
     })
-    .filter(p => p.positionCount >= 2)
-    .sort((a, b) => b.positionCount - a.positionCount || b.totalGames - a.totalGames)
-    .slice(0, limit);
+    .filter(p => p.positionCount >= 2);
+  return topN(versatile, limit, p => [p.positionCount, p.totalGames], "desc");
 }

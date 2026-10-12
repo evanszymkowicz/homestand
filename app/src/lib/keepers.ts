@@ -1,3 +1,4 @@
+import { topN } from "./array";
 import type { RenumberedPick } from "./draft";
 import { divergingBackground, linearStrength } from "./diverging";
 import { draftSlotPercentile, getSeasonPercentile, ownerRef, type OwnerRef } from "./stats";
@@ -274,17 +275,14 @@ export function getMostPlayedNeverKept(
   for (const r of seasonPoints) {
     careerPointsByPlayer.set(r.player_id, (careerPointsByPlayer.get(r.player_id) ?? 0) + r.points);
   }
-  return players
-    .filter(p => !everKept.has(p.player_id))
-    .map(p => ({
-      playerId: p.player_id,
-      playerName: p.full_name,
-      seasonsSeen: p.seasons_seen.length,
-      careerPoints: careerPointsByPlayer.get(p.player_id) ?? 0,
-      rosterDays: p.roster_days ?? 0,
-    }))
-    .sort((a, b) => b.seasonsSeen - a.seasonsSeen)
-    .slice(0, n);
+  const neverKept = players.filter(p => !everKept.has(p.player_id)).map(p => ({
+    playerId: p.player_id,
+    playerName: p.full_name,
+    seasonsSeen: p.seasons_seen.length,
+    careerPoints: careerPointsByPlayer.get(p.player_id) ?? 0,
+    rosterDays: p.roster_days ?? 0,
+  }));
+  return topN(neverKept, n, p => p.seasonsSeen, "desc");
 }
 
 export interface FranchiseKeeperPlayer {

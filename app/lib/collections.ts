@@ -4,7 +4,7 @@
 // can be imported from both the Worker bundle and the app tsconfig.
 
 /** Flat collections. `box_scores` is the only nested one. */
-const COLLECTIONS = new Set([
+export const COLLECTIONS: readonly string[] = [
   "owners.json",
   "seasons.json",
   "teams.json",
@@ -24,7 +24,7 @@ const COLLECTIONS = new Set([
   "retired-owners.json",
   "jersey-history-overrides.json",
   "position-overrides.json",
-]);
+];
 
 /** The catch-all hands us the raw path segments, so the box-score year arrives
  * as `2024.json`, not `2024`. */
@@ -38,7 +38,7 @@ const BOX_SCORE_YEAR = /^\d{4}\.json$/;
  * 404, which is also what stops `../`, absolute URLs, and `index.html` from
  * being reachable. */
 export function resolveCollection(segments: string[]): string | null {
-  if (segments.length === 1 && COLLECTIONS.has(segments[0])) return segments[0];
+  if (segments.length === 1 && COLLECTIONS.includes(segments[0])) return segments[0];
   if (segments.length === 2 && segments[0] === "box_scores" && BOX_SCORE_YEAR.test(segments[1])) {
     return `box_scores/${segments[1]}`;
   }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveCollection } from "../../lib/collections";
+import { COLLECTIONS, resolveCollection } from "../../lib/collections";
 
 /** Splits a request path exactly as Pages does for the catch-all route
  * `/api/data/{importId}/[[collection]]`. Deriving the segments from a real
@@ -12,31 +12,9 @@ function segmentsFor(path: string): string[] {
   return afterImport.split("/").filter(Boolean);
 }
 
-const FLAT = [
-  "owners.json",
-  "seasons.json",
-  "teams.json",
-  "matchups.json",
-  "draft_picks.json",
-  "keepers.json",
-  "players.json",
-  "mlb_teams.json",
-  "player_season_points.json",
-  "player_team_season_points.json",
-  "player_seasons.json",
-  "player_season_backfill.json",
-  "card_points.json",
-  "transactions.json",
-  "trades.json",
-  "achievements.json",
-  "retired-owners.json",
-  "jersey-history-overrides.json",
-  "position-overrides.json",
-];
-
 describe("resolveCollection", () => {
   it("accepts every flat collection data.ts requests", () => {
-    for (const name of FLAT) {
+    for (const name of COLLECTIONS) {
       expect(resolveCollection(segmentsFor(`/api/data/t/${name}`))).toBe(name);
     }
   });

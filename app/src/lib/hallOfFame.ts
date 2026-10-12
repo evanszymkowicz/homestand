@@ -1,3 +1,4 @@
+import { topN } from "./array";
 import { getPlayerSeasonPoints } from "./draft";
 import { IR_SLOT_ID } from "./lineupSlots";
 import type { BoxScoreEntry, Keeper, PlayerSeasonPoints } from "../types";
@@ -74,9 +75,7 @@ export function getBlownSaveHallOfShame(boxScoresByYear: Map<number, BoxScoreEnt
       totals.set(entry.player_id, existing);
     }
   }
-  return Array.from(totals.values())
-    .sort((a, b) => b.blownSaves - a.blownSaves)
-    .slice(0, n);
+  return topN(Array.from(totals.values()), n, e => e.blownSaves, "desc");
 }
 
 export interface IlStashEntry {
@@ -111,9 +110,7 @@ export function getIlStashLeaderboard(boxScoresByYear: Map<number, BoxScoreEntry
       totals.set(key, existing);
     }
   }
-  return Array.from(totals.values())
-    .sort((a, b) => b.ilDays - a.ilDays)
-    .slice(0, n);
+  return topN(Array.from(totals.values()), n, e => e.ilDays, "desc");
 }
 
 export interface KeeperBustEntry {
@@ -144,7 +141,7 @@ export function getKeeperBustHallOfFame(
   seasonPoints: PlayerSeasonPoints[],
   n = 15
 ): KeeperBustEntry[] {
-  return [...keepers]
+  const busts = keepers
     .map(k => {
       const priorRow = seasonPoints.find(r => r.year === k.year - 1 && r.player_id === k.player_id);
       return {
@@ -156,7 +153,6 @@ export function getKeeperBustHallOfFame(
         priorYearPoints: priorRow?.points ?? null,
       };
     })
-    .filter((e): e is KeeperBustEntry => e.points !== null)
-    .sort((a, b) => a.points - b.points)
-    .slice(0, n);
+    .filter((e): e is KeeperBustEntry => e.points !== null);
+  return topN(busts, n, e => e.points, "asc");
 }

@@ -1,3 +1,4 @@
+import { topN } from "./array";
 import { formatOwnerNames } from "./format";
 import { matchesPositionScope } from "./positions";
 import type { Matchup, Owner, PlayerSeasonPoints, Season, Team, TeamRecord } from "../types";
@@ -313,32 +314,30 @@ export function getCareerStandings(teams: Team[], owners: Owner[]): CareerStandi
     .sort((a, b) => b.wins - a.wins);
 }
 
-function rankedSingleSeasons(teams: Team[], owners: Owner[], direction: "best" | "worst"): SeasonRecordExtreme[] {
-  return [...teams]
-    .sort((a, b) =>
-      direction === "best"
-        ? winPct(b.overall) - winPct(a.overall) || b.overall.wins - a.overall.wins
-        : winPct(a.overall) - winPct(b.overall) || a.overall.wins - b.overall.wins
-    )
-    .map(t => ({
-      owners: creditedOwners(t).map(id => ownerRef(owners, id)),
-      teamName: t.team_name,
-      year: t.year,
-      wins: t.overall.wins,
-      losses: t.overall.losses,
-      ties: t.overall.ties,
-      winPct: winPct(t.overall),
-    }));
+function toSeasonRecordExtreme(team: Team, owners: Owner[]): SeasonRecordExtreme {
+  return {
+    owners: creditedOwners(team).map(id => ownerRef(owners, id)),
+    teamName: team.team_name,
+    year: team.year,
+    wins: team.overall.wins,
+    losses: team.overall.losses,
+    ties: team.overall.ties,
+    winPct: winPct(team.overall),
+  };
 }
 
 /** Top N worst single-season records league-wide (rank 1 first). */
 export function getWorstSingleSeasons(teams: Team[], owners: Owner[], n = 3): SeasonRecordExtreme[] {
-  return rankedSingleSeasons(teams, owners, "worst").slice(0, n);
+  return topN(teams, n, t => [winPct(t.overall), t.overall.wins], "asc").map(t =>
+    toSeasonRecordExtreme(t, owners)
+  );
 }
 
 /** Top N best single-season records league-wide (rank 1 first). */
 export function getBestSingleSeasons(teams: Team[], owners: Owner[], n = 3): SeasonRecordExtreme[] {
-  return rankedSingleSeasons(teams, owners, "best").slice(0, n);
+  return topN(teams, n, t => [winPct(t.overall), t.overall.wins], "desc").map(t =>
+    toSeasonRecordExtreme(t, owners)
+  );
 }
 
 /** Minimum seasons played to qualify for the career-worst-win% record (avoids a
@@ -352,10 +351,12 @@ export function getWorstCareerWinPcts(
   minSeasons = MIN_SEASONS_FOR_CAREER_WIN_PCT,
   n = 3
 ): CareerStandingRow[] {
-  return standings
-    .filter(row => row.seasons >= minSeasons)
-    .sort((a, b) => a.winPct - b.winPct)
-    .slice(0, n);
+  return topN(
+    standings.filter(row => row.seasons >= minSeasons),
+    n,
+    row => row.winPct,
+    "asc"
+  );
 }
 
 /** Top N best career win% (min. `minSeasons` seasons played), rank 1 first. */
@@ -364,10 +365,12 @@ export function getBestCareerWinPcts(
   minSeasons = MIN_SEASONS_FOR_CAREER_WIN_PCT,
   n = 3
 ): CareerStandingRow[] {
-  return standings
-    .filter(row => row.seasons >= minSeasons)
-    .sort((a, b) => b.winPct - a.winPct)
-    .slice(0, n);
+  return topN(
+    standings.filter(row => row.seasons >= minSeasons),
+    n,
+    row => row.winPct,
+    "desc"
+  );
 }
 
 export function getCareerPoints(teams: Team[], owners: Owner[]): CareerPointsRow[] {
@@ -401,42 +404,28 @@ function toSeasonPointsExtreme(team: Team, owners: Owner[]): SeasonPointsExtreme
 
 /** Top N most points scored in a season league-wide (rank 1 first). */
 export function getBestSeasonPoints(teams: Team[], owners: Owner[], n = 3): SeasonPointsExtreme[] {
-  return [...teams]
-    .sort((a, b) => b.overall.points_for - a.overall.points_for)
-    .slice(0, n)
-    .map(t => toSeasonPointsExtreme(t, owners));
+  return topN(teams, n, t => t.overall.points_for, "desc").map(t => toSeasonPointsExtreme(t, owners));
 }
 
 /** Top N fewest points scored in a season league-wide (rank 1 first). */
 export function getWorstSeasonPoints(teams: Team[], owners: Owner[], n = 3): SeasonPointsExtreme[] {
-  return [...teams]
-    .sort((a, b) => a.overall.points_for - b.overall.points_for)
-    .slice(0, n)
-    .map(t => toSeasonPointsExtreme(t, owners));
+  return topN(teams, n, t => t.overall.points_for, "asc").map(t => toSeasonPointsExtreme(t, owners));
 }
 
-function rankedSeasonDifferentials(
-  teams: Team[],
-  owners: Owner[],
-  direction: "best" | "worst"
-): SeasonDifferentialExtreme[] {
-  return [...teams]
-    .sort((a, b) => {
-      const diffA = a.overall.points_for - a.overall.points_against;
-      const diffB = b.overall.points_for - b.overall.points_against;
-      return direction === "best" ? diffB - diffA : diffA - diffB;
-    })
-    .map(t => ({
-      owners: creditedOwners(t).map(id => ownerRef(owners, id)),
-      teamName: t.team_name,
-      year: t.year,
-      differential: t.overall.points_for - t.overall.points_against,
-    }));
+function toSeasonDifferentialExtreme(team: Team, owners: Owner[]): SeasonDifferentialExtreme {
+  return {
+    owners: creditedOwners(team).map(id => ownerRef(owners, id)),
+    teamName: team.team_name,
+    year: team.year,
+    differential: team.overall.points_for - team.overall.points_against,
+  };
 }
 
 /** Top N best single-season point differentials (rank 1 first). */
 export function getBestSeasonDifferentials(teams: Team[], owners: Owner[], n = 3): SeasonDifferentialExtreme[] {
-  return rankedSeasonDifferentials(teams, owners, "best").slice(0, n);
+  return topN(teams, n, t => t.overall.points_for - t.overall.points_against, "desc").map(t =>
+    toSeasonDifferentialExtreme(t, owners)
+  );
 }
 
 /** Ranks team-seasons by points-for per game, not raw total — distinct from
@@ -444,15 +433,16 @@ export function getBestSeasonDifferentials(teams: Team[], owners: Owner[], n = 3
  * on a per-game basis without winning on total points. */
 export function getBestSeasonPointsPerGame(teams: Team[], owners: Owner[], n = 3): SeasonPointsExtreme[] {
   const withGames = teams.filter(t => games(t.overall) > 0);
-  return [...withGames]
-    .sort((a, b) => b.overall.points_for / games(b.overall) - a.overall.points_for / games(a.overall))
-    .slice(0, n)
-    .map(t => toSeasonPointsExtreme(t, owners));
+  return topN(withGames, n, t => t.overall.points_for / games(t.overall), "desc").map(t =>
+    toSeasonPointsExtreme(t, owners)
+  );
 }
 
 /** Top N worst single-season point differentials (rank 1 first). */
 export function getWorstSeasonDifferentials(teams: Team[], owners: Owner[], n = 3): SeasonDifferentialExtreme[] {
-  return rankedSeasonDifferentials(teams, owners, "worst").slice(0, n);
+  return topN(teams, n, t => t.overall.points_for - t.overall.points_against, "asc").map(t =>
+    toSeasonDifferentialExtreme(t, owners)
+  );
 }
 
 export interface SeasonStreakExtreme {
@@ -510,7 +500,7 @@ export function longestRun(results: StreakResult[], target: "W" | "L"): number {
   return best;
 }
 
-function rankedSeasonStreaks(
+function seasonStreakExtremes(
   teams: Team[],
   owners: Owner[],
   matchups: Matchup[],
@@ -524,16 +514,15 @@ function rankedSeasonStreaks(
       year: t.year,
       length: longestRun(resultsByTeam.get(`${t.year}:${t.espn_team_id}`) ?? [], target),
     }))
-    .filter(s => s.length > 0)
-    .sort((a, b) => b.length - a.length);
+    .filter(s => s.length > 0);
 }
 
 /** Top N longest single-season winning streaks league-wide (rank 1 first). */
 export function getBestWinStreaks(teams: Team[], owners: Owner[], matchups: Matchup[], n = 3): SeasonStreakExtreme[] {
-  return rankedSeasonStreaks(teams, owners, matchups, "W").slice(0, n);
+  return topN(seasonStreakExtremes(teams, owners, matchups, "W"), n, s => s.length, "desc");
 }
 
 /** Top N longest single-season losing streaks league-wide (rank 1 first). */
 export function getWorstLossStreaks(teams: Team[], owners: Owner[], matchups: Matchup[], n = 3): SeasonStreakExtreme[] {
-  return rankedSeasonStreaks(teams, owners, matchups, "L").slice(0, n);
+  return topN(seasonStreakExtremes(teams, owners, matchups, "L"), n, s => s.length, "desc");
 }

@@ -1,3 +1,4 @@
+import { topN } from "./array";
 import { getRenumberedBoardsByYear } from "./draft";
 import { formatRecord } from "./format";
 import { buildSeasonPercentiles, draftSlotPercentile } from "./stats";
@@ -203,7 +204,7 @@ function findBreakoutPlayers(
     });
   }
 
-  return entries.sort((a, b) => b.valueShift - a.valueShift).slice(0, 3);
+  return topN(entries, 3, e => e.valueShift, "desc");
 }
 
 /** Generate a season recap for a specific year.
