@@ -71,13 +71,24 @@ def _set_status(import_id: str, status: str, detail: str | None = None) -> None:
     sql = f"UPDATE imports SET status = '{status}', failure_reason = {reason} WHERE id = '{import_id}'"
     try:
         subprocess.run(
-            ["npx", "wrangler", "d1", "execute", "homestand-db", *TARGET_FLAG, "--command", sql],
+            [
+                "npx",
+                "wrangler",
+                "d1",
+                "execute",
+                "homestand-db",
+                *TARGET_FLAG,
+                "--command",
+                sql,
+            ],
             cwd=str(APP_DIR),
             check=True,
             capture_output=True,
         )
     except Exception as exc:  # noqa: BLE001
-        print(f"warning: could not set import status to {status}: {exc}", file=sys.stderr)
+        print(
+            f"warning: could not set import status to {status}: {exc}", file=sys.stderr
+        )
 
 
 def _upload(src_dir: Path, key_prefix: str) -> int:
@@ -86,9 +97,14 @@ def _upload(src_dir: Path, key_prefix: str) -> int:
         rel = path.relative_to(src_dir).as_posix()
         subprocess.run(
             [
-                "npx", "wrangler", "r2", "object", "put",
+                "npx",
+                "wrangler",
+                "r2",
+                "object",
+                "put",
                 f"{R2_BUCKET}/{key_prefix}/{rel}",
-                "--file", str(path),
+                "--file",
+                str(path),
                 *TARGET_FLAG,
             ],
             cwd=str(APP_DIR),
@@ -115,9 +131,14 @@ def _upload_proxy_served_manual(manual_dir: Path, key_prefix: str) -> int:
             continue
         subprocess.run(
             [
-                "npx", "wrangler", "r2", "object", "put",
+                "npx",
+                "wrangler",
+                "r2",
+                "object",
+                "put",
                 f"{R2_BUCKET}/{key_prefix}/{name}",
-                "--file", str(path),
+                "--file",
+                str(path),
                 *TARGET_FLAG,
             ],
             cwd=str(APP_DIR),
@@ -139,14 +160,18 @@ def main() -> None:
     year_start = os.environ.get("ESPN_YEAR_START")
     year_end = os.environ.get("ESPN_YEAR_END")
 
-    missing = [name for name, value in {
-        "ESPN_S2_ENCRYPTED": encrypted_s2,
-        "ESPN_SWID_ENCRYPTED": encrypted_swid,
-        "CREDENTIALS_ENCRYPTION_KEY": key,
-        "ESPN_LEAGUE_ID": league_id,
-        "ESPN_YEAR_START": year_start,
-        "ESPN_YEAR_END": year_end,
-    }.items() if not value]
+    missing = [
+        name
+        for name, value in {
+            "ESPN_S2_ENCRYPTED": encrypted_s2,
+            "ESPN_SWID_ENCRYPTED": encrypted_swid,
+            "CREDENTIALS_ENCRYPTION_KEY": key,
+            "ESPN_LEAGUE_ID": league_id,
+            "ESPN_YEAR_START": year_start,
+            "ESPN_YEAR_END": year_end,
+        }.items()
+        if not value
+    ]
     if missing:
         sys.exit(f"Missing required env vars: {', '.join(missing)}")
 
@@ -171,13 +196,18 @@ def main() -> None:
     import shutil
 
     config_path = ROOT / "config.json"
-    config_path.write_text(json.dumps({
-        "league_id": int(league_id),
-        "year_start": int(year_start),
-        "year_end": int(year_end),
-        "espn_s2": espn_s2,
-        "swid": swid,
-    }, indent=2))
+    config_path.write_text(
+        json.dumps(
+            {
+                "league_id": int(league_id),
+                "year_start": int(year_start),
+                "year_end": int(year_end),
+                "espn_s2": espn_s2,
+                "swid": swid,
+            },
+            indent=2,
+        )
+    )
 
     try:
         # Start from a clean tenant raw dir; extract.py is idempotent and would
@@ -211,9 +241,12 @@ def main() -> None:
         try:
             subprocess.run(
                 [
-                    sys.executable, str(ROOT / "scripts" / "derive_owner_map.py"),
-                    "--raw-dir", str(raw_dir),
-                    "--out-dir", str(manual_dir),
+                    sys.executable,
+                    str(ROOT / "scripts" / "derive_owner_map.py"),
+                    "--raw-dir",
+                    str(raw_dir),
+                    "--out-dir",
+                    str(manual_dir),
                 ],
                 cwd=str(ROOT),
                 check=True,
@@ -225,10 +258,14 @@ def main() -> None:
         try:
             subprocess.run(
                 [
-                    sys.executable, str(ROOT / "scripts" / "normalize_for_import.py"),
-                    "--raw-dir", str(raw_dir),
-                    "--out-dir", str(processed_dir),
-                    "--manual-dir", str(manual_dir),
+                    sys.executable,
+                    str(ROOT / "scripts" / "normalize_for_import.py"),
+                    "--raw-dir",
+                    str(raw_dir),
+                    "--out-dir",
+                    str(processed_dir),
+                    "--manual-dir",
+                    str(manual_dir),
                 ],
                 cwd=str(ROOT),
                 check=True,

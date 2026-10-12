@@ -2024,13 +2024,12 @@ def check_jersey_history_overrides(data: dict[str, Any]) -> list[Failure]:
     already verified them against the MLB Stats API by hand (see the file's own _readme).
 
     Two things only an auto-write could get wrong on its own: (1) an exact-duplicate entry
-    for the same (player_id, year, pro_team_id, jersey) -- would mean the merge logic in
-    scripts/detect_real_trades.py's merge_auto_entries() double-wrote instead of
-    replacing; (2) a pro_team_id that contradicts data/manual/pro-team-overrides.json's
+    for the same (player_id, year, pro_team_id, jersey) -- would mean merge logic double-wrote
+    instead of replacing; (2) a pro_team_id that contradicts data/manual/pro-team-overrides.json's
     hand-verified correction for that exact (year, player_id) -- that file's overrides
     exist specifically because kona_player_info.json's own value was wrong for the year,
-    so an auto-detected entry silently disagreeing with it would mean detect_real_trades.py
-    trusted a stale MLB Stats API team read instead.
+    so an auto-detected entry silently disagreeing with it would mean a stale MLB Stats API
+    team read was trusted instead.
     """
     failures = []
     auto = [

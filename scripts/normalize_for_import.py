@@ -53,9 +53,7 @@ def _record_keeper_exceptions(out_dir: Path, manual_dir: Path) -> None:
     import json
 
     keepers = json.loads((out_dir / "keepers.json").read_text())
-    misses = [
-        k for k in keepers if not k.get("validated_on_prior_roster", False)
-    ]
+    misses = [k for k in keepers if not k.get("validated_on_prior_roster", False)]
     if not misses:
         return
 

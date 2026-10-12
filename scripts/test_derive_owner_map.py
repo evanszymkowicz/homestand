@@ -51,9 +51,7 @@ def build_raw(root: Path, seasons: dict[int, list[dict]]) -> Path:
 
 
 def team_seasons_by_key(owner_map) -> dict:
-    return {
-        (e["year"], e["espn_team_id"]): e for e in owner_map["team_seasons"]
-    }
+    return {(e["year"], e["espn_team_id"]): e for e in owner_map["team_seasons"]}
 
 
 def owner_ids_named(owner_map, name: str) -> set[str]:
@@ -71,10 +69,24 @@ def test_stable_across_years() -> None:
         raw = build_raw(
             Path(tmp),
             {
-                2023: [{"id": 1, "name": "Aces", "owners": ["{s1}"], "primary": "{s1}",
-                        "members": {"{s1}": ("Evan", "Symkowicz")}}],
-                2024: [{"id": 1, "name": "Aces", "owners": ["{s1}"], "primary": "{s1}",
-                        "members": {"{s1}": ("Evan", "Symkowicz")}}],
+                2023: [
+                    {
+                        "id": 1,
+                        "name": "Aces",
+                        "owners": ["{s1}"],
+                        "primary": "{s1}",
+                        "members": {"{s1}": ("Evan", "Symkowicz")},
+                    }
+                ],
+                2024: [
+                    {
+                        "id": 1,
+                        "name": "Aces",
+                        "owners": ["{s1}"],
+                        "primary": "{s1}",
+                        "members": {"{s1}": ("Evan", "Symkowicz")},
+                    }
+                ],
             },
         )
         owner_map, notes = derive(raw)
@@ -94,10 +106,24 @@ def test_rename_merges_and_keeps_variant() -> None:
         raw = build_raw(
             Path(tmp),
             {
-                2019: [{"id": 1, "name": "T", "owners": ["{s1}"], "primary": "{s1}",
-                        "members": {"{s1}": ("Yankee", "Hank")}}],
-                2020: [{"id": 1, "name": "T", "owners": ["{s1}"], "primary": "{s1}",
-                        "members": {"{s1}": ("Anthony", "Paradiso")}}],
+                2019: [
+                    {
+                        "id": 1,
+                        "name": "T",
+                        "owners": ["{s1}"],
+                        "primary": "{s1}",
+                        "members": {"{s1}": ("Yankee", "Hank")},
+                    }
+                ],
+                2020: [
+                    {
+                        "id": 1,
+                        "name": "T",
+                        "owners": ["{s1}"],
+                        "primary": "{s1}",
+                        "members": {"{s1}": ("Anthony", "Paradiso")},
+                    }
+                ],
             },
         )
         owner_map, notes = derive(raw)
@@ -118,11 +144,27 @@ def test_extra_swid_merges_when_never_on_conflicting_teams() -> None:
         raw = build_raw(
             Path(tmp),
             {
-                2012: [{"id": 6, "name": "27 Rings", "owners": ["{a}"], "primary": "{a}",
-                        "members": {"{a}": ("Sam", "Silbert")}}],
-                2013: [{"id": 6, "name": "27 Rings", "owners": ["{a}", "{b}"],
+                2012: [
+                    {
+                        "id": 6,
+                        "name": "27 Rings",
+                        "owners": ["{a}"],
                         "primary": "{a}",
-                        "members": {"{a}": ("Sam", "Silbert"), "{b}": ("Sam", "Silbert")}}],
+                        "members": {"{a}": ("Sam", "Silbert")},
+                    }
+                ],
+                2013: [
+                    {
+                        "id": 6,
+                        "name": "27 Rings",
+                        "owners": ["{a}", "{b}"],
+                        "primary": "{a}",
+                        "members": {
+                            "{a}": ("Sam", "Silbert"),
+                            "{b}": ("Sam", "Silbert"),
+                        },
+                    }
+                ],
             },
         )
         owner_map, notes = derive(raw)
@@ -139,10 +181,20 @@ def test_conflicting_teams_kept_apart_and_reported() -> None:
             Path(tmp),
             {
                 2024: [
-                    {"id": 1, "name": "One", "owners": ["{a}"], "primary": "{a}",
-                     "members": {"{a}": ("Chris", "Doe")}},
-                    {"id": 2, "name": "Two", "owners": ["{b}"], "primary": "{b}",
-                     "members": {"{b}": ("Chris", "Doe")}},
+                    {
+                        "id": 1,
+                        "name": "One",
+                        "owners": ["{a}"],
+                        "primary": "{a}",
+                        "members": {"{a}": ("Chris", "Doe")},
+                    },
+                    {
+                        "id": 2,
+                        "name": "Two",
+                        "owners": ["{b}"],
+                        "primary": "{b}",
+                        "members": {"{b}": ("Chris", "Doe")},
+                    },
                 ],
             },
         )
@@ -159,9 +211,15 @@ def test_co_owners_and_missing_primary() -> None:
         raw = build_raw(
             Path(tmp),
             {
-                2020: [{"id": 6, "name": "Shared", "owners": ["{a}", "{b}"],
+                2020: [
+                    {
+                        "id": 6,
+                        "name": "Shared",
+                        "owners": ["{a}", "{b}"],
                         "primary": None,
-                        "members": {"{a}": ("Bo", "Quill"), "{b}": ("Bo", "Evans")}}],
+                        "members": {"{a}": ("Bo", "Quill"), "{b}": ("Bo", "Evans")},
+                    }
+                ],
             },
         )
         owner_map, notes = derive(raw)
@@ -176,8 +234,15 @@ def test_lowercase_espn_names_are_display_titled() -> None:
         raw = build_raw(
             Path(tmp),
             {
-                2012: [{"id": 1, "name": "T", "owners": ["{s}"], "primary": "{s}",
-                        "members": {"{s}": ("a", "klam")}}],
+                2012: [
+                    {
+                        "id": 1,
+                        "name": "T",
+                        "owners": ["{s}"],
+                        "primary": "{s}",
+                        "members": {"{s}": ("a", "klam")},
+                    }
+                ],
             },
         )
         owner_map, _ = derive(raw)
@@ -204,8 +269,7 @@ def test_agrees_with_hand_curated_map() -> None:
     hand = json.loads((manual / "owner-map.json").read_text())
 
     assert len(derived["owners"]) == len(hand["owners"]), (
-        f"owner count: derived {len(derived['owners'])} vs "
-        f"hand {len(hand['owners'])}"
+        f"owner count: derived {len(derived['owners'])} vs hand {len(hand['owners'])}"
     )
     assert len(derived["team_seasons"]) == len(hand["team_seasons"]), (
         f"team-season count: derived {len(derived['team_seasons'])} vs "

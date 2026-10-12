@@ -41,8 +41,8 @@ ROSTER_PERIOD_HARVEST_YEARS = (2018,)
 # survive purging on its own (rare -- 2 of 12 executed 2019-2025 trades).
 TRADE_CAPTURE_START_YEAR = 2026
 # ESPN's "Fantasy Achievements" trophies era (launched 2026-02-04, probed
-# 2026-09-01 -- endpoint traps and the no-backfill rule live in
-# skills/espn-extraction/SKILL.md and the espn-trophies-activity-tray spec).
+# 2026-09-01 -- endpoint traps and the no-backfill rule live in the
+# espn-trophies-activity-tray spec).
 ACHIEVEMENTS_ERA_START_YEAR = 2026
 REQUEST_DELAY_SECONDS = 0.75
 MAX_RETRIES = 2

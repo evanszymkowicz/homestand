@@ -124,7 +124,9 @@ def _observations(raw_dir: Path) -> list[tuple[int, int, str, str, bool]]:
             continue
         payload = unwrap_league_object(json.loads(path.read_text()))
         members = {
-            m["id"]: m for m in payload.get("members", []) if isinstance(m.get("id"), str)
+            m["id"]: m
+            for m in payload.get("members", [])
+            if isinstance(m.get("id"), str)
         }
         for team in payload.get("teams", []):
             primary = team.get("primaryOwner")
@@ -170,7 +172,9 @@ def derive(raw_dir: Path) -> tuple[dict[str, object], list[str]]:
         union.find(f"swid:{swid}")
 
     swids_by_name: dict[str, set[str]] = defaultdict(set)
-    teams_by_swid: dict[str, dict[int, set[int]]] = defaultdict(lambda: defaultdict(set))
+    teams_by_swid: dict[str, dict[int, set[int]]] = defaultdict(
+        lambda: defaultdict(set)
+    )
     for year, team_id, swid, name, _primary in rows:
         swids_by_name[name].add(swid)
         teams_by_swid[swid][year].add(team_id)

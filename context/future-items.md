@@ -37,3 +37,26 @@ remaining launch blocker**, scoped in
 | Stack-trace disclosure on 5xx | An unhandled D1 error currently returns a stack with absolute build paths in local dev. Production Pages returns a generic 500, but any future `onError` handler must not regress this. |
 | Long-horizon rate limits (D1 counter) | **Done 2026-10-06, now the only limiter.** `functions/lib/rateLimitHorizon.ts` charges fixed 10-minute / hourly / daily windows over D1 (`0009_rate_limit_counters.sql`). Applied to `login` (10/acct/hr, 25/acct/day, 60/ip/hr), `reset-request` (3/address/hr, 5/day), `probe` (5/acct/10min, 20/day), and `signup` (5/ip/hr, 3/address/hr). Fails closed; `Retry-After` is the longest tripped window, not the shortest. It absorbed the native `ratelimits` binding that Pages cannot deploy. **Cost:** every limited request now costs one D1 write. The limits are reasoned guesses, not measurements — revisit against `SELECT bucket, hits FROM rate_limit_counters ORDER BY hits DESC` once there is real traffic. |
 | WAF rate limiting rule | Not available today, by topology rather than choice. The account has **no zone** (`GET /zones` returns empty) and the app is served from `homestand.pages.dev`, which Cloudflare operates and which cannot carry a zone-level rule. Needs a custom domain on a real zone **plus** at least Pro: Free gives one rule, Path-only expressions, IP-only counting, and a 10-second window — a tighter ceiling than the D1 horizon limiter already provides, for no per-account keying. Worth it as defense in depth once a domain exists, because it runs before the Worker and costs no D1 write. **Sequencing caveat:** Pages serves `*.pages.dev` and the custom domain simultaneously and cannot disable the former except via Access or an account-level Bulk Redirect, so the rule protects only whichever hostname users actually arrive on. Do not treat "a WAF rule exists" as "the endpoint is rate limited" until that redirect is in place. |
+
+## Post-launch product ideas
+
+These extend the existing record-book/dashboard without changing Homestand's core identity as a historical league import service.
+
+| Item | Notes |
+|---|---|
+| Historical trade analyzer / trade finder | Extend `Analytics/TradeEvaluator.tsx` and `lib/tradeEvaluation.ts` to let users build hypothetical trades between any two franchises in league history and see category impact. Add a "trade finder" that surfaces swaps that would have filled a team's weak categories using rosters from the same season. |
+| Shareable league-record cards | Generate static visual cards for superlatives (Sunday Collapse moments, Hall of Fame inductions, rivalry records, draft steals/busts) so users can post them in league chats or social. No new data pipelines needed. |
+| League-history games | Expand `Superlatives/Trivia.tsx` into daily/endless games built from imported history: Guess the Player from a stat line, Higher/Lower on career totals, and a historical Grid (owner × category). |
+| "This week in league history" digest | Surface anniversaries, milestones, and notable matchups from the same calendar week across all imported seasons. Low-effort, high fit for a historical product. |
+| Player pages with real-MLB context | Overlay actual MLB batting/pitching lines for player seasons alongside league-internal fantasy value. Requires ingesting a public MLB stats feed (MLB Stats API or similar) — keep scoped to read-only reference data. |
+
+## Explorations needing new integrations
+
+These are intentionally not on the near-term roadmap. Each depends on a data source or pipeline Homestand does not currently integrate.
+
+| Item | Missing integration |
+|---|---|
+| Streamer recommendations | Current-season MLB schedule, probable pitchers, park factors, and live ownership data. |
+| Buy-low / sell-high regression signals | Statcast/xStats or Baseball Savant batted-ball data plus a current-season stats pipeline. |
+| Bullpen / closer rankings | Bullpen leverage, save-chance, and injury data from MLB sources. |
+| Prospect call-up watch | Prospect rankings, MiLB stats, and 40-man/IL transaction feeds. |
