@@ -1,8 +1,32 @@
-import { topN } from "./array";
 import { getDistinctScoringPeriods, getMatchupSideEntries, getSidePointsByPeriod } from "./boxScore";
 import { BENCH_AND_IR_SLOT_IDS, BENCH_SLOT_ID } from "./lineupSlots";
 import { findTeam } from "./schedule";
 import { ownerRef, winPct, type OwnerRef } from "./stats";
+
+// topN inlined from array.ts (now deleted): sorts by key function, slices top N.
+function topN<T>(
+  arr: readonly T[],
+  n: number,
+  key: (item: T) => number | number[],
+  direction: "asc" | "desc" = "desc"
+): T[] {
+  const sign = direction === "asc" ? 1 : -1;
+  return [...arr]
+    .sort((a, b) => {
+      const ak = key(a);
+      const bk = key(b);
+      const aKeys = typeof ak === "number" ? [ak] : ak;
+      const bKeys = typeof bk === "number" ? [bk] : bk;
+      const len = Math.min(aKeys.length, bKeys.length);
+      for (let i = 0; i < len; i++) {
+        if (aKeys[i] < bKeys[i]) return -1 * sign;
+        if (aKeys[i] > bKeys[i]) return 1 * sign;
+      }
+      return 0;
+    })
+    .slice(0, n);
+}
+
 import type { BoxScoreEntry, Matchup, MatchupSide, Owner, Season, Team } from "../types";
 
 /**
