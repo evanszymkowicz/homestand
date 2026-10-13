@@ -13,14 +13,15 @@ export function Landing() {
   return (
     <div className="scorebook-texture min-h-screen bg-surface text-ink">
       <main>
-        <section className="mx-auto flex min-h-[80vh] max-w-3xl flex-col justify-center px-6 pb-12 pt-20 text-center sm:pt-24">
-          <h1 className="wordmark-piped font-brand text-6xl leading-[0.95] sm:text-7xl">Homestand</h1>
-          <p className="mx-auto mt-5 max-w-xl text-sm font-bold uppercase tracking-widest text-ink sm:text-base">
-            Gain the edge<span className="text-hs-red">.</span> Build your team
-            <span className="text-hs-red">.</span> Stay ahead of the competition
-            <span className="text-hs-red">.</span>
-          </p>
-          <div className="mt-8 flex flex-col items-center gap-3">
+        <section className="mx-auto flex min-h-[80vh] max-w-3xl flex-col px-6 pb-12 pt-20 text-center sm:pt-24">
+          <div className="my-auto">
+            <h1 className="wordmark-piped font-brand text-6xl leading-[0.95] sm:text-7xl">Homestand</h1>
+            <p className="mx-auto mt-5 max-w-xl text-sm font-bold uppercase tracking-widest text-ink sm:text-base">
+              Gain the edge<span className="text-hs-red">.</span> Build your team
+              <span className="text-hs-red">.</span> Stay ahead of the competition
+              <span className="text-hs-red">.</span>
+            </p>
+            <div className="mt-8 flex flex-col items-center gap-3">
               <button
                 onClick={tryDemo}
                 className="inline-block cursor-pointer rounded-md bg-hs-red px-6 py-3 font-bold text-white shadow-sm hover:opacity-90">
@@ -30,6 +31,7 @@ export function Landing() {
                 Registration
               </Link>
             </div>
+          </div>
         </section>
 
         {/* Feature rows: image/copy swap sides each row. One aspect ratio on
