@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TurnstileWidget } from "../components/TurnstileWidget";
 import { useAuth } from "../lib/auth/AuthContext";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
@@ -9,7 +9,10 @@ type Tab = "login" | "signup";
 export function Login() {
   useDocumentTitle("Sign in");
   const navigate = useNavigate();
+  const location = useLocation();
   const { loginDemo, loading: authLoading } = useAuth();
+  // AuthGuard saves the blocked path in state.from; land back there after sign-in.
+  const dest = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname ?? "/season";
 
   const [tab, setTab] = useState<Tab>("login");
   const [email, setEmail] = useState("");
@@ -22,7 +25,7 @@ export function Login() {
   const handleDemo = async () => {
     setError(null);
     await loginDemo();
-    navigate("/season", { replace: true });
+    navigate(dest, { replace: true });
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -37,7 +40,7 @@ export function Login() {
       });
       const data = (await res.json()) as { error?: string };
       if (!res.ok) throw new Error(data.error ?? "login failed");
-      navigate("/season", { replace: true });
+      navigate(dest, { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
@@ -65,7 +68,7 @@ export function Login() {
       });
       const data = (await res.json()) as { error?: string };
       if (!res.ok) throw new Error(data.error ?? "signup failed");
-      navigate("/season", { replace: true });
+      navigate(dest, { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {

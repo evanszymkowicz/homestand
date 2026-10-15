@@ -13,7 +13,7 @@ export function Landing() {
   return (
     <div className="scorebook-texture min-h-screen bg-surface text-ink">
       <main>
-        <section className="mx-auto max-w-3xl px-6 py-20 text-center sm:py-24">
+        <section className="mx-auto flex min-h-dvh max-w-3xl flex-col justify-center px-6 py-12 text-center">
           <h1 className="wordmark-piped font-brand text-6xl leading-[0.95] sm:text-7xl">Homestand</h1>
           <p className="mx-auto mt-5 max-w-xl text-sm font-bold uppercase tracking-widest text-ink sm:text-base">
             Gain the edge<span className="text-hs-red">.</span> Build your team
@@ -44,7 +44,7 @@ export function Landing() {
               <div>
                 <h3 className="text-2xl font-bold">League History</h3>
                 <p className="mt-3 text-ink-dim">Every season, matchup, and box score.</p>
-                <Link to="/login" className="mt-5 inline-block whitespace-nowrap text-sm font-bold text-hs-red hover:underline">
+                <Link to="/season" className="mt-5 inline-block whitespace-nowrap text-sm font-bold text-hs-red hover:underline">
                   Explore the demo &rarr;
                 </Link>
               </div>
@@ -60,7 +60,7 @@ export function Landing() {
               <div className="order-1 sm:order-2">
                 <h3 className="text-2xl font-bold">Analytics Dashboard</h3>
                 <p className="mt-3 text-ink-dim">Performance metrics and comparative analysis in a scorebook-styled app.</p>
-                <Link to="/login" className="mt-5 inline-block whitespace-nowrap text-sm font-bold text-hs-red hover:underline">
+                <Link to="/analytics" className="mt-5 inline-block whitespace-nowrap text-sm font-bold text-hs-red hover:underline">
                   View the platform &rarr;
                 </Link>
               </div>
@@ -70,7 +70,7 @@ export function Landing() {
               <div>
                 <h3 className="text-2xl font-bold">Records</h3>
                 <p className="mt-3 text-ink-dim">Standings, statistics and superlatives compiled from every week, every year.</p>
-                <Link to="/login" className="mt-5 inline-block whitespace-nowrap text-sm font-bold text-hs-red hover:underline">
+                <Link to="/superlatives" className="mt-5 inline-block whitespace-nowrap text-sm font-bold text-hs-red hover:underline">
                   See the record book &rarr;
                 </Link>
               </div>
